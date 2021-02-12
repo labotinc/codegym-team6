@@ -1,7 +1,7 @@
 <style>
 	/* header */
 	.topnav {
-		position:relative;
+		position: relative;
 		background-color: black;
 		width: 100%;
 		height: 64px;
