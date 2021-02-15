@@ -5,9 +5,9 @@
 		background: #262626 0% 0% no-repeat padding-box;
 		top: 0px;
 		left: 0px;
-		width: 1920px;
+		width: 100%;
 		height: 72px;
-		overflow: hidden;
+		overflow: scroll;
 		opacity: 1;
 	}
 
@@ -56,7 +56,7 @@
 		float: left;
 		padding-top: 28px;
 		margin-bottom: 28px;
-		margin-left: 180px;
+		margin: 0 auto;
 	}
 
 	.topnav-centered a {
@@ -83,9 +83,9 @@
 </style>
 
 <div class="topnav">
-	<!-- 右寄せ -->
+	<!-- 左寄せ -->
 	<div class="topnav-left">
-		<p><span>QUEL</span> CINNEMAS</p>
+		<p><span>QUEL</span> CINEMAS</p>
 	</div>
 
 	<!--中央 -->
@@ -98,7 +98,7 @@
 		<a href="#">料金•割引 </a>
 	</div>
 
-	<!-- 左寄せ -->
+	<!-- 右寄せ -->
 	<div class="topnav-right">
 		<!-- 新規登録 ボタン-->
 		<a href="#" type="button">新規登録</a>

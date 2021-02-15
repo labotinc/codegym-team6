@@ -1,10 +1,10 @@
 <style>
 	/* footer */
 	.footer {
-		overflow: hidden;
+		overflow: scroll;
 		top: 1015px;
 		left: 0px;
-		width: 1920px;
+		width: 100%;
 		height: 168px;
 		background: var(--unnamed-color-262626) 0% 0% no-repeat padding-box;
 		background: #262626 0% 0% no-repeat padding-box;
@@ -50,7 +50,7 @@
 		float: left;
 		padding-top: 76px;
 		margin-bottom: 78px;
-		margin-left: 180px;
+		margin: 0 auto;
 	}
 
 	.footer-centered a {
@@ -68,7 +68,7 @@
 <div class="footer">
 	<!-- 右寄せ -->
 	<div class="footer-left">
-		<p>QUEL CINNEMAS</p>
+		<p>QUEL CINEMAS</p>
 	</div>
 
 	<!--中央 -->
