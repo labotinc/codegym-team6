@@ -15,15 +15,15 @@
 	.footer-left {
 		float: left;
 		margin-left: 140.78px;
-		padding-top: 30px;
-		margin-bottom: 30px;
+		padding-top: 48px;
+		margin-bottom: 78px;
 	}
 
 	p {
-		color: white;
+		color: #FFFFFF;
 		width: 300px;
-		margin: 5px 0 5px 30px;
-		font:Noto Sans;
+		margin: 30px;
+		font-weight: bold;
 		top: 1091px;
 		left: 140px;
 		width: 163px;
@@ -33,12 +33,13 @@
 
 	/* footer link */
 	.footer a {
-		float: left;
-		color: lightgray;
-		text-align: center;
 		padding: 3px 16px;
 		text-decoration: none;
-		font-size: 10px;
+		text-align: center;
+		font: normal normal normal 14px/19px Noto Sans;
+		letter-spacing: 1.12px;
+		color: #FFFFFF;
+		opacity: 1;
 	}
 
 	.footer a:hover {
@@ -47,19 +48,23 @@
 
 	.footer-centered {
 		float: left;
-		padding-top: 30px;
-		margin-bottom: 30px;
+		padding-top: 76px;
+		margin-bottom: 78px;
+		margin-left: 180px;
 	}
 
 	.footer-centered a {
 		float: none;
+		opacity: 1;
 	}
 
 	.footer-link {
-		color: lightgray;
+		color: #FFFFFF;
 		padding-left: 30px;
+		opacity: 1;
 	}
 </style>
+
 <div class="footer">
 	<!-- 右寄せ -->
 	<div class="footer-left">
