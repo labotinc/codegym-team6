@@ -15,7 +15,7 @@
 
 <body>
 	<!-- header表示部分 -->
-	<?= $this->element('header1') ?>
+	<?= $this->element('header') ?>
 	<!-- メインコンテンツ -->
 	<div class="container">
 		<!-- タイトル -->

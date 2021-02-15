@@ -13,7 +13,5 @@ class MainController extends AppController
 
 	public function index()
 	{
-		$this->set('header1');
-		$this->set('main');
 	}
 }
