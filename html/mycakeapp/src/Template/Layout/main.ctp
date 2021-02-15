@@ -5,7 +5,7 @@
 	<?= $this->Html->charset() ?>
 	<!-- resetcss -->
 	<?= $this->Html->css('reset') ?>
-	<?= $this->Html->css('test') ?>
+	<?= $this->Html->css('main') ?>
 
 </head>
 
