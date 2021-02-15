@@ -9,7 +9,7 @@
 	<?= $this->Html->css('main') ?>
 	<!-- GoogleFont読み込み -->
 	<!-- Noto Sans -->
-
+	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
 
 </head>
 
