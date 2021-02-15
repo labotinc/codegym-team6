@@ -7,7 +7,7 @@
 		left: 0px;
 		width: 1920px;
 		height: 72px;
-		/* overflow: hidden; */
+		overflow: hidden;
 		opacity: 1;
 	}
 
@@ -15,12 +15,11 @@
 	.topnav-left {
 		float: left;
 		margin-left: 140.78px;
-		padding-top: 26px;
-		margin-bottom: 20px;
+		padding-bottom: 30px;
 	}
 
 	p {
-		color: white;
+		color: #FFFFFF;
 		width: 300px;
 		margin: 5px 0 5px 30px;
 		font-weight: bold;
@@ -57,6 +56,7 @@
 		float: left;
 		padding-top: 28px;
 		margin-bottom: 28px;
+		margin-left: 180px;
 	}
 
 	.topnav-centered a {
@@ -72,6 +72,7 @@
 		float: right;
 		padding-top: 16px;
 		margin-bottom: 20px;
+		margin-right: 100px;
 	}
 
 	.topnav-right a {
@@ -80,6 +81,7 @@
 		opacity: 1;
 	}
 </style>
+
 <div class="topnav">
 	<!-- 右寄せ -->
 	<div class="topnav-left">
