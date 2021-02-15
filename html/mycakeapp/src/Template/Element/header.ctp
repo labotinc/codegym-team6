@@ -15,12 +15,13 @@
 	.topnav-left {
 		float: left;
 		margin-left: 140.78px;
+		margin-right: 130px;
 		padding-bottom: 30px;
+		width: 8%;
 	}
 
 	p {
 		color: #FFFFFF;
-		width: 300px;
 		margin: 5px 0 5px 30px;
 		font-weight: bold;
 	}
@@ -53,10 +54,14 @@
 
 	/* header中央リンク */
 	.topnav-centered {
+		display: flex;
+		white-space: nowrap;
 		float: left;
 		padding-top: 28px;
 		margin-bottom: 28px;
 		margin: 0 auto;
+		width: 28%;
+		margin-right: 10%;
 	}
 
 	.topnav-centered a {
@@ -64,15 +69,17 @@
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
-		margin: 30px;
 	}
 
 	/* header右側ボタンリンク */
 	.topnav-right {
+		display: flex;
+		white-space: nowrap;
 		float: right;
 		padding-top: 16px;
 		margin-bottom: 20px;
 		margin-right: 100px;
+		width: 15%;
 	}
 
 	.topnav-right a {

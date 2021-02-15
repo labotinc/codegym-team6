@@ -14,7 +14,7 @@
 	/* footer logo */
 	.footer-left {
 		float: left;
-		margin-left: 140.78px;
+		margin-left: 10%;
 		padding-top: 48px;
 		margin-bottom: 78px;
 	}
@@ -51,6 +51,9 @@
 		padding-top: 76px;
 		margin-bottom: 78px;
 		margin: 0 auto;
+		display: flex;
+		white-space: nowrap;
+		width: 28%;
 	}
 
 	.footer-centered a {
