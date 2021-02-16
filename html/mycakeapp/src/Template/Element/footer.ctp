@@ -17,6 +17,8 @@
 		margin-left: 10%;
 		padding-top: 48px;
 		margin-bottom: 78px;
+		margin-left: 7%;
+		margin-right: 6%;
 	}
 
 	p {

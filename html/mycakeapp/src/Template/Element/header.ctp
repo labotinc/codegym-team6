@@ -14,8 +14,8 @@
 	/* header logo */
 	.topnav-left {
 		float: left;
-		margin-left: 140.78px;
-		margin-right: 130px;
+		margin-left: 7%;
+		margin-right: 6%;
 		padding-bottom: 30px;
 		width: 8%;
 	}
@@ -69,6 +69,7 @@
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
+		width: 10%;
 	}
 
 	/* header右側ボタンリンク */
@@ -79,13 +80,13 @@
 		padding-top: 16px;
 		margin-bottom: 20px;
 		margin-right: 100px;
-		width: 15%;
 	}
 
 	.topnav-right a {
 		border: 1px solid #FFFFFF;
 		border-radius: 3px;
 		opacity: 1;
+		width: 20%;
 	}
 </style>
 
