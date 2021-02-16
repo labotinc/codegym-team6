@@ -24,7 +24,7 @@ class CreateTaxes extends AbstractMigration
         ]);
         $table->addColumn('end_date', 'date', [
             'default' => null,
-            'null' => false,
+            'null' => true,
         ]);
         $table->addColumn('is_deleted', 'boolean', [
             'default' => 0,

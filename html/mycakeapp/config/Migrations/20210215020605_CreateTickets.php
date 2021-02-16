@@ -26,7 +26,7 @@ class CreateTickets extends AbstractMigration
             'signed' => false,
         ]);
         $table->addColumn('row', 'integer', [
-            'default' => null,
+            'default' => 0,
             'limit' => MysqlAdapter::INT_TINY,
             'null' => false,
         ]);

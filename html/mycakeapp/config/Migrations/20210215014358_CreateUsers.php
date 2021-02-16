@@ -23,7 +23,7 @@ class CreateUsers extends AbstractMigration
             'limit' => 255,
             'null' => false,
         ]);
-        $table->addColumn('is_tmp_reserved', 'boolean', [
+        $table->addColumn('is_registered', 'boolean', [
             'default' => 0,
             'null' => false,
         ]);

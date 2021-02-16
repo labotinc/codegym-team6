@@ -18,15 +18,15 @@ class CreateScreeningSchedules extends AbstractMigration
             'limit' => 11,
             'null' => false,
         ]);
-        $table->addColumn('screening_date', 'date', [
+        $table->addColumn('date', 'date', [
             'default' => null,
             'null' => false,
         ]);
-        $table->addColumn('screening_start_time', 'time', [
+        $table->addColumn('start_time', 'time', [
             'default' => null,
             'null' => false,
         ]);
-        $table->addColumn('screening_end_time', 'time', [
+        $table->addColumn('end_time', 'time', [
             'default' => null,
             'null' => false,
         ]);

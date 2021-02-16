@@ -31,7 +31,7 @@ class CreateDiscounts extends AbstractMigration
             'null' => false,
         ]);
         $table->addColumn('row', 'integer', [
-            'default' => null,
+            'default' => 0,
             'limit' => MysqlAdapter::INT_TINY,
             'null' => false,
         ]);

@@ -23,9 +23,8 @@ class CreateCards extends AbstractMigration
             'limit' => 255,
             'null' => false,
         ]);
-        $table->addColumn('expiration_date', 'integer', [
+        $table->addColumn('expiration_date', 'date', [
             'default' => null,
-            'limit' => 11,
             'null' => false,
         ]);
         $table->addColumn('name', 'string', [
