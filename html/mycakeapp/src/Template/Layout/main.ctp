@@ -3,7 +3,7 @@
 
 <head>
 	<?= $this->Html->charset() ?>
-	<title> </title>
+	<title>QUEL CINEMAS</title>
 	<!-- resetcss読み込み -->
 	<?= $this->Html->css('reset') ?>
 	<?= $this->Html->css('main') ?>
