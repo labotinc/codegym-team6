@@ -19,9 +19,9 @@ class CreateDiscounts extends AbstractMigration
             'limit' => 100,
             'null' => false,
         ]);
-        $table->addColumn('amount', 'decimal', [
+        $table->addColumn('amount', 'integer', [
             'default' => null,
-            'limit' => 7,
+            'limit' => 11,
             'null' => false,
             'signed' => false,
         ]);

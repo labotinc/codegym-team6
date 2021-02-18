@@ -33,9 +33,9 @@ class CreatePayments extends AbstractMigration
             'limit' => 11,
             'null' => false,
         ]);
-        $table->addColumn('total_payments', 'decimal', [
+        $table->addColumn('total_payments', 'integer', [
             'default' => null,
-            'limit' => 7,
+            'limit' => 11,
             'null' => false,
             'signed' => false,
         ]);

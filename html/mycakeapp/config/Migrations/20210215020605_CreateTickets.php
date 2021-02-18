@@ -19,9 +19,9 @@ class CreateTickets extends AbstractMigration
             'limit' => 100,
             'null' => false,
         ]);
-        $table->addColumn('price', 'decimal', [
+        $table->addColumn('price', 'integer', [
             'default' => null,
-            'limit' => 7,
+            'limit' => 11,
             'null' => false,
             'signed' => false,
         ]);
