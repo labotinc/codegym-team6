@@ -9,6 +9,7 @@
 		height: 72px;
 		overflow: scroll;
 		opacity: 1;
+		position: fixed;
 	}
 
 	/* header logo */
