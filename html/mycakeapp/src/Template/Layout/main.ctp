@@ -17,15 +17,17 @@
 	<!-- header表示部分 -->
 	<?= $this->element('header') ?>
 	<!-- メインコンテンツ -->
-	<div class="container">
-		<!-- タイトル -->
-		<h2>タイトルを編集してください</h2>
-		<!-- 各ページのタイトルを変数に代入 -->
-		<!-- コンテンツ表示枠 -->
-		<div class="main">
-			<?= $this->fetch('content') ?>
+	<main>
+		<div class="container">
+			<!-- タイトル -->
+			<h2 class="main-title">タイトルを編集してください</h2>
+			<!-- 各ページのタイトルを変数に代入 -->
+			<!-- コンテンツ表示枠 -->
+			<div class="main">
+				<?= $this->fetch('content') ?>
+			</div>
 		</div>
-	</div>
+	</main>
 	<!-- footer表示部分 -->
 	<?= $this->element('footer') ?>
 </body>
