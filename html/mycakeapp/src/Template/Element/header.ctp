@@ -41,7 +41,7 @@
 		float: left;
 		color: #FFFFFF;
 		text-align: center;
-		padding: 3px 16px;
+		padding: 8px 16px;
 		text-decoration: none;
 		font-size: 15px;
 		font-size: 15px;
