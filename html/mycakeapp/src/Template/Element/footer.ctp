@@ -1,9 +1,6 @@
 <style>
 	/* footer */
 	.footer {
-		overflow: scroll;
-		top: 1015px;
-		left: 0px;
 		width: 100%;
 		height: 168px;
 		background: var(--unnamed-color-262626) 0% 0% no-repeat padding-box;
@@ -23,11 +20,8 @@
 
 	p {
 		color: #FFFFFF;
-		width: 300px;
 		margin: 30px;
 		font-weight: bold;
-		top: 1091px;
-		left: 140px;
 		width: 163px;
 		height: 14px;
 		opacity: 1;
