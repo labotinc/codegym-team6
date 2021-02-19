@@ -71,7 +71,7 @@
 </style>
 
 <div class="footer">
-	<!-- 右寄せ -->
+	<!-- 左寄せ -->
 	<div class="footer-left">
 		<p>QUEL CINEMAS</p>
 	</div>
