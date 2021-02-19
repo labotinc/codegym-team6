@@ -13,6 +13,11 @@ class CreatePayments extends AbstractMigration
     public function change()
     {
         $table = $this->table('payments');
+        $table->addColumn('reservation_id', 'integer', [
+            'default' => null,
+            'limit' => 11,
+            'null' => false,
+        ]);
         $table->addColumn('tax_id', 'integer', [
             'default' => null,
             'limit' => 11,
