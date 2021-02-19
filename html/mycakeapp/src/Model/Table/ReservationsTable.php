@@ -46,7 +46,7 @@ class ReservationsTable extends Table
             'foreignKey' => 'user_id',
             'joinType' => 'INNER',
         ]);
-        $this->hasMany('Payments', [
+        $this->hasOne('Payments', [
             'foreignKey' => 'reservation_id',
         ]);
         $this->hasMany('ReservedSeats', [
