@@ -3,8 +3,6 @@
 	.topnav {
 		background: var(--unnamed-color-262626) 0% 0% no-repeat padding-box;
 		background: #262626 0% 0% no-repeat padding-box;
-		top: 0px;
-		left: 0px;
 		width: 100%;
 		height: 72px;
 		overflow: scroll;
@@ -18,7 +16,6 @@
 		margin-left: 7%;
 		margin-right: 6%;
 		padding-bottom: 30px;
-		width: 8%;
 	}
 
 	p {
@@ -30,15 +27,13 @@
 	span {
 		color: #FFB100;
 		opacity: 1;
-		top: 29px;
-		left: 141px;
 		width: 53px;
 		height: 14px;
 	}
 
 	/* header link共通部分 */
 	.topnav a {
-		float: left;
+		/* float: left; */
 		color: #FFFFFF;
 		text-align: center;
 		padding: 8px 16px;
@@ -67,10 +62,8 @@
 
 	.topnav-centered a {
 		float: none;
-		top: 50%;
-		left: 50%;
 		transform: translate(-50%, -50%);
-		width: 10%;
+		width: 18%;
 	}
 
 	/* header右側ボタンリンク */
