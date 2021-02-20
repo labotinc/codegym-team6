@@ -4,7 +4,7 @@
 		background: var(--unnamed-color-262626) 0% 0% no-repeat padding-box;
 		background: #262626 0% 0% no-repeat padding-box;
 		width: 100%;
-		height: 72px;
+		height: 12%;
 		overflow: scroll;
 		opacity: 1;
 		position: fixed;
