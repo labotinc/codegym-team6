@@ -6,6 +6,11 @@
 		background: var(--unnamed-color-262626) 0% 0% no-repeat padding-box;
 		background: #262626 0% 0% no-repeat padding-box;
 		opacity: 1;
+		position: absolute;
+		/* ←絶対位置 */
+		bottom: 0;
+
+
 	}
 
 	/* footer logo */
