@@ -103,4 +103,9 @@ class UsersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    public function signup()
+	{
+		$this->viewBuilder()->setLayout('main');
+	}
 }
