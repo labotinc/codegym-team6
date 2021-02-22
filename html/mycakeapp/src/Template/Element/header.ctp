@@ -4,10 +4,8 @@
 		background: var(--unnamed-color-262626) 0% 0% no-repeat padding-box;
 		background: #262626 0% 0% no-repeat padding-box;
 		width: 100%;
-		height: 12%;
-		overflow: scroll;
+		height: 79px;
 		opacity: 1;
-		position: fixed;
 	}
 
 	/* header logo */
@@ -69,8 +67,8 @@
 	/* header右側ボタンリンク */
 	.topnav-right {
 		display: flex;
+		justify-content: flex-end;
 		white-space: nowrap;
-		float: right;
 		padding-top: 16px;
 		margin-bottom: 20px;
 		margin-right: 100px;
@@ -80,7 +78,6 @@
 		border: 1px solid #FFFFFF;
 		border-radius: 3px;
 		opacity: 1;
-		width: 20%;
 	}
 </style>
 
