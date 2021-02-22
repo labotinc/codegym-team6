@@ -20,7 +20,7 @@
 	<main>
 		<div class="container">
 			<!-- タイトル -->
-			<h2 class="main-title">タイトルを編集してください</h2>
+			<h2 class="main-title"><?= $this->fetch('title') ?></h2>
 			<!-- 各ページのタイトルを変数に代入 -->
 			<!-- コンテンツ表示枠 -->
 			<div class="main">
