@@ -1,0 +1,39 @@
+body{
+		min-height: 100vh; /* ←コンテンツの高さの最小値＝ブラウザの高さに指定 */
+		position: relative;/* ←相対位置 */
+		padding-bottom: 60px; /* ←フッターの高さを指定 */
+		background-color: #EBEBEB;
+}
+/* 背景 */
+.container {
+		position: relative;
+		font-family: 'Noto Sans JP', sans-serif;
+		width: 100%;
+		vertical-align: middle;
+		padding-bottom: 279px;
+		padding-top: 72px;
+		margin-bottom: 0;
+		opacity: 1;
+	}
+
+	/* タイトル */
+	h2 {
+		color: var(--unnamed-color-707070);
+		margin: auto;
+		text-align: center;
+		font: normal normal 600 25px/34px Noto Sans;
+		letter-spacing: 0.89px;
+		color: #707070;
+		opacity: 1;
+		padding-top: 83px;
+		padding-bottom: 36px;
+	}
+
+	/* コンテンツ表示部分 */
+	.main {
+		width: 736px;
+		height: 520px;
+		margin: 0 auto;
+		background: #FFFFFF 0% 0% no-repeat padding-box;
+		opacity: 1;
+	}
