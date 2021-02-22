@@ -68,13 +68,35 @@ class UsersTable extends Table
         $validator
             ->email('email')
             ->requirePresence('email', 'create')
-            ->notEmptyString('email');
+            ->maxLength('email', 255)
+            ->notEmptyString('email', '空白になっています');
 
         $validator
             ->scalar('password')
             ->maxLength('password', 255)
             ->requirePresence('password', 'create')
-            ->notEmptyString('password');
+            ->notEmptyString('password', '空白になっています')
+			->add('password', [
+				'length' => [
+					'rule' => ['lengthBetween', 4, 13],
+					'message' => 'パスワードは4文字以上、13文字以下にしてください'
+				]
+			]);
+
+		$validator
+		->scalar('password_confirm')
+		->maxLength('password_confirm', 255)
+		->notEmptyString('password_confirm', '空白になっています')
+		->add('password_confirm', [
+			'compareWith' => [
+				'rule' => ['compareWith', 'password'],
+				'message' => 'パスワードが一致していません',
+			],
+			'length' => [
+				'rule' => ['lengthBetween', 4, 13],
+				'message' => 'パスワードは4文字以上、13文字以下にしてください'
+			]
+		]);
 
         $validator
             ->boolean('is_registered')
