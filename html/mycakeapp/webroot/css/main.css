@@ -2,13 +2,12 @@ body{
 		min-height: 100vh; /* ←コンテンツの高さの最小値＝ブラウザの高さに指定 */
 		position: relative;/* ←相対位置 */
 		padding-bottom: 60px; /* ←フッターの高さを指定 */
+		background-color: #EBEBEB;
 }
 /* 背景 */
 .container {
 		position: relative;
-		/* overflow: scroll; */
 		font-family: 'Noto Sans JP', sans-serif;
-		background-color: #EBEBEB;
 		width: 100%;
 		vertical-align: middle;
 		padding-bottom: 279px;
