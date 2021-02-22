@@ -107,6 +107,18 @@ class UsersController extends AppController
     public function signup()
 	{
 		$this->viewBuilder()->setLayout('main');
+
+		$user = $this->Users->newEntity();
+		if($this->request->is('post')){
+            $user = $this->Users->patchEntity($user, $this->request->getData());
+            $user->is_registered = 0;
+            $user->is_deleted = 0;
+            if($this->Users->save($user)){
+                return $this->redirect(['action' => 'confirm']);
+            }
+            $this->Flash->error(__('保存に失敗しました。もう一度入力下さい。'));
+        }
+        $this->set(compact('user'));
 	}
 
     public function confirm()
