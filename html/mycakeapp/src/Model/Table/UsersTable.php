@@ -82,11 +82,12 @@ class UsersTable extends Table
 				'rule' => ['alphaNumericWithJapaneseCheck'],
 				'provider' => 'Custom',
 				'message' => 'パスワードに使えない文字が入力されています',
+				'last' => true,
 			])
 			->add('password', [
 				'length' => [
 					'rule' => ['lengthBetween', 4, 13],
-					'message' => 'パスワードは4文字以上、13文字以下にしてください'
+					'message' => 'パスワードは4文字以上、13文字以下にしてください',
 				]
 			]);
 
@@ -98,6 +99,7 @@ class UsersTable extends Table
 			'compareWith' => [
 				'rule' => ['compareWith', 'password'],
 				'message' => 'パスワードが一致していません',
+				'last' => true,
 			],
 			'length' => [
 				'rule' => ['lengthBetween', 4, 13],
