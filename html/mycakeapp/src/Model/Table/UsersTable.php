@@ -61,6 +61,8 @@ class UsersTable extends Table
      */
     public function validationDefault(Validator $validator)
     {
+		$validator->provider('Custom', 'App\Model\Validation\CustomValidation');
+
         $validator
             ->integer('id')
             ->allowEmptyString('id', null, 'create');
@@ -76,6 +78,11 @@ class UsersTable extends Table
             ->maxLength('password', 255)
             ->requirePresence('password', 'create')
             ->notEmptyString('password', '空白になっています')
+			->add('password', 'alphaNumeric_japanese_Check', [
+				'rule' => ['alphaNumericWithJapaneseCheck'],
+				'provider' => 'Custom',
+				'message' => 'パスワードに使えない文字が入力されています',
+			])
 			->add('password', [
 				'length' => [
 					'rule' => ['lengthBetween', 4, 13],
@@ -96,6 +103,11 @@ class UsersTable extends Table
 				'rule' => ['lengthBetween', 4, 13],
 				'message' => 'パスワードは4文字以上、13文字以下にしてください'
 			]
+		])
+		->add('password_confirm', 'alphaNumeric_japanese_Check', [
+			'rule' => ['alphaNumericWithJapaneseCheck'],
+			'provider' => 'Custom',
+			'message' => 'パスワードに使えない文字が入力されています',
 		]);
 
         $validator
