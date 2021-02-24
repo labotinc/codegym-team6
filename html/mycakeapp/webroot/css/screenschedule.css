@@ -7,7 +7,7 @@ body{
 }
 
 /* 上映スケジュール日付表示部分 */
-.date-wrapper{
+.week-banner{
 	display:flex;
 	justify-content: center;
 	margin: 0 auto;
@@ -15,7 +15,7 @@ body{
 	top: 192px;
 }
 /* 上映スケジュールの見出し */
-main .date-schedule {
+main .banner-title{
 text-align: left;
 font: normal normal bold 16px/22px Noto Sans;
 letter-spacing: 1.28px;
@@ -26,7 +26,7 @@ padding-top: 80px;
 margin-left: 20%;
 }
 
-/* バーナーの帯操作部分 */
+/* バーナーの帯の左右操作部分 */
 .nav-button{
 	width: 24px;
 	height: 80px;
@@ -39,7 +39,7 @@ margin-left: 20%;
 }
 
 /* 上映スケジュールのボックス */
-.date-select {
+.banner-box{
 	width:8%;
 	height:80px;
 	background: #7B7B7B 0% 0% no-repeat padding-box;
@@ -48,7 +48,7 @@ margin-left: 20%;
 }
 
 /* 日にち */
-p.date-box{
+p.banner-date{
 	text-align: left;
 	font: normal normal bold 15px/20px Noto Sans;
 	letter-spacing: 1.2px;

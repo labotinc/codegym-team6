@@ -23,37 +23,36 @@
 <!-- 上映スケジュールバーナー -->
 <main>
     <!-- バーナータイトル -->
-    <div class="date-schedule">上映スケジュール</div>
+    <div class="banner-title">上映スケジュール</div>
     <!-- バーナー本体 -->
     <!-- この部分は後ほどJavaScript実装 -->
     <!-- 日付のデータはDBからContollerから後ほどとってくる -->
-    <div class="date-wrapper">
+    <div class="week-banner">
         <div class="nav-button" id="nav-button">
             < </div>
-                <div class="date-select" id="date-select">
-                    <p class="date-box">○月○日(○)</p>
+                <div class="banner-box" id="banner-box">
+                    <p class="banner-date">○月○日(○)</p>
                 </div>
-                <div class="date-select" id="date-select">
-                    <p class="date-box">○月○日(○)</p>
+                <div class="banner-box" id="banner-box">
+                    <p class="banner-date">○月○日(○)</p>
                 </div>
-                <div class="date-select" id="date-select">
-                    <p class="date-box">○月○日(○)</p>
+                <div class="banner-box" id="banner-box">
+                    <p class="banner-date">○月○日(○)</p>
                 </div>
-                <div class="date-select" id="date-select">
-                    <p class="date-box">○月○日(○)</p>
+                <div class="banner-box" id="banner-box">
+                    <p class="banner-date">○月○日(○)</p>
                 </div>
-                <div class="date-select" id="date-select">
-                    <p class="date-box">○月○日(○)</p>
+                <div class="banner-box" id="banner-box">
+                    <p class="banner-date">○月○日(○)</p>
                 </div>
-                <div class="date-select" id="date-select">
-                    <p class="date-box">○月○日(○)</p>
+                <div class="banner-box" id="banner-box">
+                    <p class="banner-date">○月○日(○)</p>
                 </div>
-                <div class="date-select" id="date-select">
-                    <p class="date-box">○月○日(○)</p>
+                <div class="banner-box" id="banner-box">
+                    <p class="banner-date">○月○日(○)</p>
                 </div>
                 <div class="nav-button" id="nav-button"> > </div>
         </div>
 </main>
-
 
 <?= $this->element('footer') ?>
