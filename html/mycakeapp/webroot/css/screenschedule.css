@@ -1,0 +1,59 @@
+/* コンテンツ表示部分背景 */
+body{
+	min-height: 100vh; /* ←コンテンツの高さの最小値＝ブラウザの高さに指定 */
+	position: relative;/* ←相対位置 */
+	padding-bottom: 60px; /* ←フッターの高さを指定 */
+	background-color: #EBEBEB;
+}
+
+/* 上映スケジュール日付表示部分 */
+.date-wrapper{
+	display:flex;
+	justify-content: center;
+	margin: 0 auto;
+	position: absolute; /*絶対位置で指定*/
+	top: 192px;
+}
+/* 上映スケジュールの見出し */
+main .date-schedule {
+text-align: left;
+font: normal normal bold 16px/22px Noto Sans;
+letter-spacing: 1.28px;
+color: #242424;
+opacity: 1;
+position: relative;
+padding-top: 80px;
+margin-left: 20%;
+}
+
+/* バーナーの帯操作部分 */
+.nav-button{
+	width: 24px;
+	height: 80px;
+	background: #B1B1B1 0% 0% no-repeat padding-box;
+	opacity: 0.7;
+	text-align: center;
+	font: normal normal bold Noto Sans 80px;
+	color: #FFFFFF;
+	line-height: 80px;
+}
+
+/* 上映スケジュールのボックス */
+.date-select {
+	width:8%;
+	height:80px;
+	background: #7B7B7B 0% 0% no-repeat padding-box;
+	opacity: 1;
+	margin: 0 1px;
+}
+
+/* 日にち */
+p.date-box{
+	text-align: left;
+	font: normal normal bold 15px/20px Noto Sans;
+	letter-spacing: 1.2px;
+	color: #FFFFFF;
+	opacity: 1;
+	margin-left: 10%;
+	vertical-align: middle;
+}
