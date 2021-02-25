@@ -48,5 +48,4 @@
 	<!-- footer表示部分 -->
 	<?= $this->element('footer') ?>
 </body>
-
 </html>
