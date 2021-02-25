@@ -41,7 +41,6 @@
 						<?php endforeach; ?>
 					</table>
 				</article>
-				<?= $this->fetch('content') ?>
 			</div>
 		</div>
 	</main>
