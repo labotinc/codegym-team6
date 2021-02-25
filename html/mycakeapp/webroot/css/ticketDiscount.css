@@ -95,15 +95,18 @@ td {
 	line-height: 30px;
 }
 
-
 td .discount {
 	height: 60px;
 	line-height: 60px;
 	vertical-align: bottom;
 }
 
-.amount{
+.amount {
 	height: 60px;
 	line-height: 60px;
 	vertical-align: bottom;
+}
+
+.number {
+	text-align: right;
 }

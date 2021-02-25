@@ -24,7 +24,7 @@
 						<?php foreach ($tickets as $ticket) : ?>
 							<tr class="ticket">
 								<td><?= h($ticket->type) ?></td>
-								<td align="right"><?= number_format(h($ticket->price)) ?>円</td>
+								<td class="number"><?= number_format(h($ticket->price)) ?>円</td>
 							</tr>
 						<?php endforeach; ?>
 					</table>
@@ -36,7 +36,7 @@
 									<p class="discount-name"><?= h($discount->name) ?></p>
 									<p class="discription"><?= h($discount->discription) ?></p>
 								</td>
-								<td align="right" class="amount"><?= number_format(h($discount->amount)) ?>円</td>
+								<td class="number amount"><?= number_format(h($discount->amount)) ?>円</td>
 							</tr>
 						<?php endforeach; ?>
 					</table>
