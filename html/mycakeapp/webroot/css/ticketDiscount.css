@@ -39,7 +39,6 @@ h2 {
 
 .main {
 	width: 736px;
-	height: 520px;
 	margin: 0 auto;
 	opacity: 1;
 }
@@ -96,6 +95,7 @@ td {
 	height: 30px;
 	line-height: 30px;
 }
+
 
 td .discount {
 	height: 60px;
