@@ -111,8 +111,6 @@ class UsersController extends AppController
 		$user = $this->Users->newEntity();
 		if($this->request->is('post')){
             $user = $this->Users->patchEntity($user, $this->request->getData());
-            $user->is_registered = 0;
-            $user->is_deleted = 0;
             if($this->Users->save($user)){
                 return $this->redirect(['action' => 'confirm']);
             }
