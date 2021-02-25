@@ -1,0 +1,112 @@
+body {
+	min-height: 100vh;
+	/* ←コンテンツの高さの最小値＝ブラウザの高さに指定 */
+	position: relative;
+	/* ←相対位置 */
+	padding-bottom: 60px;
+	/* ←フッターの高さを指定 */
+	background-color: #EBEBEB;
+}
+
+/* 背景 */
+
+.container {
+	position: relative;
+	font-family: 'Noto Sans JP', sans-serif;
+	vertical-align: middle;
+	padding-bottom: 279px;
+	padding-top: 72px;
+	margin-bottom: 0;
+	opacity: 1;
+}
+
+/* タイトル */
+
+h2 {
+	color: var(--unnamed-color-707070);
+	margin: auto;
+	text-align: center;
+	font: normal normal 600 25px/34px Noto Sans;
+	letter-spacing: 0.89px;
+	color: #707070;
+	opacity: 1;
+	padding-top: 83px;
+	padding-bottom: 36px;
+}
+
+/* コンテンツ表示部分 */
+
+.main {
+	width: 736px;
+	margin: 0 auto;
+	opacity: 1;
+}
+
+.table {
+	width: 60%;
+}
+
+h3 {
+	font-size: 16px;
+	border-left: solid 7px gray;
+	height: 35px;
+	line-height: 35px;
+	margin: 20px 0 10px 0;
+	padding-left: 10px;
+	color: black;
+}
+
+table {
+	width: 100%;
+	padding-left: 17px;
+	margin-bottom: 5px;
+	border-collapse: collapse;
+}
+
+tr {
+	border-bottom: dashed 1px gray;
+}
+
+td {
+	padding: 0 10px 0 15px;
+	font-size: 16px;
+}
+
+.ticket {
+	height: 40px;
+	line-height: 40px;
+}
+
+.discount-name {
+	color: black;
+	width: 100%;
+	margin: 0;
+	padding-top: 5px;
+	height: 30px;
+	line-height: 30px;
+}
+
+.discription {
+	width: 100%;
+	font-size: 11px;
+	margin: 0;
+	color: black;
+	height: 30px;
+	line-height: 30px;
+}
+
+td .discount {
+	height: 60px;
+	line-height: 60px;
+	vertical-align: bottom;
+}
+
+.amount {
+	height: 60px;
+	line-height: 60px;
+	vertical-align: bottom;
+}
+
+.number {
+	text-align: right;
+}
