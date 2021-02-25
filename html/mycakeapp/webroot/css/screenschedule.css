@@ -1,18 +1,16 @@
 /* コンテンツ表示部分背景 */
 body{
-	min-height: 100vh; /* ←コンテンツの高さの最小値＝ブラウザの高さに指定 */
+	min-height: 100vh; /*←コンテンツの高さの最小値＝ブラウザの高さに指定*/
 	position: relative;/* ←相対位置 */
 	padding-bottom: 60px; /* ←フッターの高さを指定 */
 	background-color: #EBEBEB;
 }
 
-/* 上映スケジュール日付表示部分 */
+/* 上映スケジュール日付バーナー表示部分 */
 .week-banner{
 	display:flex;
 	justify-content: center;
-	margin: 0 auto;
-	position: absolute; /*絶対位置で指定*/
-	top: 192px;
+	margin-bottom: 30px;
 }
 /* 上映スケジュールの見出し */
 main .banner-title{
@@ -38,22 +36,165 @@ margin-left: 20%;
 	line-height: 80px;
 }
 
-/* 上映スケジュールのボックス */
-.banner-box{
-	width:8%;
+/* 上映スケジュールのバーナーのボックス */
+main .banner-box{
+	position: relative;
+	width:9%;
 	height:80px;
 	background: #7B7B7B 0% 0% no-repeat padding-box;
 	opacity: 1;
 	margin: 0 1px;
 }
 
-/* 日にち */
-p.banner-date{
+/* バーナー1週間分の日にち */
+div p.banner-date{
+	position:relative;
+	top: 30%;
+	left: 8%;
 	text-align: left;
-	font: normal normal bold 15px/20px Noto Sans;
+	font: normal normal bold 0.9rem/1rem Noto Sans;
 	letter-spacing: 1.2px;
 	color: #FFFFFF;
 	opacity: 1;
-	margin-left: 10%;
-	vertical-align: middle;
+	margin: 10px auto;
+	line-height: 30%;
+	white-space: nowrap;
+}
+
+/* 映画の詳細 */
+.movie-schedule-wrapper{
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+}
+
+/* 選んだ日付 */
+main .selected-date{
+	display: block;
+	margin-left: 20%;
+	text-align: left;
+	font: normal normal bold 23px/32px Noto Sans;
+	letter-spacing: 1.84px;
+	color: #242424;
+	opacity: 1;
+}
+
+/* 映画詳細ボックス */
+.box{
+	position: relative;
+    margin: 2em 0;
+	width: 67%;
+	height: 216px;
+	margin: 50px auto;
+}
+
+/* 映画のタイトル表示部分 */
+.box .box-title {
+    font-size: 1.2em;
+    background:#7B7B7B;
+    padding: 4px;
+    text-align: center;
+    color: #FFFFFF;
+    font-weight: bold;
+    letter-spacing: 0.05em;
+	height: 48px;
+	overflow: hidden;
+}
+
+div.box .box-title p{
+	text-align: left;
+	white-space: nowrap;
+	opacity: 1;
+	line-height: 1%;
+	font-size: 1rem;
+}
+div.box .box-title p span{
+	text-align: left;
+	white-space: nowrap;
+	opacity: 1;
+	color: #B1B1B1;
+	font-size: small;
+}
+/* 映画の詳細表示部分 */
+.box .movie-schedule-box{
+	display: flex;
+	flex-direction: row;
+    background: #D5D5D5;
+	height: 216px;
+	overflow: hidden;
+}
+/* 映画の画像 */
+.box img {
+	position: relative;
+	top: 10%;
+	left: 0.3%;
+    padding: 15px 20px;
+    margin: 6px;
+	max-width: 20%;
+    max-height: 144px;
+}
+
+/* スケジュールタイムの表示ボックス */
+.movie-schedule-box .movie-time-box{
+	background-color: #FFFFFF;
+	width:40%;
+	height: 144px;
+	margin: 5% 9px;
+}
+
+/* 上映時間 */
+.running-time{
+	text-align: center;
+	font: normal normal bold 15px/17px Noto Sans;
+	letter-spacing: 1.2px;
+	color: #7B7B7B;
+	 margin: 0 auto;
+	 padding-top:30px ;
+}
+/* 上映開始 */
+ div .movie-time-box  p span.start-time{
+	color: #7B7B7B;
+	display: inline;
+	font-size: large;
+}
+/* 上映終了 */
+.movie-time-box  .end-time{
+	color: #7B7B7B;
+}
+/* 予約購入ボタン */
+button{
+	text-align: center;
+	font: normal normal bold 15px/15px Noto Sans;
+	letter-spacing: 1.84px;
+	background-color:  #B1B1B1;
+	color: #7B7B7B;
+	padding: 6% 13% ;
+	border: none;
+	opacity: 1;
+	margin: 40px auto;
+	display: block;
+}
+
+.schedule-nav-button{
+	position: absolute; /*絶対位置で指定 */
+	top: 25%;
+	left: 93.2%;
+	height: 147px;
+	width: 5%;
+	background: #7B7B7B 0% 0% no-repeat padding-box;
+	opacity: 0.5;
+	margin: 5% 9px;
+    color: #FFFFFF;
+	display: inline-block;
+}
+
+div .schedule-nav-button p{
+	position: relative;
+	right: 125%;
+	font-size: 12%;
+	text-align: center;
+	font-size: 55px;
+	line-height: 132px;
+	margin: 0 auto;
+	opacity: 1;
 }
