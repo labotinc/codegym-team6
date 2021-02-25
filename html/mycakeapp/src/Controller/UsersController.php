@@ -116,9 +116,11 @@ class UsersController extends AppController
 				$session->write('session.signup', $user);
                 return $this->redirect(['action' => 'confirm']);
             }
-			//現時点ではエラー画面が未実装なためsignupページにリダイレクト
-			return $this->redirect(['action' => 'signup']);
-            $this->Flash->error(__('保存に失敗しました。もう一度入力下さい。'));
+			if(!$user->hasErrors()){
+				//現時点ではエラー画面が未実装なためsignupページにリダイレクト
+				return $this->redirect(['action' => 'signup']);
+				$this->Flash->error(__('保存に失敗しました。もう一度入力下さい。'));
+			}
         }
         $this->set(compact('user'));
 	}
