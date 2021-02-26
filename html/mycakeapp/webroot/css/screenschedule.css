@@ -184,6 +184,10 @@ button{
 	margin: 40px auto;
 	display: block;
 }
+/* 予約購入ボタン時hover時 */
+button:hover{
+	opacity: 0.5;
+}
 
 .schedule-nav-button{
 	position: absolute; /*絶対位置で指定 */
