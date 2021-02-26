@@ -100,7 +100,6 @@ div .box {
 .box:last-child{
 	margin-bottom: 200px;
 }
-
 /* 映画のタイトル表示部分 */
 .box .box-title {
     font-size: 1.2em;
@@ -130,6 +129,7 @@ div.box .box-title p span{
 }
 /* 映画の詳細表示部分 */
 .box .movie-schedule-box{
+	position: relative;
 	display: flex;
 	flex-direction: row;
     background: #D5D5D5;
@@ -138,22 +138,18 @@ div.box .box-title p span{
 }
 /* 映画の画像 */
 .box img {
-	position: relative;
-	top: 10%;
-	left: 0.3%;
-    padding: 15px 20px;
-    margin: 6px;
+    margin: 3% 9px 3% 26px;
 	max-width: 20%;
     max-height: 144px;
 	z-index: 1;
 }
 
 /* スケジュールタイムの表示ボックス */
-.movie-schedule-box .movie-time-box{
+ .movie-time-box{
 	background-color: #FFFFFF;
 	width:40%;
 	height: 144px;
-	margin: 5% 9px;
+	margin: 3% 9px;
 }
 
 /* 上映時間 */
@@ -191,26 +187,37 @@ button{
 
 .schedule-nav-button{
 	position: absolute; /*絶対位置で指定 */
-	top: 25%;
-	left: 93.2%;
+	top: auto;
+	left: 93.7%;
 	height: 147px;
-	width: 5%;
+	width: 46px;
 	background: #7B7B7B 0% 0% no-repeat padding-box;
 	opacity: 0.5;
-	margin: 5% 9px;
+	margin: 3% 9px;
     color: #FFFFFF;
 	display: inline-block;
 	z-index: 1;
+	overflow: visible;
 }
 
 div .schedule-nav-button p{
-	position: relative;
-	right: 125%;
-	font-size: 12%;
+	position: absolute; /*絶対位置で指定 */
+	top: auto;
+	height: 147px;
+	width: 46px;
 	text-align: center;
 	font-size: 55px;
 	line-height: 132px;
 	margin: 0 auto;
 	opacity: 1;
 	z-index: 1;
+}
+
+.box-trim{
+	position: absolute; /*絶対位置で指定 */
+	width: 26px;
+	height: 216px;
+    background: #D5D5D5;
+	z-index: 10;
+	right: 0;
 }
