@@ -27,6 +27,11 @@ td {
 	border-radius: 2px;
 }
 
+.button:hover {
+	box-shadow: 0 2px 5px gray;
+	transform: translate(0, -5px);
+}
+
 .account-delete {
 	position: absolute;
 	top: 80%;
