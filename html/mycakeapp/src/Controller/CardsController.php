@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -114,6 +115,31 @@ class CardsController extends AppController
         $this->loadComponent('Flash');
         $this->viewBuilder()->setLayout('main');
 
+        $card = $this->Cards->newEntity();
+
+        if ($this->request->is('post')) {
+
+            $data = array(
+                'user_id' => 1, //仮の値
+                'card_number' => $this->request->getData('card_number'),
+                'expiration_date' => $this->request->getData('expiration_date'),
+                'name' => $this->request->getData('name'),
+                'is_deleted' => 0,
+            );
+
+            //有効期限は日付の'日'の部分は01を指定する
+            $data['expiration_date'] = array_merge($data['expiration_date'], array('day' => '01'));
+            $card = $this->Cards->patchEntity($card, $data);
+
+
+            if ($this->Cards->save($card)) {
+                return $this->redirect(['action' => 'confirm']);
+            }
+
+            $this->Flash->error(__('保存に失敗しました。もう一度入力下さい。'));
+        }
+
+        $this->set(compact('card'));
     }
 
     public function confirm()

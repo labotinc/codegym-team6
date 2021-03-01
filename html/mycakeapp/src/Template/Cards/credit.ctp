@@ -2,7 +2,7 @@
 <?php $this->assign("title", "決済情報"); ?>
 <div class="content-area">
 
-  <?= $this->Form->create(null, array('novalidate' => true)); ?>
+  <?= $this->Form->create($card, array('novalidate' => true)); ?>
 
   <div class="credit-number">
     <div class="credit-number-form">
@@ -26,7 +26,7 @@
         'minYear' => date('Y'),
         'maxYear' => date('Y') + 6,
       ]); ?>
-    <?php echo $this->Form->error('expiration_date'); ?>
+      <?php echo $this->Form->error('expiration_date'); ?>
     </div>
 
     <div class="Gemini-form">
