@@ -1,7 +1,7 @@
 <?= $this->Html->css('Users/login.css') ?>
     <?php $this->assign("title", "ログイン"); ?>
     <div class="content-area">
-		<?= $this->Form->create(null, array('novalidate' => true)); ?>
+		<?= $this->Form->create($user_form, array('novalidate' => true)); ?>
 		<div class="login-form">
 			<?php echo $this->Form->email('email', ['label' => false, 'placeholder' => 'メールアドレス']); ?>
             <?php echo $this->Form->error('email'); ?>

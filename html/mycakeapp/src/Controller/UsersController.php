@@ -5,6 +5,7 @@ use App\Controller\AppController;
 
 use Cake\Auth\DefaultPasswordHasher;
 use Cake\Event\Event;
+use App\Form\LoginForm;
 
 /**
  * Users Controller
@@ -174,7 +175,9 @@ class UsersController extends AppController
     {
         $this->viewBuilder()->setLayout('main');
 
+		$user_form = new LoginForm();
 		if($this->request->isPost()){
+			$user_form->execute($this->request->getData());
             $user = $this->Auth->identify();
             if(!empty($user)){
                 $this->Auth->setUser($user);
@@ -182,6 +185,6 @@ class UsersController extends AppController
             }
             $this->Flash->error('メールアドレスかパスワードが間違えています');
         }
-
+		$this->set(compact('user_form'));
     }
 }
