@@ -115,4 +115,9 @@ class CardsController extends AppController
         $this->viewBuilder()->setLayout('main');
 
     }
+
+    public function confirm()
+    {
+        $this->viewBuilder()->setLayout('main');
+    }
 }
