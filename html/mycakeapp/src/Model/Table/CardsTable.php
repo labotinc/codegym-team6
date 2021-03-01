@@ -101,6 +101,8 @@ class CardsTable extends Table
     {
         $rules->add($rules->existsIn(['user_id'], 'Users'));
 
+        $rules->add($rules->isUnique(['card_number'], 'そのカードはすでに登録されています'));
+
         return $rules;
     }
 }
