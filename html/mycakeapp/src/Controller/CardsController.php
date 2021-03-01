@@ -108,4 +108,11 @@ class CardsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    public function credit()
+    {
+        $this->loadComponent('Flash');
+        $this->viewBuilder()->setLayout('main');
+
+    }
 }
