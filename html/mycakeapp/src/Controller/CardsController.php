@@ -119,9 +119,17 @@ class CardsController extends AppController
 
         if ($this->request->is('post')) {
 
+            $card_number = $this->request->getData('card_number');
+
+            //暗号化
+            $plan_text = $card_number; // 暗号化するデータ(カード番号)
+            $method = 'aes-256-ecb'; // 暗号化メソッド
+            $key = 'keykeykey'; // 暗号化キー
+            $ciphertext = openssl_encrypt($plan_text, $method, $key);
+
             $data = array(
                 'user_id' => 1, //仮の値
-                'card_number' => $this->request->getData('card_number'),
+                'card_number' => $ciphertext,
                 'expiration_date' => $this->request->getData('expiration_date'),
                 'name' => $this->request->getData('name'),
                 'is_deleted' => 0,
