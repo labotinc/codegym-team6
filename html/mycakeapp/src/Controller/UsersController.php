@@ -3,6 +3,9 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
+use Cake\Auth\DefaultPasswordHasher;
+use Cake\Event\Event;
+
 /**
  * Users Controller
  *
@@ -12,6 +15,36 @@ use App\Controller\AppController;
  */
 class UsersController extends AppController
 {
+	public function initialize()
+    {
+        parent::initialize();
+        // 各種コンポーネントのロード
+        $this->loadComponent('RequestHandler');
+        $this->loadComponent('Flash');
+        $this->loadComponent('Auth', [
+            'authorize' => ['Controller'],
+            'authenticate' => [
+                'Form' => [
+                    'fields' => [
+                        'username' => 'email',
+                        'password' => 'password'
+                    ]
+                ]
+            ],
+            'loginRedirect' => [
+                'controller' => 'Users',
+                'action' => 'login'
+            ],
+            'authError' => 'ログインしてください。',
+        ]);
+    }
+
+	public function beforeFilter(Event $event)
+	{
+		parent::beforeFilter($event);
+		$this->Auth->allow(['login', 'index', 'add', 'signup', 'confirm']);
+	}
+
     /**
      * Index method
      *
@@ -140,6 +173,15 @@ class UsersController extends AppController
     public function login()
     {
         $this->viewBuilder()->setLayout('main');
+
+		if($this->request->isPost()){
+            $user = $this->Auth->identify();
+            if(!empty($user)){
+                $this->Auth->setUser($user);
+                return $this->redirect($this->Auth->redirectUrl());
+            }
+            $this->Flash->error('メールアドレスかパスワードが間違えています');
+        }
 
     }
 }
