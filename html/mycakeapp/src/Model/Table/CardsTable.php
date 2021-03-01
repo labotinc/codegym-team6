@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
@@ -58,6 +59,8 @@ class CardsTable extends Table
      */
     public function validationDefault(Validator $validator)
     {
+        $validator->provider('Custom', 'App\Model\Validation\CustomValidation');
+
         $validator
             ->integer('id')
             ->allowEmptyString('id', null, 'create');
@@ -77,7 +80,14 @@ class CardsTable extends Table
             ->scalar('name')
             ->maxLength('name', 100)
             ->requirePresence('name', 'create')
-            ->notEmptyString('name');
+            ->notEmptyString('name', '空白になっています')
+            ->add('name', 'alphaNumeric_japanese_Check', [
+                'rule' => ['alphaNumericWithJapaneseCheck'],
+                'provider' => 'Custom',
+                'message' => '使えない文字が入力されています',
+                'last' => true,
+            ])
+            ->regex('name', "/^[a-zA-Z]+$/", '半角英字以外の文字が使われています');
 
         $validator
             ->boolean('is_deleted')
