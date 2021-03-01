@@ -131,9 +131,20 @@ class CardsController extends AppController
             $data['expiration_date'] = array_merge($data['expiration_date'], array('day' => '01'));
             $card = $this->Cards->patchEntity($card, $data);
 
+            //セキュリティコードのフォームのバリデーション
+            $securitycode = $this->request->getData('securitycode');
+            if (!$securitycode) { //空白だったら
+                $card->errors('securitycode', '空白になっています');
+            } elseif (!is_numeric($securitycode)) { //数字じゃなかったら
+                $card->errors('securitycode', '半角数字以外の文字が使われています');
+            }
 
-            if ($this->Cards->save($card)) {
-                return $this->redirect(['action' => 'confirm']);
+
+            //セキュリティーコードを数字で入力している
+            if (is_numeric($_POST['securitycode'])) {
+                if ($this->Cards->save($card)) {
+                    return $this->redirect(['action' => 'confirm']);
+                }
             }
 
             $this->Flash->error(__('保存に失敗しました。もう一度入力下さい。'));
