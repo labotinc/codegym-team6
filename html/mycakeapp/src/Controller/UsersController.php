@@ -136,4 +136,10 @@ class UsersController extends AppController
         $this->viewBuilder()->setLayout('main');
 		$session->consume('session.signup');
     }
+
+    public function login()
+    {
+        $this->viewBuilder()->setLayout('main');
+
+    }
 }
