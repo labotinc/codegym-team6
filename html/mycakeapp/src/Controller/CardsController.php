@@ -127,7 +127,7 @@ class CardsController extends AppController
             //クレジットカードのバリデーションエラーメッセージ
             if (!$card_number) { //空白だったら
                 $card->errors('card_number', '空白になっています');
-            } elseif (!is_numeric($card_number)) { //数字じゃなかったら
+            } elseif (!is_numeric($card_number)) { //半角数字ではない場合
                 $card->errors('card_number', '半角数字以外の文字が使われています');
             } elseif (($mc === 0) && ($visa === 0)) {
                 $card->errors('card_number', '不正なカード番号です');
@@ -137,7 +137,7 @@ class CardsController extends AppController
             $securitycode = $this->request->getData('securitycode');
             if (!$securitycode) { //空白だったら
                 $card->errors('securitycode', '空白になっています');
-            } elseif (!is_numeric($securitycode)) { //数字じゃなかったら
+            } elseif (!is_numeric($securitycode)) { //半角数字ではない場合
                 $card->errors('securitycode', '半角数字以外の文字が使われています');
             }
 
@@ -174,7 +174,7 @@ class CardsController extends AppController
             $data['expiration_date'] = array_merge($data['expiration_date'], array('day' => '01'));
             $card = $this->Cards->patchEntity($card, $data);
 
-            //利用規約にチェックしていて、セキュリティーコードを数字で入力している時にsaveを実行する
+            //利用規約にチェックしていて、セキュリティーコードを数字で入力していて、カード番号の整合性がとれている場合にsaveを実行する
             if ((($_POST['terms']['check']) === '1') && (is_numeric($securitycode)) && ($mc === 1 || $visa === 1)) {
                 if ($this->Cards->save($card)) {
                     return $this->redirect(['action' => 'confirm']);
