@@ -139,9 +139,14 @@ class CardsController extends AppController
                 $card->errors('securitycode', '半角数字以外の文字が使われています');
             }
 
+            //チェックボックスにチェックがない場合エラーメッセージを表示する
+            if (($_POST['terms']['check']) === '0') {
+                $card->errors('terms', '登録には利用規約に同意が必要です');
+            }
 
-            //セキュリティーコードを数字で入力している
-            if (is_numeric($_POST['securitycode'])) {
+
+            //利用規約にチェックしていて、セキュリティーコードを数字で入力している時にsaveを実行する
+            if ((($_POST['terms']['check']) === '1') && (is_numeric($_POST['securitycode']))) {
                 if ($this->Cards->save($card)) {
                     return $this->redirect(['action' => 'confirm']);
                 }
