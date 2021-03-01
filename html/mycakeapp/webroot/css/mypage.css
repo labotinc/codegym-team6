@@ -1,0 +1,43 @@
+.main {
+	position: relative;
+}
+
+table {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 350px;
+}
+
+td {
+	height: 50px;
+	line-height: 50px;
+}
+
+.right {
+	text-align: right;
+}
+
+.button {
+	text-decoration: none;
+	color: white;
+	background-color: #FBC119;
+	padding: 2px 6px;
+	border-radius: 2px;
+	box-shadow: 0 2px 2px #00000015;
+}
+
+.button:hover {
+	box-shadow: 0 2px 5px gray;
+	transform: translate(0, -5px);
+}
+
+.account-delete {
+	position: absolute;
+	top: 80%;
+	left: 50%;
+	transform: translate(-50%, -80%);
+	color: gray;
+	font-size: 14px;
+}
