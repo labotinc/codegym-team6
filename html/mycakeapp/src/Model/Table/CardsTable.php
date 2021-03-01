@@ -66,12 +66,6 @@ class CardsTable extends Table
             ->allowEmptyString('id', null, 'create');
 
         $validator
-            ->scalar('card_number')
-            ->maxLength('card_number', 255)
-            ->requirePresence('card_number', 'create')
-            ->notEmptyString('card_number');
-
-        $validator
             ->date('expiration_date')
             ->requirePresence('expiration_date', 'create')
             ->notEmptyDate('expiration_date');

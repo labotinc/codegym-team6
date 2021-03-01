@@ -120,26 +120,20 @@ class CardsController extends AppController
         if ($this->request->is('post')) {
 
             $card_number = $this->request->getData('card_number');
+            //正規表現でカード番号の整合性がとれているかチェックする
+            $mc = preg_match("/^(5[1-5]\\d{14})|(2(?:22[1-9]|2[3-9][0-9]|[3-6][0-9]{2}|7[0-1][0-9]|720)\\d{12})$/", $card_number);
+            $visa = preg_match("/^4\\d{12}(\\d{3})?$/", $card_number);
 
-            //暗号化
-            $plan_text = $card_number; // 暗号化するデータ(カード番号)
-            $method = 'aes-256-ecb'; // 暗号化メソッド
-            $key = 'keykeykey'; // 暗号化キー
-            $ciphertext = openssl_encrypt($plan_text, $method, $key);
+            //クレジットカードのバリデーションエラーメッセージ
+            if (!$card_number) { //空白だったら
+                $card->errors('card_number', '空白になっています');
+            } elseif (!is_numeric($card_number)) { //数字じゃなかったら
+                $card->errors('card_number', '半角数字以外の文字が使われています');
+            } elseif (($mc === 0) && ($visa === 0)) {
+                $card->errors('card_number', '不正なカード番号です');
+            }
 
-            $data = array(
-                'user_id' => 1, //仮の値
-                'card_number' => $ciphertext,
-                'expiration_date' => $this->request->getData('expiration_date'),
-                'name' => $this->request->getData('name'),
-                'is_deleted' => 0,
-            );
-
-            //有効期限は日付の'日'の部分は01を指定する
-            $data['expiration_date'] = array_merge($data['expiration_date'], array('day' => '01'));
-            $card = $this->Cards->patchEntity($card, $data);
-
-            //セキュリティコードのフォームのバリデーション
+            //セキュリティコードのフォームのバリデーションエラーメッセージ
             $securitycode = $this->request->getData('securitycode');
             if (!$securitycode) { //空白だったら
                 $card->errors('securitycode', '空白になっています');
@@ -152,9 +146,36 @@ class CardsController extends AppController
                 $card->errors('terms', '登録には利用規約に同意が必要です');
             }
 
+            //暗号化
+            $plan_text = $card_number; // 暗号化するデータ(カード番号)
+            $method = 'aes-256-ecb'; // 暗号化メソッド
+            $key = 'keykeykey'; // 暗号化キー
+            $ciphertext = openssl_encrypt($plan_text, $method, $key);
+
+            //エラーメッセージの上書きを避けるためsaveの条件を満たしている時のみ暗号化したカード番号を$dataに登録
+            if ((($_POST['terms']['check']) === '1') && (is_numeric($securitycode)) && ($mc === 1 || $visa === 1)) {
+                $data = array(
+                    'user_id' => 1, //仮の値
+                    'card_number' => $ciphertext,
+                    'expiration_date' => $this->request->getData('expiration_date'),
+                    'name' => $this->request->getData('name'),
+                    'is_deleted' => 0,
+                );
+            } else {
+                $data = array(
+                    'user_id' => 1, //仮の値
+                    'expiration_date' => $this->request->getData('expiration_date'),
+                    'name' => $this->request->getData('name'),
+                    'is_deleted' => 0,
+                );
+            }
+
+            //有効期限は日付の'日'の部分は01を指定する
+            $data['expiration_date'] = array_merge($data['expiration_date'], array('day' => '01'));
+            $card = $this->Cards->patchEntity($card, $data);
 
             //利用規約にチェックしていて、セキュリティーコードを数字で入力している時にsaveを実行する
-            if ((($_POST['terms']['check']) === '1') && (is_numeric($securitycode))) {
+            if ((($_POST['terms']['check']) === '1') && (is_numeric($securitycode)) && ($mc === 1 || $visa === 1)) {
                 if ($this->Cards->save($card)) {
                     return $this->redirect(['action' => 'confirm']);
                 }
