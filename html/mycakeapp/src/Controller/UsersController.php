@@ -103,4 +103,37 @@ class UsersController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    public function signup()
+	{
+		$this->viewBuilder()->setLayout('main');
+
+		$user = $this->Users->newEntity();
+		if($this->request->is('post')){
+            $user = $this->Users->patchEntity($user, $this->request->getData());
+            if($this->Users->save($user)){
+				$session = $this->getRequest()->getSession();
+				$session->write('session.signup', $user);
+                return $this->redirect(['action' => 'confirm']);
+            }
+			if(!$user->hasErrors()){
+				//現時点ではエラー画面が未実装なためsignupページにリダイレクト
+				return $this->redirect(['action' => 'signup']);
+				$this->Flash->error(__('保存に失敗しました。もう一度入力下さい。'));
+			}
+        }
+        $this->set(compact('user'));
+	}
+
+    public function confirm()
+    {
+		$session = $this->getRequest()->getSession();
+		if (!$session->read('session.signup')) {
+			//現時点ではエラー画面が未実装なためsignupページにリダイレクト
+            return $this->redirect(['action' => 'signup']);
+        }
+
+        $this->viewBuilder()->setLayout('main');
+		$session->consume('session.signup');
+    }
 }

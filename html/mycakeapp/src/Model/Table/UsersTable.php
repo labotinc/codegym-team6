@@ -61,20 +61,56 @@ class UsersTable extends Table
      */
     public function validationDefault(Validator $validator)
     {
+		$validator->provider('Custom', 'App\Model\Validation\CustomValidation');
+
         $validator
             ->integer('id')
             ->allowEmptyString('id', null, 'create');
 
         $validator
-            ->email('email')
+            ->email('email',false, 'メールアドレスが間違っているようです')
             ->requirePresence('email', 'create')
-            ->notEmptyString('email');
+            ->maxLength('email', 255)
+            ->notEmptyString('email', '空白になっています');
 
         $validator
             ->scalar('password')
             ->maxLength('password', 255)
             ->requirePresence('password', 'create')
-            ->notEmptyString('password');
+            ->notEmptyString('password', '空白になっています')
+			->add('password', 'alphaNumeric_japanese_Check', [
+				'rule' => ['alphaNumericWithJapaneseCheck'],
+				'provider' => 'Custom',
+				'message' => 'パスワードに使えない文字が入力されています',
+				'last' => true,
+			])
+			->add('password', [
+				'length' => [
+					'rule' => ['lengthBetween', 4, 13],
+					'message' => 'パスワードは4文字以上、13文字以下にしてください',
+				]
+			]);
+
+		$validator
+		->scalar('password_confirm')
+		->maxLength('password_confirm', 255)
+		->notEmptyString('password_confirm', '空白になっています')
+		->add('password_confirm', [
+			'compareWith' => [
+				'rule' => ['compareWith', 'password'],
+				'message' => 'パスワードが一致していません',
+				'last' => true,
+			],
+			'length' => [
+				'rule' => ['lengthBetween', 4, 13],
+				'message' => 'パスワードは4文字以上、13文字以下にしてください'
+			]
+		])
+		->add('password_confirm', 'alphaNumeric_japanese_Check', [
+			'rule' => ['alphaNumericWithJapaneseCheck'],
+			'provider' => 'Custom',
+			'message' => 'パスワードに使えない文字が入力されています',
+		]);
 
         $validator
             ->boolean('is_registered')
@@ -96,7 +132,7 @@ class UsersTable extends Table
      */
     public function buildRules(RulesChecker $rules)
     {
-        $rules->add($rules->isUnique(['email']));
+        $rules->add($rules->isUnique(['email'], 'そのアドレスはすでに登録されています'));
 
         return $rules;
     }

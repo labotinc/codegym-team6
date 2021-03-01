@@ -1,0 +1,59 @@
+.content-area {
+    height: 552px;
+    width: 736px;
+    background-color: #FFFFFF;
+	margin: 0 auto;
+}
+
+form {
+    height: 356px;
+    margin: 0 auto;
+	padding-top: 108px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+input {
+    outline: none;
+	width: 326px;
+    font-size: 16px;
+    letter-spacing: 0.27px;
+	padding: 10px 0 10px 10px;
+    border: none;
+}
+
+.signup-form input {
+    border-bottom: solid 2px #707070;
+    opacity: 0.3;
+}
+
+input::placeholder {
+    color: #000000;
+}
+
+.submit input{
+	color: #FFFFFF;
+	font-size: 16px;
+	text-align: center;
+    padding: 10px 0;
+	background-color: #F5AE0B;
+	border: 3px solid #F5AE0B;
+    width: 336px;
+	height: 48px;
+    cursor: pointer;
+}
+
+.submit {
+    padding-top: 30px;
+}
+
+.error-message {
+    padding-top: 8px;
+    width: 326px;
+    margin: 0 auto;
+    text-align: left;
+    color: #f46161;
+    font-size: 11px;
+}
