@@ -154,7 +154,7 @@ class CardsController extends AppController
 
 
             //利用規約にチェックしていて、セキュリティーコードを数字で入力している時にsaveを実行する
-            if ((($_POST['terms']['check']) === '1') && (is_numeric($_POST['securitycode']))) {
+            if ((($_POST['terms']['check']) === '1') && (is_numeric($securitycode))) {
                 if ($this->Cards->save($card)) {
                     return $this->redirect(['action' => 'confirm']);
                 }
