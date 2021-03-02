@@ -181,6 +181,9 @@ class CardsController extends AppController
 			//利用規約にチェックしていて、セキュリティーコードを数字で入力していて、カード番号の整合性がとれていて、カードの登録数が１枚以下の場合にsaveを実行する
 			if ((isset($check['check'])) && (is_numeric($securitycode)) && ($mc === 1 || $visa === 1) && ($cardcount <= 1)) {
 				if ($this->Cards->save($card)) {
+					$session = $this->getRequest()->getSession();
+					//セッションに書き込み
+					$session->write('session.credit', $card);
 					return $this->redirect(['action' => 'confirm']);
 				}
 			}
@@ -193,6 +196,15 @@ class CardsController extends AppController
 
 	public function confirm()
 	{
+		$session = $this->getRequest()->getSession();
+		//セッション情報がない場合、エラー画面に遷移する
+		if (!$session->read('session.credit')) {
+			//現時点ではエラー画面が未実装なためcreditページにリダイレクト
+			return $this->redirect(['action' => 'credit']);
+		}
+
 		$this->viewBuilder()->setLayout('main');
+		//セッションを読み込み後削除
+		$session->consume('session.credit');
 	}
 }
