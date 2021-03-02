@@ -118,7 +118,7 @@ class CardsController extends AppController
         $card = $this->Cards->newEntity();
 
         if ($this->request->is('post')) {
-            $cardcount = $this->Cards->find()->where(['user_id' => 1])->count();//user_idは仮の値です
+            $cardcount = $this->Cards->find()->where(['user_id' => 1])->count(); //user_idは仮の値です
 
             $card_number = $this->request->getData('card_number');
             //正規表現でカード番号の整合性がとれているかチェックする
@@ -158,7 +158,7 @@ class CardsController extends AppController
             //エラーメッセージの上書きを避けるためsaveの条件を満たしている時のみ暗号化したカード番号を$dataに登録
             if ((($_POST['terms']['check']) === '1') && (is_numeric($securitycode)) && ($mc === 1 || $visa === 1) && ($cardcount <= 1)) {
                 $data = array(
-                    'user_id' => 1, //仮の値
+                    'user_id' => 1, //ログインユーザーの仮の値
                     'card_number' => $ciphertext,
                     'expiration_date' => $this->request->getData('expiration_date'),
                     'name' => $this->request->getData('name'),
@@ -166,7 +166,7 @@ class CardsController extends AppController
                 );
             } else {
                 $data = array(
-                    'user_id' => 1, //仮の値
+                    'user_id' => 1, //ログインユーザーの仮の値
                     'expiration_date' => $this->request->getData('expiration_date'),
                     'name' => $this->request->getData('name'),
                     'is_deleted' => 0,
