@@ -144,8 +144,9 @@ class CardsController extends AppController
 				$card->errors('securitycode', '半角数字以外の文字が使われています');
 			}
 
+			$check = $this->request->getData('terms');
 			//チェックボックスにチェックがない場合エラーメッセージを表示する
-			if (($_POST['terms']['check']) === '0') {
+			if (!isset($check['check'])) {
 				$card->errors('terms', '登録には利用規約に同意が必要です');
 			}
 
@@ -156,7 +157,7 @@ class CardsController extends AppController
 			$ciphertext = openssl_encrypt($plan_text, $method, $key);
 
 			//エラーメッセージの上書きを避けるためsaveの条件を満たしている時のみ暗号化したカード番号を$dataに登録
-			if ((($_POST['terms']['check']) === '1') && (is_numeric($securitycode)) && ($mc === 1 || $visa === 1) && ($cardcount <= 1)) {
+			if ((isset($check['check'])) && (is_numeric($securitycode)) && ($mc === 1 || $visa === 1) && ($cardcount <= 1)) {
 				$data = array(
 					'user_id' => 1, //ログインユーザーの仮の値
 					'card_number' => $ciphertext,
@@ -178,7 +179,7 @@ class CardsController extends AppController
 			$card = $this->Cards->patchEntity($card, $data);
 
 			//利用規約にチェックしていて、セキュリティーコードを数字で入力していて、カード番号の整合性がとれていて、カードの登録数が１枚以下の場合にsaveを実行する
-			if ((($_POST['terms']['check']) === '1') && (is_numeric($securitycode)) && ($mc === 1 || $visa === 1) && ($cardcount <= 1)) {
+			if ((isset($check['check'])) && (is_numeric($securitycode)) && ($mc === 1 || $visa === 1) && ($cardcount <= 1)) {
 				if ($this->Cards->save($card)) {
 					return $this->redirect(['action' => 'confirm']);
 				}

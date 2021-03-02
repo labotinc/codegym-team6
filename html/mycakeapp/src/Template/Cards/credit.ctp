@@ -29,7 +29,10 @@
 		</div>
 	</div>
 	<div class="checkbox">
-		<?php echo $this->Form->checkbox('terms.check', ['id' => 'terms']); ?>
+		<?php echo $this->Form->checkbox('terms.check', [
+			'id' => 'terms',
+			'hiddenField' => false
+			]); ?>
 		<?php echo $this->Form->label('terms', '利用規約・プライバシーポリシーに同意の上、ご確認ください。'); ?>
 	</div>
 	<?php echo $this->Form->error('terms'); ?>
