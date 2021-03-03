@@ -145,6 +145,11 @@ class UsersController extends AppController
 	{
 		$this->viewBuilder()->setLayout('main');
 
+		if($this->request->getSession()->read('Auth.User.id')){
+			//現時点ではマイページトップ画面が未実装なためログイン画面へリダイレクト
+			return $this->redirect(['action' => 'login']);
+		}
+
 		$user = $this->Users->newEntity();
 		if($this->request->is('post')){
             $user = $this->Users->patchEntity($user, $this->request->getData());
