@@ -16,5 +16,6 @@
 		<?php echo $this->Form->submit('ログイン', ['label' => false]); ?>
 		<?= $this->Form->end() ?>
         <?= $this->Html->link("会員登録", ['controller' => 'Users', 'action' => 'signup']) ?>
+		<!--　現時点ではパスワード再発行ページへのリンクなし -->
         <?= $this->Html->link("パスワードを忘れた方はコチラ", ['controller' => '', 'action' => '']) ?>
 	</div>
