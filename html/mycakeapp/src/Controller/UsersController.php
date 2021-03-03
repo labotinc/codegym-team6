@@ -183,13 +183,19 @@ class UsersController extends AppController
     {
         $this->viewBuilder()->setLayout('main');
 
+		if($this->request->getSession()->read('Auth.User.id')){
+			//マイページ実装後に遷移先を変更
+			return $this->redirect(['action' => 'index']);
+		}
+
 		$user_form = new LoginForm();
 		if($this->request->isPost()){
 			$user_form->execute($this->request->getData());
             $user = $this->Auth->identify();
             if(!empty($user)){
                 $this->Auth->setUser($user);
-                return $this->redirect($this->Auth->redirectUrl());
+				//マイページ実装後にログインした後の遷移先を変更
+                return $this->redirect(['action' => 'index']);
             }
 			$error_msg = 'メールアドレスかパスワードが間違っています';
 			$this->set(compact('error_msg'));
