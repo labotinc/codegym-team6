@@ -36,7 +36,10 @@ class UsersController extends AppController
                 'controller' => 'Users',
                 'action' => 'login'
             ],
-            'authError' => 'ログインしてください。',
+			'logoutRedirect' => [
+                'controller' => 'Users',
+                'action' => 'logout',
+            ],
         ]);
     }
 
@@ -189,4 +192,14 @@ class UsersController extends AppController
         }
 		$this->set(compact('user_form'));
     }
+
+	public function logout() {
+		$this->request->getSession()->destroy();
+		return $this->redirect($this->Auth->logout());
+	}
+
+	public function isAuthorized($user)
+	{
+		return true;
+	}
 }
