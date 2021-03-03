@@ -100,9 +100,9 @@
 	<!-- 右寄せ -->
 	<div class="topnav-right">
 		<!-- 新規登録 ボタン-->
-		<a href="#" type="button">新規登録</a>
+		<?= $this->Html->link("新規登録", ['controller' => 'Users', 'action' => 'signup']) ?>
 		<!-- ログインボタン -->
-		<a href="#" type="button">ログイン</a>
+		<?= $this->Html->link("ログイン", ['controller' => 'Users', 'action' => 'login']) ?>
 	</div>
 
 </div>
