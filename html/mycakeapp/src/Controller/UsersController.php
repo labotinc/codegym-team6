@@ -204,7 +204,8 @@ class UsersController extends AppController
 		$this->set(compact('user_form'));
     }
 
-	public function logout() {
+	public function logout()
+	{
 		$this->request->getSession()->destroy();
 		return $this->redirect($this->Auth->logout());
 	}
