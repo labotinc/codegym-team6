@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Model\Table;
 
 use Cake\ORM\Query;
@@ -25,78 +26,83 @@ use Cake\Validation\Validator;
  */
 class CardsTable extends Table
 {
-    /**
-     * Initialize method
-     *
-     * @param array $config The configuration for the Table.
-     * @return void
-     */
-    public function initialize(array $config)
-    {
-        parent::initialize($config);
+	/**
+	 * Initialize method
+	 *
+	 * @param array $config The configuration for the Table.
+	 * @return void
+	 */
+	public function initialize(array $config)
+	{
+		parent::initialize($config);
 
-        $this->setTable('cards');
-        $this->setDisplayField('name');
-        $this->setPrimaryKey('id');
+		$this->setTable('cards');
+		$this->setDisplayField('name');
+		$this->setPrimaryKey('id');
 
-        $this->addBehavior('Timestamp');
+		$this->addBehavior('Timestamp');
 
-        $this->belongsTo('Users', [
-            'foreignKey' => 'user_id',
-            'joinType' => 'INNER',
-        ]);
-        $this->hasMany('Payments', [
-            'foreignKey' => 'card_id',
-        ]);
-    }
+		$this->belongsTo('Users', [
+			'foreignKey' => 'user_id',
+			'joinType' => 'INNER',
+		]);
+		$this->hasMany('Payments', [
+			'foreignKey' => 'card_id',
+		]);
+	}
 
-    /**
-     * Default validation rules.
-     *
-     * @param \Cake\Validation\Validator $validator Validator instance.
-     * @return \Cake\Validation\Validator
-     */
-    public function validationDefault(Validator $validator)
-    {
-        $validator
-            ->integer('id')
-            ->allowEmptyString('id', null, 'create');
+	/**
+	 * Default validation rules.
+	 *
+	 * @param \Cake\Validation\Validator $validator Validator instance.
+	 * @return \Cake\Validation\Validator
+	 */
+	public function validationDefault(Validator $validator)
+	{
+		$validator->provider('Custom', 'App\Model\Validation\CustomValidation');
 
-        $validator
-            ->scalar('card_number')
-            ->maxLength('card_number', 255)
-            ->requirePresence('card_number', 'create')
-            ->notEmptyString('card_number');
+		$validator
+			->integer('id')
+			->allowEmptyString('id', null, 'create');
 
-        $validator
-            ->date('expiration_date')
-            ->requirePresence('expiration_date', 'create')
-            ->notEmptyDate('expiration_date');
+		$validator
+			->date('expiration_date')
+			->requirePresence('expiration_date', 'create')
+			->notEmptyDate('expiration_date');
 
-        $validator
-            ->scalar('name')
-            ->maxLength('name', 100)
-            ->requirePresence('name', 'create')
-            ->notEmptyString('name');
+		$validator
+			->scalar('name')
+			->maxLength('name', 100)
+			->requirePresence('name', 'create')
+			->notEmptyString('name', '空白になっています')
+			->add('name', 'alphaNumeric_japanese_Check', [
+				'rule' => ['alphaNumericWithJapaneseCheck'],
+				'provider' => 'Custom',
+				'message' => '使えない文字が入力されています',
+				'last' => true,
+			])
+			->regex('name', "/^[a-zA-Z]+$/", '半角英字以外の文字が使われています');
 
-        $validator
-            ->boolean('is_deleted')
-            ->notEmptyString('is_deleted');
+		$validator
+			->boolean('is_deleted')
+			->notEmptyString('is_deleted');
 
-        return $validator;
-    }
+		return $validator;
+	}
 
-    /**
-     * Returns a rules checker object that will be used for validating
-     * application integrity.
-     *
-     * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
-     * @return \Cake\ORM\RulesChecker
-     */
-    public function buildRules(RulesChecker $rules)
-    {
-        $rules->add($rules->existsIn(['user_id'], 'Users'));
+	/**
+	 * Returns a rules checker object that will be used for validating
+	 * application integrity.
+	 *
+	 * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
+	 * @return \Cake\ORM\RulesChecker
+	 */
+	public function buildRules(RulesChecker $rules)
+	{
+		$rules->add($rules->existsIn(['user_id'], 'Users'));
 
-        return $rules;
-    }
+		$rules->add($rules->isUnique(['card_number'], 'そのカードはすでに登録されています'));
+
+		return $rules;
+	}
 }

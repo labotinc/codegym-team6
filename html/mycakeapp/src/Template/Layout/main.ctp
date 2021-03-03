@@ -10,6 +10,8 @@
 	<!-- GoogleFont読み込み -->
 	<!-- Noto Sans -->
 	<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+	<!-- FontAwesomeを読み込み -->
+	<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
 
 </head>
 

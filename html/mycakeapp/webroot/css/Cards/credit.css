@@ -1,0 +1,108 @@
+.content-area {
+    height: 552px;
+    width: 736px;
+    background-color: #FFFFFF;
+	margin: 0 auto;
+}
+
+form {
+    height: 356px;
+    margin: 0 auto;
+	padding-top: 108px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+input {
+    outline: none;
+	width: 326px;
+    font-size: 16px;
+    letter-spacing: 0.27px;
+	padding: 10px 0 10px 10px;
+    border: none;
+}
+
+.credit-form input {
+    border-bottom: solid 2px #707070;
+    opacity: 0.3;
+}
+
+input::placeholder {
+    color: #000000;
+}
+
+.submit input{
+	color: #FFFFFF;
+	font-size: 16px;
+	text-align: center;
+    padding: 10px 0;
+	background-color: #F5AE0B;
+	border: 3px solid #F5AE0B;
+    width: 336px;
+	height: 48px;
+    cursor: pointer;
+}
+
+.error-message {
+    padding-top: 8px;
+    width: 326px;
+    margin: 0 auto;
+    text-align: left;
+    color: #f46161;
+    font-size: 11px;
+}
+
+.checkbox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.checkbox input{
+    width: min-content;
+}
+
+.checkbox label{
+    color: #707070;
+    font-size: 0.7rem;
+}
+
+.Gemini{
+    display: flex;
+    justify-content: center;
+}
+
+.Gemini-form{
+    border-bottom: solid 2px #707070;
+    opacity: 0.3;
+    width: 160px;
+}
+
+.Gemini-form:first-child{
+    margin-right: 20px;
+}
+
+.fab{
+    font-size: 1.5rem;
+    color: #707070;
+    margin-left: 5px;
+}
+
+.credit-number{
+    display: flex;
+    justify-content: center;
+}
+
+.credit-number-form{
+    border-bottom: solid 2px #707070;
+    opacity: 0.3;
+    width: 270px;
+}
+
+.icon{
+    height: 24px;
+    padding-top: 6px;
+}
