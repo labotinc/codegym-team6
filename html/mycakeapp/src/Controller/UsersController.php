@@ -146,7 +146,7 @@ class UsersController extends AppController
 		$this->viewBuilder()->setLayout('main');
 
 		if($this->request->getSession()->read('Auth.User.id')){
-			//現時点ではマイページトップ画面が未実装なためログイン画面へリダイレクト
+			//マイページ実装後に遷移先を変更
 			return $this->redirect(['action' => 'index']);
 		}
 
