@@ -183,7 +183,9 @@ class UsersController extends AppController
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
             }
-            $this->Flash->error('メールアドレスかパスワードが間違えています');
+			$error_msg = 'メールアドレスかパスワードが間違っています';
+			$this->set(compact('error_msg'));
+
         }
 		$this->set(compact('user_form'));
     }

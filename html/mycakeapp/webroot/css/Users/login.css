@@ -53,3 +53,22 @@ a {
     color: #707070;
     margin-bottom: 26px;
 }
+
+.error-message {
+    padding-top: 8px;
+    width: 326px;
+    margin: 0 auto;
+    text-align: left;
+    color: #f46161;
+    font-size: 11px;
+}
+
+.error-msg {
+	display: block;
+	padding-top: 8px;
+    width: 326px;
+    margin: 0 auto;
+    text-align: left;
+    color: #f46161;
+    font-size: 11px;
+}

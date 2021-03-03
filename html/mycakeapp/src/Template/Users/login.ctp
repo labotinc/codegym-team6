@@ -5,6 +5,9 @@
 		<div class="login-form">
 			<?php echo $this->Form->email('email', ['label' => false, 'placeholder' => 'メールアドレス']); ?>
             <?php echo $this->Form->error('email'); ?>
+			<?php if (empty($this->Form->error('email')) && !(empty($error_msg))) : ?>
+				<span class="error-msg"><?php echo $error_msg; ?></span>
+			<?php endif; ?>
 		</div>
 		<div class="login-form">
 			<?php echo $this->Form->password('password', ['label' => false, 'placeholder' => 'パスワード']); ?>
