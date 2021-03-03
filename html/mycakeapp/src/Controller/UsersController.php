@@ -147,7 +147,7 @@ class UsersController extends AppController
 
 		if($this->request->getSession()->read('Auth.User.id')){
 			//現時点ではマイページトップ画面が未実装なためログイン画面へリダイレクト
-			return $this->redirect(['action' => 'login']);
+			return $this->redirect(['action' => 'index']);
 		}
 
 		$user = $this->Users->newEntity();
