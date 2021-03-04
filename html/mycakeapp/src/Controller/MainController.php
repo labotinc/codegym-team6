@@ -17,10 +17,6 @@ class MainController extends AppController
 		$this->loadModel('Tickets');
 	}
 
-	public function index()
-	{
-	}
-
 	public function mypage()
 	{
 		// mypageから予約・決済・ユーザーに遷移する上で必要なデータをモデル経由で取得しviewにわたす処理（遷移先が作成されてから記述）
