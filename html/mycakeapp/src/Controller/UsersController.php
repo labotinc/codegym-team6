@@ -146,8 +146,8 @@ class UsersController extends AppController
 		$this->viewBuilder()->setLayout('main');
 
 		if($this->request->getSession()->read('Auth.User.id')){
-			//マイページ実装後に遷移先を変更
-			return $this->redirect(['action' => 'index']);
+			//ログインした状態で直接遷移するとマイページトップへリダイレクト
+			return $this->redirect(['controller' => 'Main', 'action' => 'mypage']);
 		}
 
 		$user = $this->Users->newEntity();
@@ -184,8 +184,8 @@ class UsersController extends AppController
         $this->viewBuilder()->setLayout('main');
 
 		if($this->request->getSession()->read('Auth.User.id')){
-			//マイページ実装後に遷移先を変更
-			return $this->redirect(['action' => 'index']);
+			//ログインした状態で直接遷移するとマイページトップへリダイレクト
+			return $this->redirect(['controller' => 'Main', 'action' => 'mypage']);
 		}
 
 		$user_form = new LoginForm();
@@ -194,8 +194,8 @@ class UsersController extends AppController
             $user = $this->Auth->identify();
             if(!empty($user)){
                 $this->Auth->setUser($user);
-				//マイページ実装後にログインした後の遷移先を変更
-                return $this->redirect(['action' => 'index']);
+				//ログイン後はマイページトップへリダイレクト
+                return $this->redirect(['controller' => 'Main', 'action' => 'mypage']);
             }
 			$error_msg = 'メールアドレスかパスワードが間違っています';
 			$this->set(compact('error_msg'));
