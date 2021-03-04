@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -12,6 +13,14 @@ use App\Controller\AppController;
  */
 class ScreeningSchedulesController extends AppController
 {
+    public function initialize()
+    {
+        // Model読み込み
+        $this->loadModel('ReservationSeats');
+        $this->loadModel('Users');
+        $this->loadModel('Movies');
+    }
+
     /**
      * Index method
      *
