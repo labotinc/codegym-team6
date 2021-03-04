@@ -194,8 +194,8 @@ class UsersController extends AppController
             $user = $this->Auth->identify();
             if(!empty($user)){
                 $this->Auth->setUser($user);
-				//マイページ実装後にログインした後の遷移先を変更
-                return $this->redirect(['action' => 'index']);
+				//ログイン後はマイページトップへリダイレクト
+                return $this->redirect(['controller' => 'Main', 'action' => 'mypage']);
             }
 			$error_msg = 'メールアドレスかパスワードが間違っています';
 			$this->set(compact('error_msg'));
