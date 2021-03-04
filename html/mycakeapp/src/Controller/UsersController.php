@@ -146,8 +146,8 @@ class UsersController extends AppController
 		$this->viewBuilder()->setLayout('main');
 
 		if($this->request->getSession()->read('Auth.User.id')){
-			//マイページ実装後に遷移先を変更
-			return $this->redirect(['action' => 'index']);
+			//ログインした状態で直接遷移するとマイページトップへリダイレクト
+			return $this->redirect(['controller' => 'Main', 'action' => 'mypage']);
 		}
 
 		$user = $this->Users->newEntity();
