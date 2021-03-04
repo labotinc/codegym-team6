@@ -3,6 +3,10 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
+use Cake\Auth\DefaultPasswordHasher;
+use Cake\Event\Event;
+use App\Form\LoginForm;
+
 /**
  * Users Controller
  *
@@ -12,6 +16,39 @@ use App\Controller\AppController;
  */
 class UsersController extends AppController
 {
+	public function initialize()
+    {
+        parent::initialize();
+        // 各種コンポーネントのロード
+        $this->loadComponent('RequestHandler');
+        $this->loadComponent('Flash');
+        $this->loadComponent('Auth', [
+            'authorize' => ['Controller'],
+            'authenticate' => [
+                'Form' => [
+                    'fields' => [
+                        'username' => 'email',
+                        'password' => 'password'
+                    ]
+                ]
+            ],
+            'loginRedirect' => [
+                'controller' => 'Users',
+                'action' => 'login'
+            ],
+			'logoutRedirect' => [
+                'controller' => 'Users',
+                'action' => 'logout',
+            ],
+        ]);
+    }
+
+	public function beforeFilter(Event $event)
+	{
+		parent::beforeFilter($event);
+		$this->Auth->allow(['login', 'index', 'add', 'signup', 'confirm']);
+	}
+
     /**
      * Index method
      *
@@ -108,6 +145,11 @@ class UsersController extends AppController
 	{
 		$this->viewBuilder()->setLayout('main');
 
+		if($this->request->getSession()->read('Auth.User.id')){
+			//マイページ実装後に遷移先を変更
+			return $this->redirect(['action' => 'index']);
+		}
+
 		$user = $this->Users->newEntity();
 		if($this->request->is('post')){
             $user = $this->Users->patchEntity($user, $this->request->getData());
@@ -136,4 +178,40 @@ class UsersController extends AppController
         $this->viewBuilder()->setLayout('main');
 		$session->consume('session.signup');
     }
+
+    public function login()
+    {
+        $this->viewBuilder()->setLayout('main');
+
+		if($this->request->getSession()->read('Auth.User.id')){
+			//マイページ実装後に遷移先を変更
+			return $this->redirect(['action' => 'index']);
+		}
+
+		$user_form = new LoginForm();
+		if($this->request->isPost()){
+			$user_form->execute($this->request->getData());
+            $user = $this->Auth->identify();
+            if(!empty($user)){
+                $this->Auth->setUser($user);
+				//マイページ実装後にログインした後の遷移先を変更
+                return $this->redirect(['action' => 'index']);
+            }
+			$error_msg = 'メールアドレスかパスワードが間違っています';
+			$this->set(compact('error_msg'));
+
+        }
+		$this->set(compact('user_form'));
+    }
+
+	public function logout()
+	{
+		$this->request->getSession()->destroy();
+		return $this->redirect($this->Auth->logout());
+	}
+
+	public function isAuthorized($user)
+	{
+		return true;
+	}
 }

@@ -1,0 +1,74 @@
+.content-area {
+    height: 520px;
+    width: 736px;
+}
+
+form {
+    height: 268px;
+    margin: 0 auto;
+	padding-top: 108px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+input {
+    outline: none;
+	width: 326px;
+    font-size: 16px;
+    letter-spacing: 0.27px;
+	padding: 10px 0 10px 10px;
+    border: none;
+}
+
+.login-form input {
+    border-bottom: solid 2px #707070;
+    opacity: 0.3;
+}
+
+input::placeholder {
+    color: #000000;
+}
+
+.submit input{
+	color: #FFFFFF;
+	font-size: 16px;
+	text-align: center;
+    padding: 10px 0;
+	background-color: #F5AE0B;
+	border: 3px solid #F5AE0B;
+    width: 336px;
+	height: 48px;
+    cursor: pointer;
+    margin-bottom: 32px;
+}
+
+a {
+    display: block;
+    text-align: center;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    color: #707070;
+    margin-bottom: 26px;
+}
+
+.error-message {
+    padding-top: 8px;
+    width: 326px;
+    margin: 0 auto;
+    text-align: left;
+    color: #f46161;
+    font-size: 11px;
+}
+
+.error-msg {
+	display: block;
+	padding-top: 8px;
+    width: 326px;
+    margin: 0 auto;
+    text-align: left;
+    color: #f46161;
+    font-size: 11px;
+}

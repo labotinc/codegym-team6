@@ -99,10 +99,14 @@
 
 	<!-- 右寄せ -->
 	<div class="topnav-right">
-		<!-- 新規登録 ボタン-->
-		<a href="#" type="button">新規登録</a>
-		<!-- ログインボタン -->
-		<a href="#" type="button">ログイン</a>
+		<?php if($this->request->getSession()->read('Auth.User.id')):?>
+			<!-- 現段階ではマイページのリンク先未設定 -->
+			<?= $this->Html->link("マイページ", ['controller' => '', 'action' => '']) ?>
+			<?= $this->Html->link("ログアウト", ['controller' => 'Users', 'action' => 'logout']) ?>
+		<?php else: ?>
+			<?= $this->Html->link("新規登録", ['controller' => 'Users', 'action' => 'signup']) ?>
+			<?= $this->Html->link("ログイン", ['controller' => 'Users', 'action' => 'login']) ?>
+		<?php endif; ?>
 	</div>
 
 </div>
