@@ -11,6 +11,7 @@ class MainController extends AppController
 		$this->viewBuilder()->setLayout('main');
 		$this->loadModel('Discounts');
 		$this->loadModel('Tickets');
+		$this->loadModel('Movies');
 	}
 
 	public function index()
@@ -25,5 +26,13 @@ class MainController extends AppController
 		$discounts = $this->Discounts->find('all');
 		$tickets = $this->Tickets->find('all');
         $this->set(compact('discounts','tickets'));
+	}
+
+	public function top(){
+		// レイアウトテンプレートの無効化
+		$this->layout = false;
+		$movie = $this->Movies->find('all')->enableHydration(false)->toArray();
+		$this->set(compact('movie'));
+
 	}
 }
