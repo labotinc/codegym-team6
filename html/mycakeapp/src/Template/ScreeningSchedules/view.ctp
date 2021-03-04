@@ -1,89 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <?= $this->Html->charset() ?>
+    <title>QUEL CINEMAS</title>
+    <!-- resetcss読み込み -->
+    <?= $this->Html->css('reset') ?>
+    <?= $this->Html->css('screenschedule') ?>
+    <!-- GoogleFont読み込み -->
+    <!-- Noto Sans -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+</head>
 <?php
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\ScreeningSchedule $screeningSchedule
  */
+$date_time = new DateTime(); //現在日時時刻をサーバーから取得
+//配列で曜日を用意
+$weekconfig = [
+    "日", "月", "火", "水", "木", "金", "土"
+];
+$date = $date_time->format('Y' . '-' . 'm' . '-' . 'd');
+//その日の日付
+$today_date = $date;
+//指定日の曜日(int)
+$today_weeek_int = date("w", strtotime($today_date));
 ?>
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Screening Schedule'), ['action' => 'edit', $screeningSchedule->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Screening Schedule'), ['action' => 'delete', $screeningSchedule->id], ['confirm' => __('Are you sure you want to delete # {0}?', $screeningSchedule->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Screening Schedules'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Screening Schedule'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Movies'), ['controller' => 'Movies', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Movie'), ['controller' => 'Movies', 'action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Reserved Seats'), ['controller' => 'ReservedSeats', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Reserved Seat'), ['controller' => 'ReservedSeats', 'action' => 'add']) ?> </li>
-    </ul>
-</nav>
-<div class="screeningSchedules view large-9 medium-8 columns content">
-    <h3><?= h($screeningSchedule->id) ?></h3>
-    <table class="vertical-table">
-        <tr>
-            <th scope="row"><?= __('Movie') ?></th>
-            <td><?= $screeningSchedule->has('movie') ? $this->Html->link($screeningSchedule->movie->title, ['controller' => 'Movies', 'action' => 'view', $screeningSchedule->movie->id]) : '' ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Id') ?></th>
-            <td><?= $this->Number->format($screeningSchedule->id) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Date') ?></th>
-            <td><?= h($screeningSchedule->date) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Start Time') ?></th>
-            <td><?= h($screeningSchedule->start_time) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('End Time') ?></th>
-            <td><?= h($screeningSchedule->end_time) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Created') ?></th>
-            <td><?= h($screeningSchedule->created) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Modified') ?></th>
-            <td><?= h($screeningSchedule->modified) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Is Deleted') ?></th>
-            <td><?= $screeningSchedule->is_deleted ? __('Yes') : __('No'); ?></td>
-        </tr>
-    </table>
-    <div class="related">
-        <h4><?= __('Related Reserved Seats') ?></h4>
-        <?php if (!empty($screeningSchedule->reserved_seats)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th scope="col"><?= __('Id') ?></th>
-                <th scope="col"><?= __('Reservation Id') ?></th>
-                <th scope="col"><?= __('Screening Schedule Id') ?></th>
-                <th scope="col"><?= __('Seat') ?></th>
-                <th scope="col"><?= __('Is Deleted') ?></th>
-                <th scope="col"><?= __('Created') ?></th>
-                <th scope="col"><?= __('Modified') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($screeningSchedule->reserved_seats as $reservedSeats): ?>
-            <tr>
-                <td><?= h($reservedSeats->id) ?></td>
-                <td><?= h($reservedSeats->reservation_id) ?></td>
-                <td><?= h($reservedSeats->screening_schedule_id) ?></td>
-                <td><?= h($reservedSeats->seat) ?></td>
-                <td><?= h($reservedSeats->is_deleted) ?></td>
-                <td><?= h($reservedSeats->created) ?></td>
-                <td><?= h($reservedSeats->modified) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'ReservedSeats', 'action' => 'view', $reservedSeats->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'ReservedSeats', 'action' => 'edit', $reservedSeats->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'ReservedSeats', 'action' => 'delete', $reservedSeats->id], ['confirm' => __('Are you sure you want to delete # {0}?', $reservedSeats->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <?php endif; ?>
-    </div>
-</div>
+<!-- コンテンツメイン部分は今回レイアウトは読み込まない -->
+<?= $this->layout = false; ?>
+<!-- ヘッダーエレメント読み込み -->
+<?= $this->element('header') ?>
+<!-- 上映スケジュールバーナー -->
+<main>
+    <!-- バーナータイトル -->
+    <div class="banner-title">上映スケジュール</div>
+    <!-- バーナー本体 -->
+    <!-- この部分は後ほどJavaScript実装 -->
+    <div class="week-banner">
+        <div class="nav-button" id="nav-button">
+            < </div>
+                <!-- for文で現在日時から一週間分を表示 -->
+                <?php for ($i = 0; $i < 7; $i++) : ?>
+                    <div class="banner-box" id="banner-box">
+                        <p class="banner-date">
+                            <?php
+                            $w = date("w", strtotime("+{$i} day", strtotime($today_date))); //現在の曜日
+                            echo date('m月d日' . '(' . $weekconfig[$w] . ')', strtotime("+{$i} day", strtotime($today_date)));
+                            ?></p>
+                    </div>
+                <?php endfor; ?>
+                <div class="nav-button" id="nav-button"> > </div>
+        </div>
+
+        <!-- 実際の映画のデータ表示部分 -->
+        <div class="movie-schedule-wrapper">
+            <!-- バーナーで選択された日にち表示(javaScriptで後で実装) -->
+            <div class="selected-date" id="selected-date">(仮)○月○日(○)</div>
+
+            <!-- 映画のタイトル詳細ボックス-->
+            <!-- 選択されたその日に上映される映画作品分の繰り返しを実行 (作品数はcontrollerから後ほど取得)-->
+            <!-- 現在は任意のお数字を入れている -->
+            <?php for ($j = 0; $j < 4; $j++) : ?>
+                <div class="box">
+                    <!-- タイトル title、上映時間 running_time、終了予定日 end_dateをcontrollerから取得 -->
+                    <div class="box-title">
+                        <p>タイトルタイトル [ 上映時間 : 100分 ] 　<span class="box-title"> 00月00日(金)終了予定</span></p>
+                    </div>
+                    <div class="movie-schedule-box">
+                        <!-- 映画の画像top_image_nameを表示 -->
+                        <!-- DBのトップ画像を表示 -->
+                        <?php
+                        echo $this->Html->image("test.jpg");
+                        ?>
+
+                        <!-- for文で映画のスケジュールタイムを上映回数分表示(上映回数はcontrollerから後ほど取得) -->
+                        <!-- 現在は任意のお数字を入れている -->
+                        <?php for ($n = 0; $n < 4; $n++) : ?>
+                            <div class="movie-time-box">
+                                <!-- 上映時間start_time ~ end_timeをDBから取得して表示 -->
+                                <p class="running-time"><span class="start-time">00:00~</span>00:00</p>
+                                <!-- リンクで座席予約ページに推移させる -->
+                                <button type="button"><a href="#"></a> 予約購入</button>
+                            </div>
+                        <?php endfor; ?>
+                        <!-- スライドボタン ( JavaScriptで動きつける)-->
+                        <div class="schedule-nav-button" id="nav-button">
+                            <p> > </p>
+                        </div>
+                        <!-- スライドの隠して上げる部分9 -->
+                        <div class="box-trim"></div>
+
+                    </div>
+                </div>
+            <?php endfor; ?>
+        </div>
+</main>
+
+<!-- フッターエレメント読み込み -->
+<?= $this->element('footer') ?>
