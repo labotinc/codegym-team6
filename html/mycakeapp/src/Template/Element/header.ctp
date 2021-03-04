@@ -100,8 +100,7 @@
 	<!-- 右寄せ -->
 	<div class="topnav-right">
 		<?php if($this->request->getSession()->read('Auth.User.id')):?>
-			<!-- 現段階ではマイページのリンク先未設定 -->
-			<?= $this->Html->link("マイページ", ['controller' => '', 'action' => '']) ?>
+			<?= $this->Html->link("マイページ", ['controller' => 'Main', 'action' => 'mypage']) ?>
 			<?= $this->Html->link("ログアウト", ['controller' => 'Users', 'action' => 'logout']) ?>
 		<?php else: ?>
 			<?= $this->Html->link("新規登録", ['controller' => 'Users', 'action' => 'signup']) ?>
