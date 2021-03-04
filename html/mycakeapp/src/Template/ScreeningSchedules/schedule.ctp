@@ -65,7 +65,7 @@ $today_weeek_int = date("w", strtotime($today_date));
                 <div class="box">
                     <!-- タイトル title、上映時間 running_time、終了予定日 end_dateをcontrollerから取得 -->
                     <div class="box-title">
-                        <p>タイトルタイトル [ 上映時間 : 100分 ] 　<span class="box-title"> 00月00日(金)終了予定</span></p>
+                        <p><?= h($movie->title);?> [ 上映時間 : <?= h($movie->running_time);?>分 ] 　<span class="box-title"><?= h($movie->end_date-> i18nFormat('yyyy年MM月dd日'));?> 終了予定</span></p>
                     </div>
                     <div class="movie-schedule-box">
                         <!-- 映画の画像top_image_nameを表示 -->
@@ -79,7 +79,8 @@ $today_weeek_int = date("w", strtotime($today_date));
                         <?php for ($n = 0; $n < 4; $n++) : ?>
                             <div class="movie-time-box">
                                 <!-- 上映時間start_time ~ end_timeをDBから取得して表示 -->
-                                <p class="running-time"><span class="start-time">00:00~</span>00:00</p>
+                                <p class="running-time"><span class="start-time"><?= h($screeningSchedule->start_time-> i18nFormat('H:mm'));?>~</span><?= h($screeningSchedule->end_time-> i18nFormat('H:mm'));?></p>
+
                                 <!-- リンクで座席予約ページに推移させる -->
                                 <button type="button"><a href="#"></a> 予約購入</button>
                             </div>
