@@ -4,7 +4,10 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
-class MainController extends AppController
+use Cake\Event\Event;
+use Exception;
+
+class MainController extends BaseController
 {
 	public function initialize()
 	{
@@ -16,6 +19,7 @@ class MainController extends AppController
 		$this->loadModel('Discounts');
 		$this->loadModel('Tickets');
 		$this->loadModel('Movies');
+		$this->loadComponent('Auth');
 	}
 
 	public function mypage()
@@ -34,11 +38,11 @@ class MainController extends AppController
 		$this->set(compact('discounts', 'tickets'));
 	}
 
-	public function top(){
+	public function top()
+	{
 		// レイアウトテンプレートの無効化
 		$this->layout = false;
 		$movie = $this->Movies->find('all')->enableHydration(false)->toArray();
 		$this->set(compact('movie'));
-
 	}
 }
