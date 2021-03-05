@@ -11,7 +11,7 @@ use App\Controller\AppController;
  *
  * @method \App\Model\Entity\Card[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class CardsController extends AppController
+class CardsController extends BaseController
 {
 	/**
 	 * Index method
