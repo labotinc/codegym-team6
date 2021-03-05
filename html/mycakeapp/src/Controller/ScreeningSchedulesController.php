@@ -117,4 +117,28 @@ class ScreeningSchedulesController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+// スケジュールのアクション追加
+    public function schedule($id = null)
+    {
+
+        $screeningSchedule = $this->ScreeningSchedules->get($id, [
+            'contain' => ['Movies', 'ReservedSeats'],
+        ]);
+        // 映画IDを取得
+        $movie = $this->Movies->get($id);
+        // 今日の日付
+        $date =$screeningSchedule->date->format('Y-m-d');
+        // 明日の日付
+        $tomorrow = date(('Y-m-d'), $date.strtotime("+ 1day"));
+
+        $id = $this->request->query['id'];
+
+
+
+
+
+
+        $this->set(compact('screeningSchedule', 'movie'));
+    }
 }
