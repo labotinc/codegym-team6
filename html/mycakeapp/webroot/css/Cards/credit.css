@@ -1,228 +1,228 @@
 .content-area {
-    height          : 552px;
-    width           : 736px;
-    background-color: #FFFFFF;
-    margin          : 0 auto;
+	height          : 552px;
+	width           : 736px;
+	background-color: #FFFFFF;
+	margin          : 0 auto;
 }
 
 form {
-    height         : 356px;
-    margin         : 0 auto;
-    padding-top    : 108px;
-    text-align     : center;
-    display        : flex;
-    flex-direction : column;
-    justify-content: space-between;
+	height         : 356px;
+	margin         : 0 auto;
+	padding-top    : 108px;
+	text-align     : center;
+	display        : flex;
+	flex-direction : column;
+	justify-content: space-between;
 }
 
 input {
-    outline       : none;
-    width         : 326px;
-    font-size     : 16px;
-    letter-spacing: 0.27px;
-    padding       : 10px 0 10px 10px;
-    border        : none;
+	outline       : none;
+	width         : 326px;
+	font-size     : 16px;
+	letter-spacing: 0.27px;
+	padding       : 10px 0 10px 10px;
+	border        : none;
 }
 
 .credit-form input {
-    border-bottom: solid 2px #707070;
-    opacity      : 0.3;
+	border-bottom: solid 2px #707070;
+	opacity      : 0.3;
 }
 
 input::placeholder {
-    color: #000000;
+	color: #000000;
 }
 
 .submit input {
-    color           : #FFFFFF;
-    font-size       : 16px;
-    text-align      : center;
-    padding         : 10px 0;
-    background-color: #F5AE0B;
-    border          : 3px solid #F5AE0B;
-    width           : 336px;
-    height          : 48px;
-    cursor          : pointer;
+	color           : #FFFFFF;
+	font-size       : 16px;
+	text-align      : center;
+	padding         : 10px 0;
+	background-color: #F5AE0B;
+	border          : 3px solid #F5AE0B;
+	width           : 336px;
+	height          : 48px;
+	cursor          : pointer;
 }
 
 .error-message {
-    padding-top: 8px;
-    width      : 326px;
-    margin     : 0 auto;
-    text-align : left;
-    color      : #f46161;
-    font-size  : 11px;
+	padding-top: 8px;
+	width      : 326px;
+	margin     : 0 auto;
+	text-align : left;
+	color      : #f46161;
+	font-size  : 11px;
 }
 
 .checkbox {
-    display        : flex;
-    justify-content: center;
-    align-items    : center;
+	display        : flex;
+	justify-content: center;
+	align-items    : center;
 }
 
 
 .checkbox input {
-    width: min-content;
+	width: min-content;
 }
 
 .checkbox label {
-    color    : #707070;
-    font-size: 0.7rem;
+	color    : #707070;
+	font-size: 0.7rem;
 }
 
 .Gemini {
-    display        : flex;
-    justify-content: center;
+	display        : flex;
+	justify-content: center;
 }
 
 .Gemini-form {
-    border-bottom: solid 2px #707070;
-    opacity      : 0.3;
-    width        : 160px;
+	border-bottom: solid 2px #707070;
+	opacity      : 0.3;
+	width        : 160px;
 }
 
 .Gemini-form:first-child {
-    margin-right: 20px;
+	margin-right: 20px;
 }
 
 .fab {
-    font-size  : 1.5rem;
-    color      : #707070;
-    margin-left: 5px;
+	font-size  : 1.5rem;
+	color      : #707070;
+	margin-left: 5px;
 }
 
 .credit-number {
-    display        : flex;
-    justify-content: center;
+	display        : flex;
+	justify-content: center;
 }
 
 .credit-number-form {
-    border-bottom: solid 2px #707070;
-    opacity      : 0.3;
-    width        : 270px;
+	border-bottom: solid 2px #707070;
+	opacity      : 0.3;
+	width        : 270px;
 }
 
 .icon {
-    height     : 24px;
-    padding-top: 6px;
+	height     : 24px;
+	padding-top: 6px;
 }
 
 /* ↓ マイページクレジットカード画面のCSS */
 .wrapper {
-    padding-top: 30px;
+	padding-top: 30px;
 }
 
 .card-area {
-    padding-top    : 25px;
-    display        : flex;
-    justify-content: center;
-    width          : 736px;
+	padding-top    : 25px;
+	display        : flex;
+	justify-content: center;
+	width          : 736px;
 }
 
 .card {
-    border       : #b8b5b5 solid 1px;
-    border-radius: 8px;
-    width        : 300px;
-    margin-right : 20px;
-    padding      : 20px 20px 20px 40px;
+	border       : #b8b5b5 solid 1px;
+	border-radius: 8px;
+	width        : 300px;
+	margin-right : 20px;
+	padding      : 20px 20px 20px 40px;
 }
 
 .card-name {
-    font-size    : 1rem;
-    color        : #707070;
-    font-weight  : bold;
-    margin-bottom: 15px;
-    width        : 300px;
+	font-size    : 1rem;
+	color        : #707070;
+	font-weight  : bold;
+	margin-bottom: 15px;
+	width        : 300px;
 }
 
 .card-number {
-    color    : #707070;
-    width    : 300px;
-    font-size: 0.9rem;
+	color    : #707070;
+	width    : 300px;
+	font-size: 0.9rem;
 }
 
 .card-number span {
-    color: #707070;
+	color: #707070;
 
 }
 
 .buttons {
-    display       : flex;
-    flex-direction: column;
+	display       : flex;
+	flex-direction: column;
 }
 
 .buttons-link {
-    background-color: #f1eded;
-    text-align      : center;
-    width           : 150px;
-    height          : 40px;
-    border-radius   : 2px;
+	background-color: #f1eded;
+	text-align      : center;
+	width           : 150px;
+	height          : 40px;
+	border-radius   : 2px;
 
 }
 
 .buttons-link:first-child {
-    margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
 
 .buttons-link a {
-    color          : #707070;
-    text-decoration: none;
-    display        : block;
-    height         : 40px;
-    line-height    : 40px;
-    font-size      : 0.9rem;
+	color          : #707070;
+	text-decoration: none;
+	display        : block;
+	height         : 40px;
+	line-height    : 40px;
+	font-size      : 0.9rem;
 }
 
 .buttons-link:hover {
-    opacity: 0.7;
+	opacity: 0.7;
 }
 
 .under-area {
-    margin-top     : 30px;
-    display        : flex;
-    justify-content: center;
+	margin-top     : 30px;
+	display        : flex;
+	justify-content: center;
 }
 
 .mypage-link {
-    background-color: #f1eded;
-    text-align      : center;
-    width           : 150px;
-    height          : 40px;
-    border-radius   : 2px;
-    margin-right    : 20px;
+	background-color: #f1eded;
+	text-align      : center;
+	width           : 150px;
+	height          : 40px;
+	border-radius   : 2px;
+	margin-right    : 20px;
 }
 
 .mypage-link a {
-    color          : #707070;
-    text-decoration: none;
-    display        : block;
-    height         : 40px;
-    line-height    : 40px;
-    font-size      : 0.9rem;
+	color          : #707070;
+	text-decoration: none;
+	display        : block;
+	height         : 40px;
+	line-height    : 40px;
+	font-size      : 0.9rem;
 }
 
 .mypage-link:hover {
-    opacity: 0.7;
+	opacity: 0.7;
 }
 
 .Registration {
-    background-color: rgb(235, 183, 72);
-    text-align      : center;
-    width           : 150px;
-    height          : 40px;
-    border-radius   : 2px;
+	background-color: rgb(235, 183, 72);
+	text-align      : center;
+	width           : 150px;
+	height          : 40px;
+	border-radius   : 2px;
 }
 
 .Registration a {
-    color          : white;
-    text-decoration: none;
-    display        : block;
-    height         : 40px;
-    line-height    : 40px;
-    font-size      : 0.9rem;
+	color          : white;
+	text-decoration: none;
+	display        : block;
+	height         : 40px;
+	line-height    : 40px;
+	font-size      : 0.9rem;
 }
 
 .Registration:hover {
-    opacity: 0.7;
+	opacity: 0.7;
 }
