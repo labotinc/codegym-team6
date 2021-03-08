@@ -23,8 +23,8 @@
       </div>
     <?php endforeach; ?>
     <div class="under-area">
-      <div class="mypage-link"><a href="#">マイページに戻る</a></div>
-      <div class="Registration"><a href="#">新規登録</a></div>
+      <div class="mypage-link"><a href="<?= $this->Url->build(['controller' => 'Main', 'action' => 'mypage']) ?>">マイページに戻る</a></div>
+      <div class="Registration"><a href="<?= $this->Url->build(['controller' => 'Cards', 'action' => 'credit']) ?>">新規登録</a></div>
     </div>
   </div>
 </div>
