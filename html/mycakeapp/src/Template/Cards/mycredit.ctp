@@ -32,7 +32,9 @@
     <?php endif; ?>
     <div class="under-area">
       <div class="mypage-link"><a href="<?= $this->Url->build(['controller' => 'Main', 'action' => 'mypage']) ?>">マイページに戻る</a></div>
-      <div class="Registration"><a href="<?= $this->Url->build(['controller' => 'Cards', 'action' => 'credit']) ?>">新規登録</a></div>
+      <?php if ($cardcount  <= 1) : ?>
+        <div class="Registration"><a href="<?= $this->Url->build(['controller' => 'Cards', 'action' => 'credit']) ?>">新規登録</a></div>
+      <?php endif; ?>
     </div>
   </div>
 </div>
