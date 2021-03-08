@@ -200,8 +200,7 @@ class CardsController extends BaseController
 		$session = $this->getRequest()->getSession();
 		//セッション情報がない場合、エラー画面に遷移する
 		if (!$session->read('session.credit')) {
-			//現時点ではエラー画面が未実装なためcreditページにリダイレクト
-			return $this->redirect(['action' => 'credit']);
+			throw new InternalErrorException;
 		}
 
 		$this->viewBuilder()->setLayout('main');
