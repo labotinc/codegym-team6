@@ -172,8 +172,7 @@ class UsersController extends AppController
 	{
 		$session = $this->getRequest()->getSession();
 		if (!$session->read('session.signup')) {
-			//現時点ではエラー画面が未実装なためsignupページにリダイレクト
-			return $this->redirect(['action' => 'signup']);
+			throw new InternalErrorException;
 		}
 
 		$this->viewBuilder()->setLayout('main');
