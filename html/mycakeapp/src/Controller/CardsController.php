@@ -219,7 +219,7 @@ class CardsController extends BaseController
 		}
 		$this->viewBuilder()->setLayout('main');
 		$authuser = $this->Auth->user('id');
-		$cards = $this->Cards->find()->where(['user_id' => $authuser]);
+		$cards = $this->Cards->find('all',array('order' => array('Cards.expiration_date ASC')))->where(['user_id' => $authuser]);
 		$this->set(compact('cards'));
 	}
 }
