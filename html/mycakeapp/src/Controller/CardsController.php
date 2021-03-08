@@ -208,4 +208,9 @@ class CardsController extends BaseController
 		//セッションを読み込み後削除
 		$session->consume('session.credit');
 	}
+
+	public function mycredit()
+	{
+		$this->viewBuilder()->setLayout('main');
+	}
 }
