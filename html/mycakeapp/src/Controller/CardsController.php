@@ -211,6 +211,12 @@ class CardsController extends BaseController
 
 	public function mycredit()
 	{
+		$session = $this->getRequest()->getSession();
+		//セッション情報がない場合、エラー画面に遷移する
+		if (!$this->request->getSession()->read('Auth.User.id')) {
+			//現時点ではエラー画面が未実装なためマイページにリダイレクト
+			return $this->redirect(['controller' => 'Main', 'action' => 'mypage']);
+		}
 		$this->viewBuilder()->setLayout('main');
 	}
 }
