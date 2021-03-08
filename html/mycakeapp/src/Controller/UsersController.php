@@ -160,8 +160,7 @@ class UsersController extends AppController
 				return $this->redirect(['action' => 'confirm']);
 			}
 			if (!$user->hasErrors()) {
-				//現時点ではエラー画面が未実装なためsignupページにリダイレクト
-				return $this->redirect(['action' => 'signup']);
+				throw new InternalErrorException;
 				$this->Flash->error(__('保存に失敗しました。もう一度入力下さい。'));
 			}
 		}
