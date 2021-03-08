@@ -187,6 +187,7 @@ class CardsController extends BaseController
 					$session->write('session.credit', $card);
 					return $this->redirect(['action' => 'confirm']);
 				}
+				throw new InternalErrorException;
 			}
 
 			$this->Flash->error(__('保存に失敗しました。もう一度入力下さい。'));
