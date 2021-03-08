@@ -2,6 +2,7 @@
 <?php $this->assign("title", "決済情報"); ?>
 <div class="wrapper">
   <div class="card-countainer">
+
     <?php foreach ($cards as $card) : ?>
       <?php
       //暗号化したクレジットカード番号を復号
@@ -22,6 +23,13 @@
         </div>
       </div>
     <?php endforeach; ?>
+    <?php if ($cardcount <= 0) : ?>
+      <div class="card-area">
+        <div class="card">
+          <div class="card-name">クレジットカードが登録されていません</div>
+        </div>
+      </div>
+    <?php endif; ?>
     <div class="under-area">
       <div class="mypage-link"><a href="<?= $this->Url->build(['controller' => 'Main', 'action' => 'mypage']) ?>">マイページに戻る</a></div>
       <div class="Registration"><a href="<?= $this->Url->build(['controller' => 'Cards', 'action' => 'credit']) ?>">新規登録</a></div>
