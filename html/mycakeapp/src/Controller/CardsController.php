@@ -218,5 +218,8 @@ class CardsController extends BaseController
 			return $this->redirect(['controller' => 'Main', 'action' => 'mypage']);
 		}
 		$this->viewBuilder()->setLayout('main');
+		$authuser = $this->Auth->user('id');
+		$cards = $this->Cards->find()->where(['user_id' => $authuser]);
+		$this->set(compact('cards'));
 	}
 }

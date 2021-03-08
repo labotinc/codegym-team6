@@ -108,8 +108,12 @@ input::placeholder {
 }
 
 /* ↓ マイページクレジットカード画面のCSS */
+.wrapper {
+    padding-top: 30px;
+}
+
 .card-area {
-    padding-top    : 50px;
+    padding-top    : 25px;
     display        : flex;
     justify-content: center;
     width          : 736px;
