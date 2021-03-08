@@ -26,7 +26,7 @@
         <legend><?= __('Edit Screening Schedule') ?></legend>
         <?php
             echo $this->Form->control('movie_id', ['options' => $movies]);
-            echo $this->Form->control('date');
+            echo $this->Form->control('screening_date');
             echo $this->Form->control('start_time');
             echo $this->Form->control('end_time');
             echo $this->Form->control('is_deleted');

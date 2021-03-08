@@ -30,8 +30,8 @@
             <td><?= $this->Number->format($screeningSchedule->id) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Date') ?></th>
-            <td><?= h($screeningSchedule->date) ?></td>
+            <th scope="row"><?= __('Screening Date') ?></th>
+            <td><?= h($screeningSchedule->screening_date) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Start Time') ?></th>

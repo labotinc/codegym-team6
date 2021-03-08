@@ -21,7 +21,7 @@
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('movie_id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('date') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('screening_date') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('start_time') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('end_time') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('is_deleted') ?></th>
@@ -35,7 +35,7 @@
             <tr>
                 <td><?= $this->Number->format($screeningSchedule->id) ?></td>
                 <td><?= $screeningSchedule->has('movie') ? $this->Html->link($screeningSchedule->movie->title, ['controller' => 'Movies', 'action' => 'view', $screeningSchedule->movie->id]) : '' ?></td>
-                <td><?= h($screeningSchedule->date) ?></td>
+                <td><?= h($screeningSchedule->screening_date) ?></td>
                 <td><?= h($screeningSchedule->start_time) ?></td>
                 <td><?= h($screeningSchedule->end_time) ?></td>
                 <td><?= h($screeningSchedule->is_deleted) ?></td>
