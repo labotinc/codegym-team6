@@ -32,9 +32,25 @@
 		<?php endif; ?>
 		<div class="under-area">
 			<div class="mypage-link"><a href="<?= $this->Url->build(['controller' => 'Main', 'action' => 'mypage']) ?>">マイページに戻る</a></div>
-			<?php if ($cardcount  <= 1) : ?>
-				<div class="Registration"><a href="<?= $this->Url->build(['controller' => 'Cards', 'action' => 'credit']) ?>">新規登録</a></div>
-			<?php endif; ?>
+			<div class="Registration">
+				<?php if ($cardcount  <= 1) : ?>
+					<a href="<?= $this->Url->build(['controller' => 'Cards', 'action' => 'credit']) ?>">新規登録</a>
+				<?php else : ?>
+					<a onclick=" erorr()" href="#">新規登録</a>
+				<?php endif; ?>
+			</div>
 		</div>
+		<div id="output"></div>
 	</div>
 </div>
+<?php
+echo <<<EOM
+<script type="text/javascript">
+function erorr() {
+			target = document.getElementById("output");
+			target.innerHTML = "クレジットカードは２件まで登録できます";
+			return false;
+		}
+</script>
+EOM;
+?>
