@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\ScreeningSchedule $screeningSchedule
@@ -19,11 +20,11 @@
     <fieldset>
         <legend><?= __('Add Screening Schedule') ?></legend>
         <?php
-            echo $this->Form->control('movie_id', ['options' => $movies]);
-            echo $this->Form->control('screening_date');
-            echo $this->Form->control('start_time');
-            echo $this->Form->control('end_time');
-            echo $this->Form->control('is_deleted');
+        echo $this->Form->control('movie_id', ['options' => $movies]);
+        echo $this->Form->control('screening_date');
+        echo $this->Form->control('start_time');
+        echo $this->Form->control('end_time');
+        echo $this->Form->control('is_deleted');
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
