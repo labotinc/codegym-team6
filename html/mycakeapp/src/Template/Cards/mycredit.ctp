@@ -2,7 +2,6 @@
 <?php $this->assign("title", "決済情報"); ?>
 <div class="wrapper">
 	<div class="card-countainer">
-
 		<?php foreach ($cards as $card) : ?>
 			<?php
 			//暗号化したクレジットカード番号を復号
@@ -14,7 +13,7 @@
 				<div class="card">
 					<div class="card-name"><?= h($card->name) ?></div>
 					<div class="card-number">
-						****-****-****-<span class="number"><?= h($ext_number) ?> </span>- 有効期限(月/年) <span><?= date('m/y',  strtotime($card['expiration_date'])) ?></span>
+						****-****-****-<span class="number"><?= h($ext_number) ?></span> - 有効期限(月/年) <span><?= date('m/y', strtotime($card['expiration_date'])) ?></span>
 					</div>
 				</div>
 				<div class="buttons">
