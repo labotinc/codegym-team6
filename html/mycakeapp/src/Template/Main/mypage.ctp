@@ -19,7 +19,7 @@
 			<td>決済情報</td>
 			<td class="right">
 				<!-- 現状は遷移先なし。遷移先の実装(決済情報一覧)が完了したら、遷移先を変更 -->
-				<a class="button" href="#">変更</a>
+				<a class="button" href="<?= $this->Url->build(['controller' => 'Cards', 'action' => 'mycredit']) ?>">変更</a>
 			</td>
 		</tr>
 	</table>

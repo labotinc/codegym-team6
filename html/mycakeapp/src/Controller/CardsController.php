@@ -208,4 +208,15 @@ class CardsController extends BaseController
 		//セッションを読み込み後削除
 		$session->consume('session.credit');
 	}
+
+	public function mycredit()
+	{
+		$this->viewBuilder()->setLayout('main');
+		$authuser = $this->Auth->user('id');
+		//ログインユーザーのカードを登録した順番で取得
+		$cards = $this->Cards->find('all', array('order' => array('Cards.created ASC')))->where(['user_id' => $authuser]);
+		//ユーザーが登録しているカードの枚数をカウントし、viewで表示の切り替えに使用する
+		$cardcount = $this->Cards->find()->where(['user_id' => $authuser])->count();
+		$this->set(compact('cards', 'cardcount'));
+	}
 }
