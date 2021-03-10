@@ -7,6 +7,7 @@ use App\Controller\AppController;
 use Cake\Auth\DefaultPasswordHasher;
 use Cake\Event\Event;
 use App\Form\LoginForm;
+use Exception;
 
 /**
  * Users Controller
@@ -151,19 +152,20 @@ class UsersController extends AppController
 			return $this->redirect(['controller' => 'Main', 'action' => 'mypage']);
 		}
 
-		$user = $this->Users->newEntity();
-		if ($this->request->is('post')) {
-			$user = $this->Users->patchEntity($user, $this->request->getData());
-			if ($this->Users->save($user)) {
-				$session = $this->getRequest()->getSession();
-				$session->write('session.signup', $user);
-				return $this->redirect(['action' => 'confirm']);
+		try {
+			$user = $this->Users->newEntity();
+			if ($this->request->is('post')) {
+				$user = $this->Users->patchEntity($user, $this->request->getData());
+				if ($this->Users->save($user)) {
+					$session = $this->getRequest()->getSession();
+					$session->write('session.signup', $user);
+					return $this->redirect(['action' => 'confirm']);
+				}
 			}
-			if (!$user->hasErrors()) {
-				throw new InternalErrorException;
-				$this->Flash->error(__('保存に失敗しました。もう一度入力下さい。'));
-			}
+		} catch(Exception $e){
+			throw new InternalErrorException;
 		}
+
 		$this->set(compact('user'));
 	}
 
