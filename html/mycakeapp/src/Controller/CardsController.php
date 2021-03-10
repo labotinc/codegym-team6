@@ -211,15 +211,11 @@ class CardsController extends BaseController
 
 	public function mycredit()
 	{
-		$session = $this->getRequest()->getSession();
-		//セッション情報がない場合、エラー画面に遷移する
-		if (!$this->request->getSession()->read('Auth.User.id')) {
-			//現時点ではエラー画面が未実装なためマイページにリダイレクト
-			return $this->redirect(['controller' => 'Main', 'action' => 'mypage']);
-		}
 		$this->viewBuilder()->setLayout('main');
 		$authuser = $this->Auth->user('id');
+		//ログインユーザーのカードを登録した順番で取得
 		$cards = $this->Cards->find('all', array('order' => array('Cards.created ASC')))->where(['user_id' => $authuser]);
+		//ユーザーが登録しているカードの枚数をカウントし、viewで表示の切り替えに使用する
 		$cardcount = $this->Cards->find()->where(['user_id' => $authuser])->count();
 		$this->set(compact('cards', 'cardcount'));
 	}
