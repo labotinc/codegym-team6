@@ -10,7 +10,7 @@ use App\Controller\AppController;
  *
  * @method \App\Model\Entity\Ticket[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class TicketsController extends AppController
+class TicketsController extends BaseController
 {
     /**
      * Index method
@@ -102,5 +102,13 @@ class TicketsController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+    public function ticket()
+    {
+        $this->viewBuilder()->setLayout('main');
+        $tickets = $this->Tickets->find('all', array('order' => array('Tickets.row ASC')));
+        $this->set(compact('tickets'));
+        // var_dump($_POST['ticket']);
+        // exit;
     }
 }

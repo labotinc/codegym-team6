@@ -1,0 +1,66 @@
+.wrapper {
+    padding-top: 30px;
+}
+
+.reservation {
+    color: #707070;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.schedules {
+    margin-top: 20px;
+}
+
+.seat {
+    margin-top: 20px;
+}
+
+.ticket{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.ticket-area{
+    border: #b8b5b5 solid 1px;
+    border-radius: 8px;
+    width: 300px;
+    padding: 15px 20px ;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.under-area {
+    display: flex;
+    justify-content: center;
+}
+
+.under-area button:first-child {
+    margin-right: 25px;
+    color: #707070;
+    font-size: 16px;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #e4dede;
+    border: 3px solid #e4dede;
+    width: 180px;
+    height: 48px;
+    cursor: pointer;
+}
+
+.under-area button:last-child {
+    color: #ffffff;
+    font-size: 16px;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #f5ae0b;
+    border: 3px solid #f5ae0b;
+    width: 180px;
+    height: 48px;
+    cursor: pointer;
+}
