@@ -108,4 +108,10 @@ class ReservationsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+    public function reservation()
+    {
+        $this->viewBuilder()->setLayout('main');
+        
+    }
 }
