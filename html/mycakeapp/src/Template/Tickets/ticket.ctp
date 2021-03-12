@@ -16,10 +16,13 @@
     <?php foreach ($tickets as $ticket) : ?>
       <div class="ticket-area">
 
-        <?php echo $this->Form->input('ticket_id', array(
+        <?php echo $this->Form->control('ticket', array(
+          'hiddenField' => false,
           'label' => false,
           "type" => "radio",
-          'options' => array('送信する値' => $ticket['type'])
+          'options' => array(
+            $ticket['id'] => $ticket['type'],
+        )
         )); ?>
         <div><?= number_format(h($ticket->price)) ?>円</div>
 

@@ -108,7 +108,9 @@ class TicketsController extends BaseController
         $this->viewBuilder()->setLayout('main');
         $tickets = $this->Tickets->find('all', array('order' => array('Tickets.row ASC')));
         $this->set(compact('tickets'));
+        $ticket = $this->request->getData('ticket');
         // var_dump($_POST['ticket']);
+        // var_dump($ticket);
         // exit;
     }
 }
