@@ -35,7 +35,7 @@
 
 
   <div class="under-area">
-    <?php echo $this->Form->button('戻る', ['label' => false, 'type' => 'submit']); ?>
+    <div class="back"><a href="#">戻る</a></div>
     <?php echo $this->Form->button('次へ', ['label' => false, 'type' => 'submit']); ?>
   </div>
   <?= $this->Form->end() ?>

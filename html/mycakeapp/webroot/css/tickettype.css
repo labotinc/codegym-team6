@@ -16,7 +16,7 @@
     margin-top: 20px;
 }
 
-.ticket{
+.ticket {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -24,32 +24,36 @@
     margin-bottom: 20px;
 }
 
-.ticket-area{
+.ticket-area {
     border: #b8b5b5 solid 1px;
     border-radius: 8px;
     width: 300px;
-    padding: 15px 20px ;
+    padding: 15px 20px;
     margin-bottom: 10px;
     display: flex;
     justify-content: space-between;
 }
-
 
 .under-area {
     display: flex;
     justify-content: center;
 }
 
-.under-area button:first-child {
-    margin-right: 25px;
-    color: #707070;
-    font-size: 16px;
-    text-align: center;
-    padding: 10px 0;
+.back {
     background-color: #e4dede;
-    border: 3px solid #e4dede;
+    text-align: center;
     width: 180px;
     height: 48px;
+    margin-right: 25px;
+}
+
+.back a {
+    color: #707070;
+    text-decoration: none;
+    display: block;
+    height: 48px;
+    line-height: 48px;
+    font-size: 16px;
     cursor: pointer;
 }
 
