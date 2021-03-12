@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -10,7 +11,7 @@ use App\Controller\AppController;
  *
  * @method \App\Model\Entity\Reservation[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class ReservationsController extends AppController
+class ReservationsController extends BaseController
 {
     /**
      * Index method
@@ -112,6 +113,5 @@ class ReservationsController extends AppController
     public function reservation()
     {
         $this->viewBuilder()->setLayout('main');
-        
     }
 }
