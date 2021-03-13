@@ -110,8 +110,4 @@ class ReservationsController extends BaseController
         return $this->redirect(['action' => 'index']);
     }
 
-    public function reservation()
-    {
-        $this->viewBuilder()->setLayout('main');
-    }
 }

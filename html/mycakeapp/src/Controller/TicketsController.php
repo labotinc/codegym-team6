@@ -113,9 +113,18 @@ class TicketsController extends BaseController
         if (isset($selected_ticket)) {
             $session = $this->getRequest()->getSession();
             $session->write('session.ticket', $selected_ticket);
-            return $this->redirect(['controller' => 'Reservations', 'action' => 'reservation']);
+            return $this->redirect(['action' => 'reservation']);
         }
         $this->set(compact('tickets'));
+    }
+
+    public function reservation()
+    {
+        $this->viewBuilder()->setLayout('main');
+        $ticket_id = $this->getRequest()->getSession()->read('session.ticket');
+        $tickets = $this->Tickets->find()->where(['id' => $ticket_id]);
+        $this->set(compact('tickets'));
+
     }
 
     public function dummy()
