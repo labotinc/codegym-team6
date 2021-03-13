@@ -107,10 +107,13 @@ class TicketsController extends BaseController
     {
         $this->viewBuilder()->setLayout('main');
         $tickets = $this->Tickets->find('all', array('order' => array('Tickets.row ASC')));
+        $selected_ticket = $this->request->getData('ticket');
+        if (isset($selected_ticket)) {
+            $session = $this->getRequest()->getSession();
+            $session->write('session.ticket', $selected_ticket);
+            return $this->redirect(['controller' => 'Reservations', 'action' => 'reservation']);
+        }
         $this->set(compact('tickets'));
-        $ticket = $this->request->getData('ticket');
-        // var_dump($_POST['ticket']);
-        // var_dump($ticket);
-        // exit;
+
     }
 }
