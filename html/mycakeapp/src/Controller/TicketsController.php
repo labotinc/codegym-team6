@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -103,6 +104,7 @@ class TicketsController extends BaseController
 
         return $this->redirect(['action' => 'index']);
     }
+
     public function ticket()
     {
         $this->viewBuilder()->setLayout('main');
@@ -114,6 +116,15 @@ class TicketsController extends BaseController
             return $this->redirect(['controller' => 'Reservations', 'action' => 'reservation']);
         }
         $this->set(compact('tickets'));
+    }
 
+    public function dummy()
+    {
+
+        $this->viewBuilder()->setLayout('main');
+        if ($this->request->is('post')) {
+
+            return $this->redirect(['action' => 'ticket']);
+        }
     }
 }
