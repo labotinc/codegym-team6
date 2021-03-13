@@ -11,6 +11,7 @@
     </div>
     <div class="seat">座席：<span>A-1</span></div>
     <div class="seat">種別：<span>一般</span></div>
+    <div class="seat">割引：<span>レディースデイ割引</span></div>
     <div class="seat">金額：<span>0000</span>円</div>
   </div>
 
