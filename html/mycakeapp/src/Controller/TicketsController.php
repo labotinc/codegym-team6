@@ -109,11 +109,18 @@ class TicketsController extends BaseController
     {
         $this->viewBuilder()->setLayout('main');
         $tickets = $this->Tickets->find('all', array('order' => array('Tickets.row ASC')));
-        $selected_ticket = $this->request->getData('ticket');
-        if (isset($selected_ticket)) {
-            $session = $this->getRequest()->getSession();
-            $session->write('session.ticket', $selected_ticket);
-            return $this->redirect(['action' => 'reservation']);
+        //次へのボタンを押した時の処理
+        if ($this->request->is('put')) {
+            //ラジオボタンで選択したチケットIDを取得
+            $selected_ticket = $this->request->getData('ticket');
+            if (isset($selected_ticket)) {
+                $session = $this->getRequest()->getSession();
+                $session->write('session.ticket', $selected_ticket);
+                return $this->redirect(['action' => 'reservation']);
+            } else {
+                $error = 'チケットを選択してください';
+                $this->set(compact('error'));
+            }
         }
         $this->set(compact('tickets'));
     }
@@ -124,7 +131,6 @@ class TicketsController extends BaseController
         $ticket_id = $this->getRequest()->getSession()->read('session.ticket');
         $tickets = $this->Tickets->find()->where(['id' => $ticket_id]);
         $this->set(compact('tickets'));
-
     }
 
     public function dummy()

@@ -15,27 +15,23 @@
   <div class="ticket">
     <?php foreach ($tickets as $ticket) : ?>
       <div class="ticket-area">
-
         <?php echo $this->Form->control('ticket', array(
           'hiddenField' => false,
           'label' => false,
           "type" => "radio",
           'options' => array(
             $ticket['id'] => $ticket['type'],
-        )
+          )
         )); ?>
         <div><?= number_format(h($ticket->price)) ?>円</div>
-
       </div>
     <?php endforeach; ?>
-
-
   </div>
-
-
-
   <div class="under-area">
     <div class="back"><a href="#">戻る</a></div>
     <?php echo $this->Form->button('次へ', ['label' => false, 'type' => 'submit']); ?>
   </div>
   <?= $this->Form->end() ?>
+  <?php if (isset($error)) : ?>
+    <div class="error">チケットを選択してください</div>
+  <?php endif; ?>
