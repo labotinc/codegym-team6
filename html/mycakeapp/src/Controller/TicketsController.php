@@ -13,6 +13,18 @@ use App\Controller\AppController;
  */
 class TicketsController extends BaseController
 {
+    public function initialize()
+    {
+        $this->loadModel('Reservations');
+        $this->loadModel('Payments');
+        $this->loadModel('Users');
+        $this->loadModel('Discounts');
+        $this->loadModel('Tickets');
+        $this->loadModel('Movies');
+        $this->loadModel('Reserved_seats');
+        $this->loadModel('Screening_schedules');
+        $this->loadComponent('Auth');
+    }
     /**
      * Index method
      *
@@ -109,12 +121,12 @@ class TicketsController extends BaseController
     {
         $this->viewBuilder()->setLayout('main');
         $tickets = $this->Tickets->find('all', array('order' => array('Tickets.row ASC')));
+        $session = $this->getRequest()->getSession();
         //次へのボタンを押した時の処理
         if ($this->request->is('put')) {
             //ラジオボタンで選択したチケットIDを取得
             $selected_ticket = $this->request->getData('ticket');
             if (isset($selected_ticket)) {
-                $session = $this->getRequest()->getSession();
                 $session->write('session.ticket', $selected_ticket);
                 return $this->redirect(['action' => 'reservation']);
             } else {
@@ -123,6 +135,7 @@ class TicketsController extends BaseController
             }
         }
         $this->set(compact('tickets'));
+        $session->consume('session.ticket');
     }
 
     public function reservation()
@@ -135,11 +148,20 @@ class TicketsController extends BaseController
 
     public function dummy()
     {
-
+        $seats = $this->Reserved_seats->find()->first();
+        //座席予約テーブルのスケジュールIDでスケジュールテーブルを検索
+        $screening_schedule = $this->Screening_schedules->find()->where(['id' => $seats['screening_schedule_id']])->first();
+        //スケジュールテーブルの映画IDで映画テーブルを検索
+        $movie = $this->Movies->find()->where(['id' => $screening_schedule['movie_id']])->first();
+        $session = $this->getRequest()->getSession();
         $this->viewBuilder()->setLayout('main');
         if ($this->request->is('post')) {
-
+            $session->write('session.seats', $seats);
+            $session->write('session.screening_schedule', $screening_schedule);
+            $session->write('session.movie', $movie);
             return $this->redirect(['action' => 'ticket']);
         }
+        $this->set(compact('seats', 'screening_schedule', 'movie'));
+        $session->consume('session.seats');
     }
 }

@@ -45,4 +45,17 @@ class MainController extends BaseController
 		$movie = $this->Movies->find('all')->enableHydration(false)->toArray();
 		$this->set(compact('movie'));
 	}
+
+	public function dummy()
+	{
+		// $seats = $this->reserved_seats->get()->first();
+
+		$this->viewBuilder()->setLayout('main');
+		if ($this->request->is('post')) {
+
+			return $this->redirect(['action' => 'ticket']);
+		}
+		// $this->set(compact('seats'));
+
+	}
 }
