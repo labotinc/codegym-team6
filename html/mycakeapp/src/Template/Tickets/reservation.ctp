@@ -2,7 +2,7 @@
 <?php $this->assign("title", "予約確認"); ?>
 <?php
 $title = $this->Session->read('session.movie.title');
-$date = $this->Session->read('session.screening_schedule.date');
+$date = $this->Session->read('session.screening_schedule.screening_date');
 $start_time = $this->Session->read('session.screening_schedule.start_time');
 $end_time = $this->Session->read('session.screening_schedule.end_time');
 $seat = $this->Session->read('session.seats.seat');
