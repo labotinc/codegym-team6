@@ -163,5 +163,7 @@ class TicketsController extends BaseController
         }
         $this->set(compact('seats', 'screening_schedule', 'movie'));
         $session->consume('session.seats');
+        $session->consume('session.screening_schedule');
+        $session->consume('session.movie');
     }
 }
