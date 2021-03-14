@@ -1,15 +1,23 @@
 <?= $this->Html->css('tickettype.css') ?>
 <?php $this->assign("title", "チケット種別"); ?>
+<?php
+$title = $this->Session->read('session.movie.title');
+$date = $this->Session->read('session.screening_schedule.date');
+$start_time = $this->Session->read('session.screening_schedule.start_time');
+$end_time = $this->Session->read('session.screening_schedule.end_time');
+$seat = $this->Session->read('session.seats.seat');
+$week_name = ['日', '月', '火', '水', '木', '金', '土'];
+?>
 <div class="wrapper">
   <div class="reservation">
-    <div class="title">タイトルタイトル</div>
+    <div class="title"><?= $title; ?></div>
     <div class="schedules">
-      <span class="month">00</span>月
-      <span class="date">00</span>日（<span class="day">月</span>）
-      <span class="start">00:00</span>〜
-      <span class="end">00:00</span>
+      <span><?= date('m', strtotime($date)) ?></span>月
+      <span><?= date('d', strtotime($date)) ?></span>日（<span><?= $week_name[date('w', strtotime($date))] ?></span>）
+      <span><?= date('G:i', strtotime($start_time)) ?></span> 〜
+      <span><?= date('G:i', strtotime($end_time)) ?></span>
     </div>
-    <div class="seat">座席：<span>A-1</span></div>
+    <div class="seat">座席：<?= $seat ?></div>
   </div>
   <?= $this->Form->create($tickets, array('novalidate' => true)); ?>
   <div class="ticket">
