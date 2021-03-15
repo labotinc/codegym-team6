@@ -110,4 +110,36 @@ class ReservedSeatsController extends AppController
 
         return $this->redirect(['action' => 'index']);
     }
+
+	public function seatSelect()
+	{
+		// 一時的にコメントアウト
+		$this->viewBuilder()->setLayout('main');
+		// addのコピー
+		// $reservedSeat = $this->ReservedSeats->newEntity();
+        // if ($this->request->is('post')) {
+        //     $reservedSeat = $this->ReservedSeats->patchEntity($reservedSeat, $this->request->getData());
+        //     if ($this->ReservedSeats->save($reservedSeat)) {
+        //         $this->Flash->success(__('The reserved seat has been saved.'));
+
+        //         return $this->redirect(['action' => 'index']);
+        //     }
+        //     $this->Flash->error(__('The reserved seat could not be saved. Please, try again.'));
+        // }
+        // $reservations = $this->ReservedSeats->Reservations->find('list', ['limit' => 200]);
+        // $screeningSchedules = $this->ReservedSeats->ScreeningSchedules->find('list', ['limit' => 200]);
+        // $this->set(compact('reservedSeat', 'reservations', 'screeningSchedules'));
+	}
+
+	public function pra(){
+		$this->viewBuilder()->setLayout('main');
+		// postされているのかどうか判断できていない！選択して送信ボタン押しても反応しない！submitボタン使ってないからや！
+		if (isset($_POST['seatNum']) && is_array($_POST['seatNum'])) {
+			echo 'checkbox送信あり';
+		} else {
+			echo '何もあらへん';
+		}
+		var_dump($_POST['seatNum']);
+		
+	}
 }
