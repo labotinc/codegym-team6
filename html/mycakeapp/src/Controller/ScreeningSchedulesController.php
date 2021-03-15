@@ -3,13 +3,17 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use App\Model\Entity\ScreeningSchedule;
+use Cake\Database\Query;
+use Cake\Routing\Router; //追記
+use DateTime;
 
 /**
  * ScreeningSchedules Controller
  *
  * @property \App\Model\Table\ScreeningSchedulesTable $ScreeningSchedules
  *
- * @method \App\Model\Entity\ScreeningSchedule[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
+ * @method \App\Model\Entity\ScreeningSchedule[]|\Cake\Datasource\all_schedule_ResultSetInterface paginate($object = null, array $settings = [])
  */
 class ScreeningSchedulesController extends AppController
 {
@@ -118,27 +122,66 @@ class ScreeningSchedulesController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-// スケジュールのアクション追加
-    public function schedule($id = null)
+    // スケジュールのアクション追加
+    public function schedule($today)
     {
-
-        $screeningSchedule = $this->ScreeningSchedules->get($id, [
-            'contain' => ['Movies', 'ReservedSeats'],
-        ]);
-        // 映画IDを取得
-        $movie = $this->Movies->get($id);
         // 今日の日付
-        $date =$screeningSchedule->date->format('Y-m-d');
-        // 明日の日付
-        $tomorrow = date(('Y-m-d'), $date.strtotime("+ 1day"));
+        // 現在日時時刻をサーバーから取得
+        // UNIX TIMESTAMPを取得
+        $timestamp = time();
+        // date()で日時を出力
+        // $today = date('Y-m-d', $timestamp);
+        $now = new DateTime();
+        $today = $now->format('Y-m-d');
 
-        $id = $this->request->query['id'];
+        // 映画のスケジュールテーブルから今日の日付と放映日が一致する作品レコードを検索
+        if ($this->request->is('get')) {
+            $schedule_datas = $this->ScreeningSchedules->find()
+                ->where([
+                    'screening_date LIKE' => $today . '%'
+                ])
+                ->andwhere(['ScreeningSchedules.is_deleted' => 0])
+                ->contain('Movies')
+                ->order('movie_id', 'start_time')
+                ->toArray();
+        }
+        // 空の配列の用意
+        $schedule_arr = [];
+        foreach ($schedule_datas as $schedule_data) { //該当日の上映スケジュール分回る
+            // 文字列で開始時間と終了時間を入れた変数を用意
+            $display_time = $schedule_data->start_time->i18nFormat('H:mm') . '~' . $schedule_data->end_time->i18nFormat('H:mm');
+            if (!isset($schedule_arr[$schedule_data->movie_id])) { //同じmovie_idが無い場合
+                $schedule_arr[$schedule_data->movie_id] = array(
+                    'movie_id' => $schedule_data->movie_id,
+                    'title' => $schedule_data->movie->title,
+                    'running_time' => $schedule_data->movie->running_time,
+                    'end_date' => $schedule_data->movie->end_date,
+                    'top_image_name' => $schedule_data->movie->top_image_name,
+                    'is_deleted' => $schedule_data->movie->is_deleted,
+                    'schedule' => array($display_time)
+                );
+            } else { //同じmovie_idを生成した場合≒2つ目があった場合→配列を結合する
+                array_push($schedule_arr[$schedule_data->movie_id]['schedule'], $display_time);
+            }
+        }
 
+        $hit  = count($schedule_datas);
+        $arr[] = array();
 
-
-
-
-
-        $this->set(compact('screeningSchedule', 'movie'));
+        // ヒットした映画の件数(その日の作品数)
+        if ($this->request->is('get')) {
+            $movie_find = $this->Movies->find()
+                // まだ上映期間中の映画
+                ->where(['end_date >=' => $today])
+                // かつ削除されていない映画
+                ->andwhere(['is_deleted' => 0])
+                ->contain('ScreeningSchedules');
+            // 今日上映の映画作品数
+            $count_movie = $movie_find->count();
+        }
+        $movie_data = $movie_find->toArray();
+        // //  DBの全てのデータを結果を代入、結果として取得
+        // $all_movie_result = $movie_data->toArray();
+        $this->set(compact('schedule_arr', 'movie_data', 'count_movie'));
     }
 }
