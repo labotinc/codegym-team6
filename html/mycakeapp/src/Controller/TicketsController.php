@@ -155,6 +155,7 @@ class TicketsController extends BaseController
         $movie = $this->Movies->find()->where(['id' => $screening_schedule['movie_id']])->first();
         $session = $this->getRequest()->getSession();
         $this->viewBuilder()->setLayout('main');
+        //次へボタンを押した時にセッションに保存をしてリダイレクト
         if ($this->request->is('post')) {
             $session->write('session.seats', $seats);
             $session->write('session.screening_schedule', $screening_schedule);
@@ -162,6 +163,7 @@ class TicketsController extends BaseController
             return $this->redirect(['action' => 'ticket']);
         }
         $this->set(compact('seats', 'screening_schedule', 'movie'));
+        //画面遷移してきたタイミングで保存していたセッションは破棄する
         $session->consume('session.seats');
         $session->consume('session.screening_schedule');
         $session->consume('session.movie');

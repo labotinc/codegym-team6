@@ -1,11 +1,13 @@
 <?= $this->Html->css('tickettype.css') ?>
 <?php $this->assign("title", "チケット種別"); ?>
 <?php
+//セッションデータの読み込み
 $title = $this->Session->read('session.movie.title');
 $date = $this->Session->read('session.screening_schedule.screening_date');
 $start_time = $this->Session->read('session.screening_schedule.start_time');
 $end_time = $this->Session->read('session.screening_schedule.end_time');
 $seat = $this->Session->read('session.seats.seat');
+//曜日に変換するための配列
 $week_name = ['日', '月', '火', '水', '木', '金', '土'];
 ?>
 <div class="wrapper">
