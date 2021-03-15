@@ -31,7 +31,7 @@ $week_name = ['日', '月', '火', '水', '木', '金', '土'];
 
 	<?= $this->Form->create(null, array('novalidate' => true)); ?>
 	<div class="under-area">
-		<div class="back"><a href="<?= $this->Url->build(['action' => 'ticket']) ?>">戻る</a></div>
+		<div class="back"><a href="<?= $this->Url->build(['action' => 'selectticket']) ?>">戻る</a></div>
 		<?php echo $this->Form->button('決済へ', ['label' => false, 'type' => 'submit']); ?>
 	</div>
 	<?= $this->Form->end() ?>

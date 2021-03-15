@@ -13,18 +13,7 @@ use App\Controller\AppController;
  */
 class TicketsController extends BaseController
 {
-	public function initialize()
-	{
-		$this->loadModel('Reservations');
-		$this->loadModel('Payments');
-		$this->loadModel('Users');
-		$this->loadModel('Discounts');
-		$this->loadModel('Tickets');
-		$this->loadModel('Movies');
-		$this->loadModel('Reserved_seats');
-		$this->loadModel('Screening_schedules');
-		$this->loadComponent('Auth');
-	}
+
 	/**
 	 * Index method
 	 *
@@ -117,55 +106,4 @@ class TicketsController extends BaseController
 		return $this->redirect(['action' => 'index']);
 	}
 
-	public function ticket()
-	{
-		$this->viewBuilder()->setLayout('main');
-		$tickets = $this->Tickets->find('all', array('order' => array('Tickets.row ASC')));
-		$session = $this->getRequest()->getSession();
-		//次へのボタンを押した時の処理
-		if ($this->request->is('put')) {
-			//ラジオボタンで選択したチケットIDを取得
-			$selected_ticket = $this->request->getData('ticket');
-			if (isset($selected_ticket)) {
-				$session->write('session.ticket', $selected_ticket);
-				return $this->redirect(['action' => 'reservation']);
-			} else {
-				$error = 'チケットを選択してください';
-				$this->set(compact('error'));
-			}
-		}
-		$this->set(compact('tickets'));
-		$session->consume('session.ticket');
-	}
-
-	public function reservation()
-	{
-		$this->viewBuilder()->setLayout('main');
-		$ticket_id = $this->getRequest()->getSession()->read('session.ticket');
-		$tickets = $this->Tickets->find()->where(['id' => $ticket_id]);
-		$this->set(compact('tickets'));
-	}
-
-	public function dummy()
-	{
-		$seats = $this->Reserved_seats->find()->first();
-		//座席予約テーブルのスケジュールIDでスケジュールテーブルを検索
-		$screening_schedule = $this->Screening_schedules->find()->where(['id' => $seats['screening_schedule_id']])->first();
-		//スケジュールテーブルの映画IDで映画テーブルを検索
-		$movie = $this->Movies->find()->where(['id' => $screening_schedule['movie_id']])->first();
-		$session = $this->getRequest()->getSession();
-		$this->viewBuilder()->setLayout('main');
-		//次へボタンを押した時にセッションに保存をしてリダイレクト
-		if ($this->request->is('post')) {
-			$session->write('session.seats', $seats);
-			$session->write('session.screening_schedule', $screening_schedule);
-			$session->write('session.movie', $movie);
-			return $this->redirect(['action' => 'ticket']);
-		}
-		$this->set(compact('seats', 'screening_schedule', 'movie'));
-		//画面遷移してきたタイミングで保存していたセッションは破棄する
-		$session->consume('session.seats');
-		$session->consume('session.screening_schedule');
-		$session->consume('session.movie');
-	}
 }
