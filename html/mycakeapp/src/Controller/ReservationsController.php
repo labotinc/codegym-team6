@@ -152,7 +152,7 @@ class ReservationsController extends BaseController
 				$this->set(compact('error'));
 			}
 		}
-		$this->set(compact('tickets', 'screening_schedule','movie', 'reserved_seats'));
+		$this->set(compact('tickets', 'screening_schedule', 'movie', 'reserved_seats'));
 		$session->consume('session.ticket');
 	}
 
@@ -161,7 +161,19 @@ class ReservationsController extends BaseController
 		$this->viewBuilder()->setLayout('main');
 		$ticket_id = $this->getRequest()->getSession()->read('session.ticket');
 		$tickets = $this->Tickets->find()->where(['id' => $ticket_id]);
-		$this->set(compact('tickets'));
+		$session = $this->getRequest()->getSession();
+		//セッションに保存された上映スケジュールidを取得
+		$session_screening_schedule_id = $session->read('session.screening_schedule');
+		//取得した上映スケジュールidで検索、レコードの情報を取得
+		$screening_schedule = $this->Screening_schedules->find()->where(['id' => $session_screening_schedule_id]);
+		//上映スケジュールのmovie_idの値でmoviesテーブルを検索
+		$screening_schedule_movie_id = $screening_schedule->toArray()[0]->movie_id;
+		$movie = $this->Movies->find()->where(['id' => $screening_schedule_movie_id]);
+		//セッションに保存された座席予約のidを取得
+		$session_reserved_seats_id = $session->read('session.reserved_seats');
+		//上の行で取得したidでreserved_seatsテーブルの情報を取得
+		$reserved_seats = $this->Reserved_seats->find()->where(['id' => $session_reserved_seats_id]);
+		$this->set(compact('tickets', 'screening_schedule', 'movie', 'reserved_seats'));
 	}
 
 	public function dummy()
@@ -180,6 +192,5 @@ class ReservationsController extends BaseController
 		//画面遷移してきたタイミングで保存していたセッションは破棄する
 		$session->consume('session.seats');
 		$session->consume('session.screening_schedule');
-
 	}
 }

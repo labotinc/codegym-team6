@@ -1,12 +1,12 @@
 <?= $this->Html->css('tickettype.css') ?>
 <?php $this->assign("title", "予約確認"); ?>
 <?php
-//セッションデータの読み込み
-$title = $this->Session->read('session.movie.title');
-$date = $this->Session->read('session.screening_schedule.screening_date');
-$start_time = $this->Session->read('session.screening_schedule.start_time');
-$end_time = $this->Session->read('session.screening_schedule.end_time');
-$seat = $this->Session->read('session.seats.seat');
+//データの読み込み
+$title = $movie->toArray()[0]->title;
+$date = $screening_schedule->toArray()[0]->screening_date;
+$start_time = $screening_schedule->toArray()[0]->start_time;
+$end_time = $screening_schedule->toArray()[0]->end_time;
+$seat = $reserved_seats->toArray()[0]->seat;
 //曜日に変換するための配列
 $week_name = ['日', '月', '火', '水', '木', '金', '土'];
 ?>
