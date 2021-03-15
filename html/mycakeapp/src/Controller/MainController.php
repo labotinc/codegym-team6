@@ -19,6 +19,8 @@ class MainController extends BaseController
 		$this->loadModel('Discounts');
 		$this->loadModel('Tickets');
 		$this->loadModel('Movies');
+		$this->loadModel('ReservedSeat');
+		$this->loadModel('ScreeningSchedule');
 		$this->loadComponent('Auth');
 	}
 
@@ -44,5 +46,10 @@ class MainController extends BaseController
 		$this->layout = false;
 		$movie = $this->Movies->find('all')->enableHydration(false)->toArray();
 		$this->set(compact('movie'));
+	}
+
+	public function reservationConfirm()
+	{
+		$this->viewBuilder()->setLayout('main');
 	}
 }
