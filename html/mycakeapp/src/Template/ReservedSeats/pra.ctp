@@ -25,17 +25,17 @@
 				<?php for ($j = 0; $j < 11; $j++) : ?>
 					<td>
 						<?php
-						echo $this->Form->checkbox('',[
+						echo $this->Form->checkbox('', [
 							'id' => ($i . '.' . $j),
 							'name' => 'seatNum[]',
-							'value' => ($i . '.' . $j),
+							'value' => ($seatIndex[$j] . '-' . ($i + 1)),
 							'class' => 'checkbox',
 							'hiddenField' => false
-							]);
-							echo $this->Form->label('','',[
-								'for' => ($i . '.' . $j),
-								'class' => 'label',
-								]);
+						]);
+						echo $this->Form->label('', '', [
+							'for' => ($i . '.' . $j),
+							'class' => 'label',
+						]);
 						?>
 					</td>
 					<!-- valueに席番号🔴.🔴が来るようになっている。valueを取得できてそれをDBに送信できるという仮定のものと実装した。 -->
@@ -45,7 +45,7 @@
 		<?php endfor; ?>
 	</table>
 	<div class="bottom">
-	<?php echo $this->Form->button('決定', ['type' => 'submit']); ?>
+		<?php echo $this->Form->button('決定', ['type' => 'submit']); ?>
 	</div>
 	<!-- <div class="bottom">
 		<button type="submit">決定</button>
