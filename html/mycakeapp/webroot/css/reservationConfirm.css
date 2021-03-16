@@ -91,3 +91,14 @@
     display: block;
     text-align: center;
 }
+
+.count-check p {
+    width: 348px;
+    font-family: 'Hiragino Kaku Gothic ProN';
+    color: #707070;
+    font-size: 14px;
+    font-weight: normal;
+    text-align: center;
+    margin: 0 auto;
+    padding-bottom: 40px;
+}

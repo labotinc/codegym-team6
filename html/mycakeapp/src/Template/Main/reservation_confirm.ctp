@@ -1,5 +1,6 @@
 <?= $this->Html->css('reservationConfirm.css') ?>
 	<?php $this->assign("title", "予約詳細"); ?>
+	<?php $count = 0; ?>
 	<?php if($my_reservations): ?>
 		<?php foreach ($my_reservations as $my_reservation) : ?>
 			<?php foreach ($my_reservation->reserved_seats as $reserved_seat): ?>
@@ -19,9 +20,16 @@
 						</div>
 						<?= $this->Html->link("キャンセル", ['controller' => '', 'action' => '']) ?>
 					</section>
+				<?php else: ?>
+					<?php $count++; ?>
 				<?php endif; ?>
 			<?php endforeach; ?>
 		<?php endforeach; ?>
+		<?php if($count > 1): ?>
+			<div class="count-check">
+				<p>現在予約はありません</p>
+			</div>
+		<?php endif; ?>
 		<div class="btn">
 			<?= $this->Html->link("マイページに戻る", ['controller' => 'Main', 'action' => 'mypage']) ?>
 		</div>
