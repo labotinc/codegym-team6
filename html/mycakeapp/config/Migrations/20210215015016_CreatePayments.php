@@ -36,7 +36,7 @@ class CreatePayments extends AbstractMigration
         $table->addColumn('discount_id', 'integer', [
             'default' => null,
             'limit' => 11,
-            'null' => true,
+            'null' => false,
         ]);
         $table->addColumn('total_payments', 'integer', [
             'default' => null,
