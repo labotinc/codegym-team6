@@ -19,8 +19,8 @@ class MainController extends BaseController
 		$this->loadModel('Discounts');
 		$this->loadModel('Tickets');
 		$this->loadModel('Movies');
-		$this->loadModel('ReservedSeat');
-		$this->loadModel('ScreeningSchedule');
+		$this->loadModel('ReservedSeats');
+		$this->loadModel('ScreeningSchedules');
 		$this->loadComponent('Auth');
 	}
 
@@ -51,5 +51,13 @@ class MainController extends BaseController
 	public function reservationConfirm()
 	{
 		$this->viewBuilder()->setLayout('main');
+
+		$authuser = $this->Auth->user('id');
+		$my_reservations = $this->Reservations->find('all', [
+			'conditions' => ['Reservations.user_id' => $authuser],
+			'contain' => ['ReservedSeats' => ['ScreeningSchedules' => 'Movies'], 'Payments' => ['Tickets']],
+		]);
+
+		$this->set(compact('my_reservations'));
 	}
 }
