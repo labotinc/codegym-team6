@@ -17,6 +17,7 @@
 								&yen<?= number_format(h($my_reservation->payment->ticket->price)); ?>
 							</div>
 						</div>
+						<?= $this->Html->link("キャンセル", ['controller' => '', 'action' => '']) ?>
 					</section>
 				<?php endif; ?>
 			<?php endforeach; ?>
