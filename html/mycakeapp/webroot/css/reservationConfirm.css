@@ -1,0 +1,34 @@
+.main {
+    height: 100%;
+    padding-top: 120px;
+}
+
+.my-reservation {
+    width: 528px;
+    background-color: #F2F2F2;
+    margin: 0 auto;
+    margin-bottom: 32px;
+    height: 128px;
+    display: flex;
+    color: #707070;
+}
+
+.my-reservation img {
+    height: 128px;
+}
+
+.reservation-detail {
+    margin: 19px 0 24px 24px;
+    width: 245px;
+}
+
+.my-reservation h3 {
+    font-size: 20px;
+    margin-bottom: 4px;
+}
+
+.schedule-seat {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+}
