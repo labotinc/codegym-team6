@@ -21,10 +21,10 @@
 					</section>
 				<?php endif; ?>
 			<?php endforeach; ?>
-			<?php endforeach; ?>
-			<div class="btn">
-				<?= $this->Html->link("マイページに戻る", ['controller' => 'Main', 'action' => 'mypage']) ?>
-			</div>
+		<?php endforeach; ?>
+		<div class="btn">
+			<?= $this->Html->link("マイページに戻る", ['controller' => 'Main', 'action' => 'mypage']) ?>
+		</div>
 	<?php else: ?>
 		<div class="content-area">
 			<p>現在予約はありません</p>
