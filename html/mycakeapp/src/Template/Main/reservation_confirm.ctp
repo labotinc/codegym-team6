@@ -13,6 +13,7 @@
 					</ul>
 					<div class="price-discount">
 						&yen<?= number_format(h($my_reservation->payment->ticket->price)); ?>
+						<span><?= h($my_reservation->payment->discount->name); ?></span>
 					</div>
 				</div>
 			</section>

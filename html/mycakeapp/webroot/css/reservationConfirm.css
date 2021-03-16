@@ -30,8 +30,17 @@
 .schedule-seat {
     display: flex;
     justify-content: space-between;
+    font-size: 16px;
+    line-height: 22px;
 }
 
 .schedule-seat li {
-    margin-bottom: 4px;
+    margin-bottom: 8px;
+}
+
+.price-discount span {
+    color: #B7B7B7;
+    border: 1px solid #B7B7B7;
+    font-size: 14px;
+    margin-left: 10px;
 }
