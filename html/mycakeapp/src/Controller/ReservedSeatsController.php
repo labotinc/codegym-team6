@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Controller\AppController;
@@ -12,104 +13,104 @@ use App\Controller\AppController;
  */
 class ReservedSeatsController extends AppController
 {
-    /**
-     * Index method
-     *
-     * @return \Cake\Http\Response|null
-     */
-    public function index()
-    {
-        $this->paginate = [
-            'contain' => ['Reservations', 'ScreeningSchedules'],
-        ];
-        $reservedSeats = $this->paginate($this->ReservedSeats);
+	/**
+	 * Index method
+	 *
+	 * @return \Cake\Http\Response|null
+	 */
+	public function index()
+	{
+		$this->paginate = [
+			'contain' => ['Reservations', 'ScreeningSchedules'],
+		];
+		$reservedSeats = $this->paginate($this->ReservedSeats);
 
-        $this->set(compact('reservedSeats'));
-    }
+		$this->set(compact('reservedSeats'));
+	}
 
-    /**
-     * View method
-     *
-     * @param string|null $id Reserved Seat id.
-     * @return \Cake\Http\Response|null
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($id = null)
-    {
-        $reservedSeat = $this->ReservedSeats->get($id, [
-            'contain' => ['Reservations', 'ScreeningSchedules'],
-        ]);
+	/**
+	 * View method
+	 *
+	 * @param string|null $id Reserved Seat id.
+	 * @return \Cake\Http\Response|null
+	 * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+	 */
+	public function view($id = null)
+	{
+		$reservedSeat = $this->ReservedSeats->get($id, [
+			'contain' => ['Reservations', 'ScreeningSchedules'],
+		]);
 
-        $this->set('reservedSeat', $reservedSeat);
-    }
+		$this->set('reservedSeat', $reservedSeat);
+	}
 
-    /**
-     * Add method
-     *
-     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
-     */
-    public function add()
-    {
-        $reservedSeat = $this->ReservedSeats->newEntity();
-        if ($this->request->is('post')) {
-            $reservedSeat = $this->ReservedSeats->patchEntity($reservedSeat, $this->request->getData());
-            if ($this->ReservedSeats->save($reservedSeat)) {
-                $this->Flash->success(__('The reserved seat has been saved.'));
+	/**
+	 * Add method
+	 *
+	 * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise.
+	 */
+	public function add()
+	{
+		$reservedSeat = $this->ReservedSeats->newEntity();
+		if ($this->request->is('post')) {
+			$reservedSeat = $this->ReservedSeats->patchEntity($reservedSeat, $this->request->getData());
+			if ($this->ReservedSeats->save($reservedSeat)) {
+				$this->Flash->success(__('The reserved seat has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The reserved seat could not be saved. Please, try again.'));
-        }
-        $reservations = $this->ReservedSeats->Reservations->find('list', ['limit' => 200]);
-        $screeningSchedules = $this->ReservedSeats->ScreeningSchedules->find('list', ['limit' => 200]);
-        $this->set(compact('reservedSeat', 'reservations', 'screeningSchedules'));
-    }
+				return $this->redirect(['action' => 'index']);
+			}
+			$this->Flash->error(__('The reserved seat could not be saved. Please, try again.'));
+		}
+		$reservations = $this->ReservedSeats->Reservations->find('list', ['limit' => 200]);
+		$screeningSchedules = $this->ReservedSeats->ScreeningSchedules->find('list', ['limit' => 200]);
+		$this->set(compact('reservedSeat', 'reservations', 'screeningSchedules'));
+	}
 
-    /**
-     * Edit method
-     *
-     * @param string|null $id Reserved Seat id.
-     * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function edit($id = null)
-    {
-        $reservedSeat = $this->ReservedSeats->get($id, [
-            'contain' => [],
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $reservedSeat = $this->ReservedSeats->patchEntity($reservedSeat, $this->request->getData());
-            if ($this->ReservedSeats->save($reservedSeat)) {
-                $this->Flash->success(__('The reserved seat has been saved.'));
+	/**
+	 * Edit method
+	 *
+	 * @param string|null $id Reserved Seat id.
+	 * @return \Cake\Http\Response|null Redirects on successful edit, renders view otherwise.
+	 * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+	 */
+	public function edit($id = null)
+	{
+		$reservedSeat = $this->ReservedSeats->get($id, [
+			'contain' => [],
+		]);
+		if ($this->request->is(['patch', 'post', 'put'])) {
+			$reservedSeat = $this->ReservedSeats->patchEntity($reservedSeat, $this->request->getData());
+			if ($this->ReservedSeats->save($reservedSeat)) {
+				$this->Flash->success(__('The reserved seat has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The reserved seat could not be saved. Please, try again.'));
-        }
-        $reservations = $this->ReservedSeats->Reservations->find('list', ['limit' => 200]);
-        $screeningSchedules = $this->ReservedSeats->ScreeningSchedules->find('list', ['limit' => 200]);
-        $this->set(compact('reservedSeat', 'reservations', 'screeningSchedules'));
-    }
+				return $this->redirect(['action' => 'index']);
+			}
+			$this->Flash->error(__('The reserved seat could not be saved. Please, try again.'));
+		}
+		$reservations = $this->ReservedSeats->Reservations->find('list', ['limit' => 200]);
+		$screeningSchedules = $this->ReservedSeats->ScreeningSchedules->find('list', ['limit' => 200]);
+		$this->set(compact('reservedSeat', 'reservations', 'screeningSchedules'));
+	}
 
-    /**
-     * Delete method
-     *
-     * @param string|null $id Reserved Seat id.
-     * @return \Cake\Http\Response|null Redirects to index.
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function delete($id = null)
-    {
-        $this->request->allowMethod(['post', 'delete']);
-        $reservedSeat = $this->ReservedSeats->get($id);
-        if ($this->ReservedSeats->delete($reservedSeat)) {
-            $this->Flash->success(__('The reserved seat has been deleted.'));
-        } else {
-            $this->Flash->error(__('The reserved seat could not be deleted. Please, try again.'));
-        }
+	/**
+	 * Delete method
+	 *
+	 * @param string|null $id Reserved Seat id.
+	 * @return \Cake\Http\Response|null Redirects to index.
+	 * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+	 */
+	public function delete($id = null)
+	{
+		$this->request->allowMethod(['post', 'delete']);
+		$reservedSeat = $this->ReservedSeats->get($id);
+		if ($this->ReservedSeats->delete($reservedSeat)) {
+			$this->Flash->success(__('The reserved seat has been deleted.'));
+		} else {
+			$this->Flash->error(__('The reserved seat could not be deleted. Please, try again.'));
+		}
 
-        return $this->redirect(['action' => 'index']);
-    }
+		return $this->redirect(['action' => 'index']);
+	}
 
 	public function seatSelect()
 	{
@@ -117,29 +118,46 @@ class ReservedSeatsController extends AppController
 		$this->viewBuilder()->setLayout('main');
 		// addのコピー
 		// $reservedSeat = $this->ReservedSeats->newEntity();
-        // if ($this->request->is('post')) {
-        //     $reservedSeat = $this->ReservedSeats->patchEntity($reservedSeat, $this->request->getData());
-        //     if ($this->ReservedSeats->save($reservedSeat)) {
-        //         $this->Flash->success(__('The reserved seat has been saved.'));
+		// if ($this->request->is('post')) {
+		//     $reservedSeat = $this->ReservedSeats->patchEntity($reservedSeat, $this->request->getData());
+		//     if ($this->ReservedSeats->save($reservedSeat)) {
+		//         $this->Flash->success(__('The reserved seat has been saved.'));
 
-        //         return $this->redirect(['action' => 'index']);
-        //     }
-        //     $this->Flash->error(__('The reserved seat could not be saved. Please, try again.'));
-        // }
-        // $reservations = $this->ReservedSeats->Reservations->find('list', ['limit' => 200]);
-        // $screeningSchedules = $this->ReservedSeats->ScreeningSchedules->find('list', ['limit' => 200]);
-        // $this->set(compact('reservedSeat', 'reservations', 'screeningSchedules'));
+		//         return $this->redirect(['action' => 'index']);
+		//     }
+		//     $this->Flash->error(__('The reserved seat could not be saved. Please, try again.'));
+		// }
+		// $reservations = $this->ReservedSeats->Reservations->find('list', ['limit' => 200]);
+		// $screeningSchedules = $this->ReservedSeats->ScreeningSchedules->find('list', ['limit' => 200]);
+		// $this->set(compact('reservedSeat', 'reservations', 'screeningSchedules'));
 	}
 
-	public function pra(){
+	public function pra()
+	{
 		$this->viewBuilder()->setLayout('main');
-		// postされているのかどうか判断できていない！選択して送信ボタン押しても反応しない！submitボタン使ってないからや！
-		if (isset($_POST['seatNum']) && is_array($_POST['seatNum'])) {
-			echo 'checkbox送信あり';
-		} else {
-			echo '何もあらへん';
-		}
-		var_dump($_POST['seatNum']);
+		$authuser = $this->Auth->user('id');
 		
+		// $reservedSeats = $this->ReservedSeats->newEntity();
+		// $reservations = $this->Reservations->newEntity();
+
+		if ($this->request->is('post')) {
+			
+			return $this->redirect(['controller' => 'Main', 'action' => 'mypage']);
+		}
+
+
+
+
+
+
+
+
+		// if (isset($_POST['seatNum']) && is_array($_POST['seatNum'])) {
+		// 	echo 'checkbox送信あり';
+		// } else {
+		// 	echo '何もあらへん';
+		// }
+		// var_dump($_POST['seatNum']);
+
 	}
 }
