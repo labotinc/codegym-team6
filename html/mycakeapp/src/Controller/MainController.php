@@ -6,6 +6,7 @@ use App\Controller\AppController;
 
 use Cake\Event\Event;
 use Exception;
+use Cake\I18n\Time;
 
 class MainController extends BaseController
 {
@@ -60,6 +61,8 @@ class MainController extends BaseController
 
 		$week = array( "日", "月", "火", "水", "木", "金", "土" );
 
-		$this->set(compact('my_reservations', 'week'));
+		$now_time = Time::now();
+
+		$this->set(compact('my_reservations', 'week', 'now_time'));
 	}
 }
