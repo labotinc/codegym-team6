@@ -55,7 +55,7 @@ class MainController extends BaseController
 		$authuser = $this->Auth->user('id');
 		$my_reservations = $this->Reservations->find('all', [
 			'conditions' => ['Reservations.user_id' => $authuser],
-			'contain' => ['ReservedSeats' => ['ScreeningSchedules' => 'Movies'], 'Payments' => ['Tickets', 'Discounts']],
+			'contain' => ['ReservedSeats' => ['ScreeningSchedules' => 'Movies'], 'Payments' => ['Tickets']],
 		]);
 
 		$week = array( "日", "月", "火", "水", "木", "金", "土" );

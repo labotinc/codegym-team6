@@ -1,6 +1,6 @@
 <?= $this->Html->css('reservationConfirm.css') ?>
 	<?php $this->assign("title", "予約詳細"); ?>
-	<?php if(!($my_reservations)): ?>
+	<?php if($my_reservations): ?>
 		<?php foreach ($my_reservations as $my_reservation) : ?>
 			<?php foreach ($my_reservation->reserved_seats as $reserved_seat): ?>
 				<section class="my-reservation">
@@ -14,7 +14,6 @@
 						</ul>
 						<div class="price-discount">
 							&yen<?= number_format(h($my_reservation->payment->ticket->price)); ?>
-							<span><?= h($my_reservation->payment->discount->name); ?></span>
 						</div>
 					</div>
 				</section>
