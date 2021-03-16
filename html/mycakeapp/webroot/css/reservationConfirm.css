@@ -30,5 +30,8 @@
 .schedule-seat {
     display: flex;
     justify-content: space-between;
+}
+
+.schedule-seat li {
     margin-bottom: 4px;
 }

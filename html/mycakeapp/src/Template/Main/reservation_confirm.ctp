@@ -6,13 +6,14 @@
 				<?php echo $this->Html->image('/img/main/' . h($reserved_seat->screening_schedule->movie->slide_image_name)); ?>
 				<div class="reservation-detail">
 					<h3><?= h($reserved_seat->screening_schedule->movie->title); ?></h3>
-					<div class="schedule-seat">
-						<?= h($reserved_seat->screening_schedule->screening_date); ?>
-						<?= h($reserved_seat->screening_schedule->start_time); ?>
-						<?= h($reserved_seat->screening_schedule->end_time); ?>
-						<?= h($reserved_seat->seat); ?>
+					<ul class="schedule-seat">
+						<li><?= h($reserved_seat->screening_schedule->screening_date->format('n月d日')), '(', $week[h($reserved_seat->screening_schedule->screening_date->format('w'))],')'; ?></li>
+						<li><?= h($reserved_seat->screening_schedule->start_time->format('H:i')), '~', h($reserved_seat->screening_schedule->end_time->format('H:i'));; ?></li>
+						<li><?= h($reserved_seat->seat); ?></li>
+					</ul>
+					<div class="price-discount">
+						&yen<?= number_format(h($my_reservation->payment->ticket->price)); ?>
 					</div>
-					<?= h($my_reservation->payment->ticket->price); ?>
 				</div>
 			</section>
 		<?php endforeach; ?>
