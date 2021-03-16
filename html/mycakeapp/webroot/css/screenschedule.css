@@ -54,7 +54,7 @@ main .banner-box{
 }
 
 /* バーナー1週間分の日にち */
-div p.banner-date{
+input[type = "text"] {
 	position:relative;
 	top: 30%;
 	left: 8%;

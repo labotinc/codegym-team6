@@ -46,13 +46,14 @@ $today_weeek_int = date("w", strtotime($today_date));
 
         <!-- for文で現在日時から一週間分を表示 -->
         <?php for ($i = 0; $i < 7; $i++) : ?>
-            <div class="banner-box" id="banner-box">
-                <p class="banner-date">
-                    <?php
-                    $w = date("w", strtotime("+{$i} day", strtotime($today_date))); //現在の曜日
-                    echo date('m月d日' . '(' . $weekconfig[$w] . ')', strtotime("+{$i} day", strtotime($today_date)));
-                    ?></p>
-            </div>
+            <!-- <div class="banner-box" id="banner-box">
+                <p class="banner-date"> -->
+            <?php  $w = date("w", strtotime("+{$i} day", strtotime($today_date))); //現在の曜日
+                                        $date = date('m月d日' . '(' . $weekconfig[$w] . ')', strtotime("+{$i} day", strtotime($today_date)));?>
+            <input type="text" value="<?php echo $date; ?> " class="banner-box" id="banner-box">
+            </input>
+            <!-- </p> -->
+            <!-- </div> -->
         <?php endfor; ?>
     </div>
     <!-- 実際の映画のデータ表示部分 -->
@@ -85,18 +86,12 @@ $today_weeek_int = date("w", strtotime($today_date));
                                     <button type="button"><a href="#"></a> 予約購入</button>
                                 </div>
                             <?php endforeach; ?>
-                            <!-- スライドボタン ( JavaScriptで動きつける)-->
-                            <div class="schedule-nav-button" id="nav-button">
-
-                            </div>
                             <!-- スライドの隠して上げる部分 -->
                             <div class="box-trim"></div>
 
                         </div>
                     </div>
                 <?php endforeach; ?>
-
-
                 <!-- 映画のタイトル詳細ボックス-->
                 <!-- 選択されたその日に上映される映画作品分の繰り返しを実行 (作品数はcontrollerから後ほど取得)-->
                 <!-- 現在はヒットした映画作品数字を入れている -->
