@@ -6,6 +6,7 @@ use App\Controller\AppController;
 
 use Cake\Event\Event;
 use Exception;
+use Cake\I18n\Time;
 
 class MainController extends BaseController
 {
@@ -19,6 +20,8 @@ class MainController extends BaseController
 		$this->loadModel('Discounts');
 		$this->loadModel('Tickets');
 		$this->loadModel('Movies');
+		$this->loadModel('ReservedSeats');
+		$this->loadModel('ScreeningSchedules');
 		$this->loadComponent('Auth');
 	}
 
@@ -44,5 +47,22 @@ class MainController extends BaseController
 		$this->layout = false;
 		$movie = $this->Movies->find('all')->enableHydration(false)->toArray();
 		$this->set(compact('movie'));
+	}
+
+	public function reservationConfirm()
+	{
+		$this->viewBuilder()->setLayout('main');
+
+		$authuser = $this->Auth->user('id');
+		$my_reservations = $this->Reservations->find('all', [
+			'conditions' => ['Reservations.user_id' => $authuser],
+			'contain' => ['ReservedSeats' => ['ScreeningSchedules' => 'Movies'], 'Payments' => ['Tickets']],
+		]);
+
+		$week = array( "日", "月", "火", "水", "木", "金", "土" );
+
+		$now_time = Time::now();
+
+		$this->set(compact('my_reservations', 'week', 'now_time'));
 	}
 }
