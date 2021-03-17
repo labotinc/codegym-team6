@@ -125,22 +125,22 @@ class ScreeningSchedulesController extends AppController
     // スケジュールのアクション追加
     public function schedule($today)
     {
-        if($_REQUEST['date']){
-            //リクエストある場合＝指定日を表示
-            $get_date = date('Y-m-d', strtotime('+' . $_REQUEST['hoge'] . 'days', time()));
-        }else{
-            //初回表示＝今日を表示
-            //$get_date = time()->fotmat('Y-m-d');
-        }
-        //DBから$get_dateに該当するmovie schedulesを取得
-        //// find like $get_date %;
+    //     if($_REQUEST['date']){
+    //         //リクエストある場合＝指定日を表示
+    //         $get_date = date('Y-m-d', strtotime('+' . $_REQUEST['hoge'] . 'days', time()));
+    //     }else{
+    //         //初回表示＝今日を表示
+    //         //$get_date = time()->fotmat('Y-m-d');
+    //     }
+    //     //DBから$get_dateに該当するmovie schedulesを取得
+    //     //// find like $get_date %;
 
-        for ($i = 0; $i < 7; $i++) :
-            $display_date = date('m-d', strtotime('+'. $i . 'days', time()));
-            $get_date = date('Y-m-d', strtotime('+' . $i . 'days', time()));
-            //var_dump($display_date, $get_date);
-        endfor;
-       // exit();
+    //     for ($i = 0; $i < 7; $i++) :
+    //         $display_date = date('m-d', strtotime('+'. $i . 'days', time()));
+    //         $get_date = date('Y-m-d', strtotime('+' . $i . 'days', time()));
+    //         //var_dump($display_date, $get_date);
+    //     endfor;
+    //    // exit();
 
 
 

@@ -48,27 +48,29 @@
 
         //0現在時刻　システムから取得　一回で済む　＝今日
         //for
-            //1指定時刻　０から計算　ex明日、明後日
-            //2表示時刻　１からフォーマット
-            //3リクエスト値　１からフォーマット
+        //1指定時刻　０から計算　ex明日、明後日
+        //2表示時刻　１からフォーマット
+        //3リクエスト値　１からフォーマット
         //endfor
         ?>
         <!-- for文で現在日時から一週間分を表示 -->
-        <?php $today = new DateTime(); //0?>
+        <?php $today = new DateTime(); //0
+        ?>
         <?php for ($i = 0; $i < 7; $i++) : ?>
             <?php
-                //バーナーに表示させる書式
-                $display_date = date('m-d', strtotime('+'. $i . 'days', time()));
-                //Controllerに渡す書式
-                $get_date = date('Y-m-d', strtotime('+' . $i . 'days', time()));
-                $date = //strtotime('+' . $i . 'days', $today);
-                strtotime("+{$i} day", strtotime($today));
-                //2
-                //3
-                dd($today,$date);
+            //現在の曜日
+            $w = date("w", strtotime("+{$i} day", strtotime($today)));
+            //バーナーに表示させる書式
+            $display_date = date('m-d' . '(' . $weekconfig[$w] . ')', strtotime('+' . $i . 'days', time()));
+            //Controllerに渡す書式
+            $get_date = date('Y-m-d', strtotime('+' . $i . 'days', time()));
+
+            $date = strtotime("+{$i} day", strtotime($today));
+
+            dd($date);
             ?>
-            <div class="banner-box" id="banner-box<?=$i?>">
-            <p class="banner-date">$date</p>
+            <div class="banner-box" id="banner-box<?= $i ?>">
+                <p class="banner-date">$date</p>
                 <a href="<?php echo $this->Html->link('date', array(
                                 'controller' => 'ScreeningSchedules',
                                 'action' => 'schedule',
