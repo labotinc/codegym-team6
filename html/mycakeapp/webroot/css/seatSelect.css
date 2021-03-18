@@ -1,0 +1,70 @@
+.table {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 30px 0;
+}
+
+.bottom {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-top: 20px;
+}
+
+button {
+	color: white;
+	background-color: #FBC119;
+	padding: 10px 150px;
+	border-radius: 2px;
+	margin: 0 auto;
+	border: none;
+}
+
+button:hover {
+	box-shadow: 0 2px 5px gray;
+}
+
+table {
+	border-collapse: separate;
+	border-spacing: 20px;
+}
+
+#data-table {
+	padding-top: 22px;
+}
+
+#left-table, #right-table {
+	table-layout: fixed;
+}
+
+#left-table td, #right-table td {
+	height: 19px;
+	width: 19px;
+}
+
+.checkbox {
+	display: none;
+}
+
+.label {
+	display: block;
+	width: 19px;
+	height: 19px;
+	cursor: pointer;
+	border-radius: 2px;
+	background-color: lightgray;
+}
+
+.checkbox:checked+label {
+	background-color: gray;
+}
+
+.error {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: red;
+	font-size: 13px;
+	padding-top: 5px;
+}
