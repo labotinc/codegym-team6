@@ -4,6 +4,7 @@
 <div class="wrapper">
 	<div class="card-container">
 		<div class="card-info">ご登録のクレジットカード</div>
+		<?= $this->Form->create(null, array('novalidate' => true)); ?>
 		<?php foreach ($cards as $card) : ?>
 			<?php
 			//暗号化したクレジットカード番号を復号
@@ -15,7 +16,14 @@
 			?>
 			<div class="card-area">
 				<div class="card">
-					<div class="card-name"><?= h($card->name) ?></div>
+					<?php echo $this->Form->input('select', array(
+						'hiddenField' => false,
+						'label' => false,
+						"type" => "radio",
+						'options' => array(
+							$card['id'] => $card['name'],
+						)
+					)); ?>
 					<div class="card-number">
 						****-****-****-<span class="number"><?= h($ext_number) ?></span> - 有効期限(月/年) <span><?= $limit_date ?></span>
 					</div>
@@ -24,7 +32,8 @@
 		<?php endforeach; ?>
 	</div>
 	<div class="under-area">
-		<div class="back"><a href="<?= $this->Url->build(['controller' => 'reservations','action' => 'reservation']) ?>">戻る</a></div>
+		<div class="back"><a href="<?= $this->Url->build(['controller' => 'reservations', 'action' => 'reservation']) ?>">戻る</a></div>
 		<?php echo $this->Form->button('確認する', ['label' => false, 'type' => 'submit']); ?>
 	</div>
+	<?= $this->Form->end() ?>
 </div>

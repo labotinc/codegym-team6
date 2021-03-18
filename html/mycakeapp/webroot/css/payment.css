@@ -25,7 +25,8 @@
     border: #b8b5b5 solid 1px;
     border-radius: 8px;
     width: 350px;
-    padding: 20px 20px 20px 40px;
+    padding: 20px 20px 20px 60px;
+    position: relative;
 }
 
 .card-name {
@@ -40,6 +41,7 @@
     color: #707070;
     width: 300px;
     font-size: 0.9rem;
+    margin-top: 10px;
 }
 
 .card-number span {
@@ -80,4 +82,17 @@
     width: 220px;
     height: 48px;
     cursor: pointer;
+}
+
+label {
+    color: #707070;
+    margin-bottom: 20px;
+}
+
+label input {
+    width: 1.4em;
+    height: 1.4em;
+    position: absolute;
+    top: 25px;
+    left: 20px;
 }
