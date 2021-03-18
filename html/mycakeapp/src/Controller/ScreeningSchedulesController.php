@@ -129,8 +129,8 @@ class ScreeningSchedulesController extends AppController
         //曜日を定義(ctpに渡す)
         $weekconfig = ["日", "月", "火", "水", "木", "金", "土"];
         // URLの受け渡し
-        if ($date < 6) {
-            //正規表現で0-6の一文字の確認に変更
+        if ($date < 7) {
+            //0-6の数値がctpの日付バーナーからパラメータに渡されたら
             $get_date = date('Y-m-d', strtotime('+' . $date . 'days')); //ctpの変数用に渡す変数
             $header_date = date('m-d', strtotime('+' . $date . 'days'));
         } else {
@@ -192,6 +192,6 @@ class ScreeningSchedulesController extends AppController
         }
         $movie_data = $movie_find->toArray();
         // //  DBの全てのデータを結果を代入、結果として取得
-        $this->set(compact('schedule_arr', 'movie_data', 'count_movie', 'header_date', 'weekconfig'));
+        $this->set(compact('schedule_arr', 'movie_data', 'count_movie', 'header_date', 'weekconfig','date'));
     }
 }
