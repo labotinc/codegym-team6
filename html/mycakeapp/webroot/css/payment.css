@@ -96,3 +96,10 @@ label input {
     top: 25px;
     left: 20px;
 }
+
+.error {
+    margin-top: 15px;
+    text-align: center;
+    color: red;
+    font-size: 0.9rem;
+}

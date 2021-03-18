@@ -16,10 +16,11 @@
 			?>
 			<div class="card-area">
 				<div class="card">
-					<?php echo $this->Form->input('select', array(
+					<?php echo $this->Form->input('card', array(
 						'hiddenField' => false,
 						'label' => false,
 						"type" => "radio",
+						'checked' => "checked",
 						'options' => array(
 							$card['id'] => $card['name'],
 						)
@@ -37,3 +38,6 @@
 	</div>
 	<?= $this->Form->end() ?>
 </div>
+<?php if (isset($error)) : ?>
+	<div class="error">チケットを選択してください</div>
+<?php endif; ?>
