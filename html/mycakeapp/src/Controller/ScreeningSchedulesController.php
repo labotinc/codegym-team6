@@ -158,6 +158,7 @@ class ScreeningSchedulesController extends AppController
                     'screening_date LIKE' => $get_date . '%'
                 ])
                 ->andwhere(['ScreeningSchedules.is_deleted' => 0])
+                ->andwhere(['ScreeningSchedules.start_time >' => $now])
                 ->contain('Movies')
                 ->order('start_time', 'movie_id')
                 ->toArray();
