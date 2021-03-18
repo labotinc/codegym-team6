@@ -75,7 +75,7 @@
                             <!-- DBのトップ画像を表示 -->
                             <?php echo $this->Html->image('/img/movie/' . ($schedule_movie['top_image_name'])); ?>
 
-                            <?php foreach ($schedule_movie['schedule'] ['button_id']as $schedule_time) : ?>
+                            <?php foreach ($schedule_movie['schedule'] as $schedule_time) : ?>
                                 <?php foreach ($schedule_movie['button_id'] as $schedule_id) : ?>
                                 <!-- echo Schedule Box -->
                                 <div class="movie-time-box">
@@ -86,7 +86,7 @@
                                         <?php echo $this->Form->button('予約購入', [
                                             'label' => false,
                                             'type' => 'submit',
-                                            'value' => $schedule_id
+                                            'value' => $id
                                         ]); ?>
 
                                 </div>
