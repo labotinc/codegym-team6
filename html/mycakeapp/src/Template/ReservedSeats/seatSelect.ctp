@@ -44,6 +44,9 @@
 	<div class="bottom">
 		<?php echo $this->Form->button('決定', ['type' => 'submit']); ?>
 	</div>
+	<?php if(isset($error)): ?>
+			<div class="error"><?php echo $error; ?></div>
+		<?php endif; ?>
 	<?= $this->Form->end(); ?>
 	<!-- 右側数字インデックス -->
 	<table id="right-table">
