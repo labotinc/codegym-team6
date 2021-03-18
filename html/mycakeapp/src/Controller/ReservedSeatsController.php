@@ -17,6 +17,8 @@ class ReservedSeatsController extends BaseController
 	{
 		// mypageからの遷移先である予約・決済・ユーザー（削除）のModel読み込み
 		$this->loadModel('Reservations');
+		$this->loadModel('Reserved_seats');
+		$this->loadModel('Screening_schedules');
 		$this->loadComponent('Auth');
 	}
 	/**
@@ -118,34 +120,62 @@ class ReservedSeatsController extends BaseController
 		return $this->redirect(['action' => 'index']);
 	}
 
-	public function pra()
+	// 後ほど修正：seatselectへの画面遷移時にセッションがなければ弾く。その処理を書く。
+	public function seatSelect()
 	{
 		$this->viewBuilder()->setLayout('main');
 		$authuser = $this->Auth->user('id');
 
-		// $reservedSeats = $this->ReservedSeats->newEntity();
-		$reservations = $this->Reservations->newEntity();
-
-		// nimaさんの流re
-
-		// var_dump($authuser);
-		// exit;
+		$reservations = $this->Reservations->newEntity(); //予約
+		$reserved_seats = $this->Reserved_seats->newEntity(); //座席予約
+		$session = $this->getRequest()->getSession();
+		$seatNum = $this->request->getData('seatNum');
 
 		if ($this->request->is('post')) {
-			$data = array(
-				'user_id' => $authuser, //ログインユーザー
-			);
+			//Reservationsテーブルに保存
+			$data = array('user_id' => $authuser);
 			$reservations = $this->Reservations->patchEntity($reservations, $data);
-			// var_dump($reservations['id']);
-			// exit;
 			if ($this->Reservations->save($reservations)) {
-				$reservations_id = $this->Reservations->find(array('order' => array('Reservations.created DESC')))->where(['user_id' => $authuser])->first();
-				// $session = $this->getRequest()->getSession();
-				// //セッションに書き込み
-				// $session->write('session.credit', $reservations);
-				return $this->redirect(['controller' => 'Main', 'action' => 'mypage']);
+				$reservations_id = $this->Reservations->find('all', array('order' => array('Reservations.created DESC')))->where(['user_id' => $authuser])->enableHydration(false)->toArray();
+				// セッションに書き込み
+				$session->write('session.reservations_id', $reservations_id[0]['id']);
 			}
+			//セッションの中の上映スケジュールidを読み込む
+			$session_screening_schedule_id = $session->read('session.screening_schedule');
+			//Reserved_seatsテーブルに保存
+			$data = array(
+				'reservation_id' => $reservations_id[0]['id'],
+				'screening_schedule_id' => $session_screening_schedule_id,
+				'seat' => $seatNum[0],
+			);
+			$reserved_seats = $this->Reserved_seats->patchEntity($reserved_seats, $data);
+			if ($this->Reserved_seats->save($reserved_seats)) {
+				// 直前に保存した予約idを使って予約座席idを検索
+				$reserved_seats_id = $this->Reserved_seats->find('all', array('order' => array('Reserved_seats.created DESC')))->where(['reservation_id' => $reservations_id[0]['id']])->enableHydration(false)->toArray();
+				// セッションに書き込み
+				$session->write('session.reserved_seats_id', $reserved_seats_id[0]['id']);
+			}
+
+			//リダイレクト先は仮にマイページとする
+			return $this->redirect(['controller' => 'Main', 'action' => 'mypage']);
 		}
-		$this->set(compact('reservations'));
+		$this->set(compact('reservations', 'reserved_seats'));
+		$session->consume('session.reservations_id');
+		$session->consume('session.reserved_seats_id');
+	}
+
+	public function dummySeat()
+	{
+		$this->viewBuilder()->setLayout('main');
+		//座席予約テーブルのでスケジュールテーブルを検索
+		$screening_schedule = $this->Screening_schedules->find()->first();
+		$session = $this->getRequest()->getSession();
+		//次へボタンを押した時にセッションに保存をしてリダイレクト
+		if ($this->request->is('post')) {
+			$session->write('session.screening_schedule', $screening_schedule['id']);
+			return $this->redirect(['action' => 'seatselect']);
+		}
+		//画面遷移してきたタイミングで保存していたセッションは破棄する
+		$session->consume('session.screening_schedule');
 	}
 }
