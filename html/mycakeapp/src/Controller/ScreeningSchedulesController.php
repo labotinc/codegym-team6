@@ -7,6 +7,7 @@ use App\Model\Entity\ScreeningSchedule;
 use Cake\Database\Query;
 use Cake\Routing\Router; //追記
 use DateTime;
+use Cake\Network\Exception\InternalErrorException; //例外的なエラー処理を投げる
 
 /**
  * ScreeningSchedules Controller
@@ -125,46 +126,17 @@ class ScreeningSchedulesController extends AppController
     // スケジュールのアクション追加
     public function schedule($date = 0)
     {
-        //     if($_REQUEST['date']){
-        //         //リクエストある場合＝指定日を表示
-        //         $get_date = date('Y-m-d', strtotime('+' . $_REQUEST['hoge'] . 'days', time()));
-        //     }else{
-        //         //初回表示＝今日を表示
-        //         //$get_date = time()->fotmat('Y-m-d');
-        //     }
-        //     //DBから$get_dateに該当するmovie schedulesを取得
-        //     //// find like $get_date %;
-
-        //     for ($i = 0; $i < 7; $i++) :
-        //         $display_date = date('m-d', strtotime('+'. $i . 'days', time()));
-        //         $get_date = date('Y-m-d', strtotime('+' . $i . 'days', time()));
-        //         //var_dump($display_date, $get_date);
-        //     endfor;
-        //    // exit();
-
-        // if($_REQUEST['param1']){//0-6
-        //     // if param = 0 new date;
-        //     $get_date = strtotime('+'. $_REQUEST['param1']. 'days');//*+0days 動くのか？
-        // }else{
-        // }
-
-        if ($date > 6) {
-            //正規表現で0-6の一文字の確認に変更！
-            //error
+        //曜日を定義(ctpに渡す)
+        $weekconfig = ["日", "月", "火", "水", "木", "金", "土"];
+        // URLの受け渡し
+        if ($date < 6) {
+            //正規表現で0-6の一文字の確認に変更
+            $get_date = date('Y-m-d', strtotime('+' . $date . 'days')); //ctpの変数用に渡す変数
+            $header_date = date('m-d', strtotime('+' . $date . 'days'));
         } else {
-            $get_date = date('Y-m-d', strtotime('+' . $date . 'days'));
+            //例外エラー：500に飛ばす
+            throw new InternalErrorException;
         }
-        // if(!$_REQUEST['param1']){
-        //     //初期アクセス
-        //     $get_date = date('Y-m-d');//今日
-        // }elseif($_REQUST['param1'] > 6){
-        //     //param1が異常値
-        //     // echo $this->redirect['controller'=>'error'];//エラー処理
-        // }else{
-        //     //param1 = 0-6　＝正常値
-        //     $get_date = date('Y-m-d', strtotime('+' . $_REQUEST['param1'] . 'days'));
-        // }
-
         // 今日の日付
         // 現在日時時刻をサーバーから取得
         // UNIX TIMESTAMPを取得
@@ -180,7 +152,7 @@ class ScreeningSchedulesController extends AppController
                 ])
                 ->andwhere(['ScreeningSchedules.is_deleted' => 0])
                 ->contain('Movies')
-                ->order('start_time','movie_id')
+                ->order('start_time', 'movie_id')
                 ->toArray();
         }
         // 空の配列の用意
@@ -220,7 +192,6 @@ class ScreeningSchedulesController extends AppController
         }
         $movie_data = $movie_find->toArray();
         // //  DBの全てのデータを結果を代入、結果として取得
-        // $all_movie_result = $movie_data->toArray();
-        $this->set(compact('schedule_arr', 'movie_data', 'count_movie'));
+        $this->set(compact('schedule_arr', 'movie_data', 'count_movie', 'header_date', 'weekconfig'));
     }
 }
