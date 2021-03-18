@@ -10,8 +10,20 @@ use App\Controller\AppController;
  *
  * @method \App\Model\Entity\Payment[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class PaymentsController extends AppController
+class PaymentsController extends BaseController
 {
+
+    public function initialize()
+    {
+        $this->loadModel('Reservations');
+        $this->loadModel('Tickets');
+        $this->loadModel('Movies');
+        $this->loadModel('Reserved_seats');
+        $this->loadModel('Screening_schedules');
+        $this->loadModel('Users');
+        $this->loadModel('Cards');
+        $this->loadComponent('Auth');
+    }
     /**
      * Index method
      *
@@ -115,5 +127,14 @@ class PaymentsController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function payment()
+    {
+        $this->viewBuilder()->setLayout('main');
+        $authuser = $this->Auth->user('id');
+        //ログインユーザーのカードを登録した順番で取得
+        $cards = $this->Cards->find('all', array('order' => array('Cards.created ASC')))->where(['user_id' => $authuser]);
+        $this->set(compact('cards'));
     }
 }
