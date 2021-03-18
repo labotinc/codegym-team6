@@ -132,7 +132,8 @@ class ScreeningSchedulesController extends AppController
         if ($date < 7) {
             //0-6の数値がctpの日付バーナーからパラメータに渡されたら
             $get_date = date('Y-m-d', strtotime('+' . $date . 'days')); //ctpの変数用に渡す変数
-            $header_date = date('m-d', strtotime('+' . $date . 'days'));
+            $week_number = date('w', strtotime('+'. $date . 'days'));
+            $header_date = date('m月d日(' .$weekconfig[$week_number] . ')', strtotime('+' . $date . 'days'));
         } else {
             //例外エラー：500に飛ばす
             throw new InternalErrorException;
@@ -160,6 +161,7 @@ class ScreeningSchedulesController extends AppController
         foreach ($schedule_datas as $schedule_data) { //該当日の上映スケジュール分回る
             // 文字列で開始時間と終了時間を入れた変数を用意
             //※ここでmerge後影響出るかも(start_time,end_timeのカラム型変更)
+            $id = $schedule_data->id;
             $display_time = $schedule_data->start_time->i18nFormat('H:mm') . '~' . $schedule_data->end_time->i18nFormat('H:mm');
             if (!isset($schedule_arr[$schedule_data->movie_id])) { //同じmovie_idが無い場合
                 $schedule_arr[$schedule_data->movie_id] = array(
@@ -168,13 +170,16 @@ class ScreeningSchedulesController extends AppController
                     'running_time' => $schedule_data->movie->running_time,
                     'end_date' => $schedule_data->movie->end_date,
                     'top_image_name' => $schedule_data->movie->top_image_name,
-                    'is_deleted' => $schedule_data->movie->is_deleted,
-                    'schedule' => array($display_time)
+                    'is_deleted' =>$schedule_data->movie->is_deleted,
+                    'schedule' => array($display_time),
+                    'button_id' => array($id),
                 );
             } else { //同じmovie_idを生成した場合≒2つ目があった場合→配列を結合する
                 array_push($schedule_arr[$schedule_data->movie_id]['schedule'], $display_time);
+                array_push($schedule_arr[$schedule_data->movie_id]['button_id'], $id);
             }
         }
+        // dd($schedule_arr, $schedule_arr[1]['button_id'],$id);
 
         $hit  = count($schedule_datas);
         $arr[] = array();
@@ -192,6 +197,6 @@ class ScreeningSchedulesController extends AppController
         }
         $movie_data = $movie_find->toArray();
         // //  DBの全てのデータを結果を代入、結果として取得
-        $this->set(compact('schedule_arr', 'movie_data', 'count_movie', 'header_date', 'weekconfig','date'));
+        $this->set(compact('schedule_arr', 'movie_data', 'count_movie', 'header_date', 'weekconfig','date','id'));
     }
 }

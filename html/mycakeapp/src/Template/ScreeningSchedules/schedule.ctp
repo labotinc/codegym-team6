@@ -32,9 +32,7 @@
     <!-- バーナー本体 -->
     <!-- この部分は後ほどJavaScript実装 -->
     <div class="week-banner">
-        <?php
-        //曜日を定義
-        $weekconfig = ["日", "月", "火", "水", "木", "金", "土"];
+        <?php $weekconfig = ["日", "月", "火", "水", "木", "金", "土"]; //曜日を定義
         ?>
         <?php
         //for文で現在日時から一週間分を表示
@@ -47,12 +45,11 @@
             $display_date = date('m-d' . '(' . $weekconfig[$w] . ')', strtotime('+' . $i . 'days'));
             ?>
             <div class="banner-box" id="banner-box">
-                <!-- <p class="banner-date"><?=$display_date;?></p> -->
-                <a  class = "date-link" href="<?=$this->Url->build([
-                                'controller' => 'ScreeningSchedules',
-                                'action' => 'schedule',
-                                $i
-                ]); ?>"><?=$display_date;?></a>
+                <a class="date-link" href="<?= $this->Url->build([
+                                                'controller' => 'ScreeningSchedules',
+                                                'action' => 'schedule',
+                                                $i
+                                            ]); ?>"><?= $display_date; ?></a>
             </div>
         <?php endfor; ?>
     </div>
@@ -62,9 +59,11 @@
         <div class="selected-date" id="selected-date">
             <!-- 今は今日日付 -->
             <?php
-            echo $display_date;
-            ?>s
+            echo $header_date;
+            ?>
+
             <div>
+                <?= $this->Form->create(null, array('novalidate' => true)); ?>
                 <?php foreach ($schedule_arr as $schedule_movie) : ?>
                     <!-- echo Movie Box -->
                     <div class="box">
@@ -76,15 +75,23 @@
                             <!-- DBのトップ画像を表示 -->
                             <?php echo $this->Html->image('/img/movie/' . ($schedule_movie['top_image_name'])); ?>
 
-                            <?php foreach ($schedule_movie['schedule'] as $schedule_time) : ?>
+                            <?php foreach ($schedule_movie['schedule'] ['button_id']as $schedule_time) : ?>
+                                <?php foreach ($schedule_movie['button_id'] as $schedule_id) : ?>
                                 <!-- echo Schedule Box -->
                                 <div class="movie-time-box">
                                     <!-- 上映時間start_time ~ end_timeをDB(上映スケジュールテーブル)から取得して表示 -->
                                     <p class="running-time"><span class="start-time"><?= h($schedule_time); ?></span></p>
 
                                     <!-- リンクで座席予約ページに推移させる -->
-                                    <button type="button"><a href="#"></a> 予約購入</button>
+                                        <?php echo $this->Form->button('予約購入', [
+                                            'label' => false,
+                                            'type' => 'submit',
+                                            'value' => $schedule_id
+                                        ]); ?>
+
                                 </div>
+
+                                    <?php endforeach; ?>
                             <?php endforeach; ?>
                             <!-- スライドの隠して上げる部分 -->
                             <div class="box-trim"></div>
@@ -92,6 +99,7 @@
                         </div>
                     </div>
                 <?php endforeach; ?>
+                <?= $this->Form->end() ?>
                 <!-- 映画のタイトル詳細ボックス-->
                 <!-- 選択されたその日に上映される映画作品分の繰り返しを実行 (作品数はcontrollerから後ほど取得)-->
                 <!-- 現在はヒットした映画作品数字を入れている -->
