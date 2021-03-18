@@ -187,6 +187,7 @@ class ScreeningSchedulesController extends AppController
         $schedule_arr = [];
         foreach ($schedule_datas as $schedule_data) { //該当日の上映スケジュール分回る
             // 文字列で開始時間と終了時間を入れた変数を用意
+            //※ここでmerge後影響出るかも(start_time,end_timeのカラム型変更)
             $display_time = $schedule_data->start_time->i18nFormat('H:mm') . '~' . $schedule_data->end_time->i18nFormat('H:mm');
             if (!isset($schedule_arr[$schedule_data->movie_id])) { //同じmovie_idが無い場合
                 $schedule_arr[$schedule_data->movie_id] = array(
