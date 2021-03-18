@@ -123,42 +123,52 @@ class ScreeningSchedulesController extends AppController
     }
 
     // スケジュールのアクション追加
-    public function schedule($today)
+    public function schedule($date = 0)
     {
-    //     if($_REQUEST['date']){
-    //         //リクエストある場合＝指定日を表示
-    //         $get_date = date('Y-m-d', strtotime('+' . $_REQUEST['hoge'] . 'days', time()));
-    //     }else{
-    //         //初回表示＝今日を表示
-    //         //$get_date = time()->fotmat('Y-m-d');
-    //     }
-    //     //DBから$get_dateに該当するmovie schedulesを取得
-    //     //// find like $get_date %;
+        //     if($_REQUEST['date']){
+        //         //リクエストある場合＝指定日を表示
+        //         $get_date = date('Y-m-d', strtotime('+' . $_REQUEST['hoge'] . 'days', time()));
+        //     }else{
+        //         //初回表示＝今日を表示
+        //         //$get_date = time()->fotmat('Y-m-d');
+        //     }
+        //     //DBから$get_dateに該当するmovie schedulesを取得
+        //     //// find like $get_date %;
 
-    //     for ($i = 0; $i < 7; $i++) :
-    //         $display_date = date('m-d', strtotime('+'. $i . 'days', time()));
-    //         $get_date = date('Y-m-d', strtotime('+' . $i . 'days', time()));
-    //         //var_dump($display_date, $get_date);
-    //     endfor;
-    //    // exit();
+        //     for ($i = 0; $i < 7; $i++) :
+        //         $display_date = date('m-d', strtotime('+'. $i . 'days', time()));
+        //         $get_date = date('Y-m-d', strtotime('+' . $i . 'days', time()));
+        //         //var_dump($display_date, $get_date);
+        //     endfor;
+        //    // exit();
 
+        // if($_REQUEST['param1']){//0-6
+        //     // if param = 0 new date;
+        //     $get_date = strtotime('+'. $_REQUEST['param1']. 'days');//*+0days 動くのか？
+        // }else{
+        // }
 
-
-
-
-        if($_REQUEST['param1']){//0-6
-            // if param = 0 new date;
-            $get_date = strtotime('+'. $_REQUEST['param1']. 'days');//*+0days 動くのか？
-        }else{
-            $get_date = new DateTime();//今日
+        if ($date > 6) {
+            //正規表現で0-6の一文字の確認に変更！
+            //error
+        } else {
+            $get_date = date('Y-m-d', strtotime('+' . $date . 'days'));
         }
-        $get_date2 = $get_date->format('Y-m-d');
+        // if(!$_REQUEST['param1']){
+        //     //初期アクセス
+        //     $get_date = date('Y-m-d');//今日
+        // }elseif($_REQUST['param1'] > 6){
+        //     //param1が異常値
+        //     // echo $this->redirect['controller'=>'error'];//エラー処理
+        // }else{
+        //     //param1 = 0-6　＝正常値
+        //     $get_date = date('Y-m-d', strtotime('+' . $_REQUEST['param1'] . 'days'));
+        // }
+
         // 今日の日付
         // 現在日時時刻をサーバーから取得
         // UNIX TIMESTAMPを取得
         $timestamp = time();
-        // date()で日時を出力
-        // $today = date('Y-m-d', $timestamp);
         $now = new DateTime();
         $today = $now->format('Y-m-d');
 
@@ -166,11 +176,11 @@ class ScreeningSchedulesController extends AppController
         if ($this->request->is('get')) {
             $schedule_datas = $this->ScreeningSchedules->find()
                 ->where([
-                    'screening_date LIKE' => $today . '%'
+                    'screening_date LIKE' => $get_date . '%'
                 ])
                 ->andwhere(['ScreeningSchedules.is_deleted' => 0])
                 ->contain('Movies')
-                ->order('movie_id', 'start_time')
+                ->order('start_time','movie_id')
                 ->toArray();
         }
         // 空の配列の用意
