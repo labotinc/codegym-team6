@@ -56,8 +56,6 @@ table {
 	background-color: lightgray;
 }
 
-
 .checkbox:checked+label {
 	background-color: gray;
 }
-
