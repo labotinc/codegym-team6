@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
+use Exception;
+
 /**
  * Payments Controller
  *
@@ -19,6 +21,7 @@ class PaymentsController extends BaseController
 		$this->loadModel('Reservations');
 		$this->loadModel('Tickets');
 		$this->loadModel('Movies');
+		$this->loadModel('discounts');
 		$this->loadModel('Reserved_seats');
 		$this->loadModel('Screening_schedules');
 		$this->loadModel('Users');
@@ -157,50 +160,58 @@ class PaymentsController extends BaseController
 
 	public function paymentSummary()
 	{
+		$session = $this->getRequest()->getSession();
+		$payments = $this->Payments->newEntity();
 		$this->viewBuilder()->setLayout('main');
 		// $authuser = $this->Auth->user('id');
-		$ticket_id = $this->getRequest()->getSession()->read('session.ticket');
-		$tickets = $this->Tickets->find()->where(['id' => $ticket_id]);
+		$session_ticket_id = $this->getRequest()->getSession()->read('session.ticket');
+		// var_dump($ticket_id);
+		// exit;
+		$tickets = $this->Tickets->find()->where(['id' => $session_ticket_id]);
 		$price = $tickets->toArray()[0]->price;
 		//消費税を検索し、100で割る
-		$tax = $this->Taxes->find()->where(['is_deleted' => 0 ]);
-		$tax_rate = ($tax->toArray()[0]->tax_rate)/100;
-		$sales_tax = $price * $tax_rate;//料金に対しての消費税額
-		$total = $price + ($price * $tax_rate);//合計金額
-		if ($this->request->is('post')) {
-			$payments = $this->Payments->newEntity();
-
-
-			// $data = array(
-			// 	'reservation_id' => $reservations_id[0]['id'],
-			// 	'screening_schedule_id' => $session_screening_schedule_id,
-			// 	'seat' => $seatNum[0],);
-
-
-
-			// return $this->redirect([ 'action' => 'confirm']);
+		$tax = $this->Taxes->find()->where(['is_deleted' => 0]);
+		$tax_rate = ($tax->toArray()[0]->tax_rate) / 100;
+		$sales_tax = $price * $tax_rate; //料金に対しての消費税額
+		$total = $price + ($price * $tax_rate); //合計金額
+		try {
+			if ($this->request->is('post')) {
+				$session_reservations_id = $session->read('session.reservations_id');
+				$tax_id = $tax->toArray()[0]->id;
+				$session_card_id = $session->read('session.card_id');
+				$data = array(
+					'reservation_id' => $session_reservations_id,
+					'tax_id' => $tax_id,
+					'card_id' => $session_card_id,
+					'ticket_id' => $session_ticket_id,
+					'total_payments' => $total,
+				);
+				$payments = $this->Payments->patchEntity($payments, $data);
+				if ($this->Payments->save($payments)) {
+					$session = $this->getRequest()->getSession();
+					$session->write('session.peyments', $payments);
+					return $this->redirect(['action' => 'confirm']);
+				}
+			}
+		} catch (Exception $e) {
+			throw new InternalErrorException;
 		}
-
-
-
-
-
-
-
-		$this->set(compact('price','sales_tax','total','payments'));
-
+		$this->set(compact('price', 'sales_tax', 'total', 'payments'));
 	}
 
 	public function confirm()
 	{
-		// $session = $this->getRequest()->getSession();
-		// if (!$session->read('session.signup')) {
-		// 	throw new InternalErrorException;
-		// }
+		$session = $this->getRequest()->getSession();
+		if (!$session->read('session.peyments')) {
+			throw new InternalErrorException;
+		}
 
 		$this->viewBuilder()->setLayout('main');
-		// $session->consume('session.signup');
+		$session->consume('session.peyments');
+		$session->consume('session.reservations_id');
+		$session->consume('session.reserved_seats_id');
+		$session->consume('session.screening_schedules_id');
+		$session->consume('session.ticket');
+		$session->consume('session.card_id');
 	}
-
-
 }
