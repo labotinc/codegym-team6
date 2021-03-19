@@ -23,6 +23,7 @@ class PaymentsController extends BaseController
 		$this->loadModel('Screening_schedules');
 		$this->loadModel('Users');
 		$this->loadModel('Cards');
+		$this->loadModel('Taxes');
 		$this->loadComponent('Auth');
 	}
 	/**
@@ -156,5 +157,23 @@ class PaymentsController extends BaseController
 	public function paymentSummary()
 	{
 		$this->viewBuilder()->setLayout('main');
+		$authuser = $this->Auth->user('id');
+		$ticket_id = $this->getRequest()->getSession()->read('session.ticket');
+		$tickets = $this->Tickets->find()->where(['id' => $ticket_id]);
+		$price = $tickets->toArray()[0]->price;
+		//消費税を検索し、100で割る
+		$tax = $this->Taxes->find()->where(['is_deleted' => 0 ]);
+		$tax_rate = ($tax->toArray()[0]->tax_rate)/100;
+		$sales_tax = $price * $tax_rate;
+		$total = $price + ($price * $tax_rate);
+
+
+
+
+
+
+
+		$this->set(compact('price','sales_tax','total'));
+
 	}
 }

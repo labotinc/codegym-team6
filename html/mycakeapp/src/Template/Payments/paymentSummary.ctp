@@ -5,7 +5,7 @@
 		<div class="summary">
 			<div class="item">
 				<div>チケット金額(税抜)</div>
-				<div>&yen1800</div>
+				<div>&yen<?= number_format($price)  ?></div>
 			</div>
 			<div class="item point">
 				<div>ご利用ポイント</div>
@@ -14,16 +14,17 @@
 			<div class="underline"></div>
 			<div class="item">
 				<div>小計</div>
-				<div>&yen1500</div>
+				<!-- 利用ポイントの計算は現時点ではしない -->
+				<div>&yen<?= number_format($price) ?></div>
 			</div>
 			<div class="item">
 				<div>消費税</div>
-				<div>&yen</div>
+				<div>&yen<?= number_format($sales_tax) ?></div>
 			</div>
 			<div class="underline"></div>
 			<div class="item">
 				<div>合計(税込)</div>
-				<div>&yen</div>
+				<div>&yen<?= number_format($total) ?></div>
 			</div>
 		</div>
 	</div>
