@@ -177,7 +177,7 @@ class ReservationsController extends BaseController
 		$session_reserved_seats_id = $session->read('session.reserved_seats_id');
 		//上の行で取得したidでreserved_seatsテーブルの情報を取得
 		$reserved_seats = $this->Reserved_seats->find()->where(['id' => $session_reserved_seats_id]);
-		$this->set(compact('tickets', 'screening_schedules', 'movie', 'reserved_seats','cardcount'));
+		$this->set(compact('tickets', 'screening_schedules', 'movie', 'reserved_seats', 'cardcount'));
 	}
 
 	public function dummy()
