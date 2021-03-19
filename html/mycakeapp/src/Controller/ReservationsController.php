@@ -21,6 +21,7 @@ class ReservationsController extends BaseController
 		$this->loadModel('Reserved_seats');
 		$this->loadModel('Screening_schedules');
 		$this->loadModel('Users');
+		$this->loadModel('Cards');
 		$this->loadComponent('Auth');
 	}
 
@@ -161,6 +162,9 @@ class ReservationsController extends BaseController
 		$this->viewBuilder()->setLayout('main');
 		$ticket_id = $this->getRequest()->getSession()->read('session.ticket');
 		$tickets = $this->Tickets->find()->where(['id' => $ticket_id]);
+		$authuser = $this->Auth->user('id');
+		//カードの枚数を数えて、ビューでの分岐に使う
+		$cardcount = $this->Cards->find()->where(['user_id' => $authuser])->count();
 		$session = $this->getRequest()->getSession();
 		//セッションに保存された上映スケジュールidを取得
 		$session_screening_schedule_id = $session->read('session.screening_schedule');
@@ -173,7 +177,7 @@ class ReservationsController extends BaseController
 		$session_reserved_seats_id = $session->read('session.reserved_seats');
 		//上の行で取得したidでreserved_seatsテーブルの情報を取得
 		$reserved_seats = $this->Reserved_seats->find()->where(['id' => $session_reserved_seats_id]);
-		$this->set(compact('tickets', 'screening_schedule', 'movie', 'reserved_seats'));
+		$this->set(compact('tickets', 'screening_schedule', 'movie', 'reserved_seats','cardcount'));
 	}
 
 	public function dummy()

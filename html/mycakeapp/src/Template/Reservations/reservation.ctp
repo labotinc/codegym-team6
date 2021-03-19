@@ -32,6 +32,10 @@ $week_name = ['日', '月', '火', '水', '木', '金', '土'];
 	<?= $this->Form->create(null, array('novalidate' => true)); ?>
 	<div class="under-area">
 		<div class="back"><a href="<?= $this->Url->build(['action' => 'selectticket']) ?>">戻る</a></div>
-		<?php echo $this->Form->button('決済へ', ['label' => false, 'type' => 'submit']); ?>
+		<?php if ($cardcount  >= 1) : ?>
+			<div class="next"><a href="<?= $this->Url->build(['controller' => 'payments', 'action' => 'payment']) ?>">決済へ</a></div>
+		<?php else : ?>
+			<div class="next"><a href="<?= $this->Url->build(['controller' => 'Cards', 'action' => 'credit']) ?>">決済へ</a></div>
+		<?php endif; ?>
 	</div>
 	<?= $this->Form->end() ?>
