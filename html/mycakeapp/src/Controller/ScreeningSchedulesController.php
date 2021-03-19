@@ -172,7 +172,7 @@ class ScreeningSchedulesController extends AppController
             if (!isset($schedule_arr[$schedule_data->movie_id])) { //同じmovie_idが無い場合
                 $schedule =  array(
                     'schedule_id' => $schedule_data->id,
-                    'disoplay_time' => $display_time
+                    'display_time' => $display_time
                 );
                 $schedule_arr[$schedule_data->movie_id] = array(
                     'movie_id' => $schedule_data->movie_id,
@@ -183,7 +183,7 @@ class ScreeningSchedulesController extends AppController
                     'is_deleted' => $schedule_data->movie->is_deleted,
                     array(
                         'schedule_id' => $schedule_data->id,
-                        'display_time' => $display_time,
+                        'display_time' => $display_time
                     )
                 );
             } else { //同じmovie_idを生成した場合≒2つ目があった場合→配列を結合する
@@ -194,7 +194,6 @@ class ScreeningSchedulesController extends AppController
                 array_push($schedule_arr[$schedule_data->movie_id], $schedule);
             }
         }
-        dd($schedule_arr);
 
         $hit  = count($schedule_datas);
         $arr[] = array();
