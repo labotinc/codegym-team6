@@ -24,6 +24,7 @@ class PaymentsController extends BaseController
 		$this->loadModel('Users');
 		$this->loadModel('Cards');
 		$this->loadModel('Taxes');
+		$this->loadModel('Payments');
 		$this->loadComponent('Auth');
 	}
 	/**
@@ -157,15 +158,28 @@ class PaymentsController extends BaseController
 	public function paymentSummary()
 	{
 		$this->viewBuilder()->setLayout('main');
-		$authuser = $this->Auth->user('id');
+		// $authuser = $this->Auth->user('id');
 		$ticket_id = $this->getRequest()->getSession()->read('session.ticket');
 		$tickets = $this->Tickets->find()->where(['id' => $ticket_id]);
 		$price = $tickets->toArray()[0]->price;
 		//消費税を検索し、100で割る
 		$tax = $this->Taxes->find()->where(['is_deleted' => 0 ]);
 		$tax_rate = ($tax->toArray()[0]->tax_rate)/100;
-		$sales_tax = $price * $tax_rate;
-		$total = $price + ($price * $tax_rate);
+		$sales_tax = $price * $tax_rate;//料金に対しての消費税額
+		$total = $price + ($price * $tax_rate);//合計金額
+		if ($this->request->is('post')) {
+			$payments = $this->Payments->newEntity();
+
+
+			// $data = array(
+			// 	'reservation_id' => $reservations_id[0]['id'],
+			// 	'screening_schedule_id' => $session_screening_schedule_id,
+			// 	'seat' => $seatNum[0],);
+
+
+
+			// return $this->redirect([ 'action' => 'confirm']);
+		}
 
 
 
@@ -173,7 +187,20 @@ class PaymentsController extends BaseController
 
 
 
-		$this->set(compact('price','sales_tax','total'));
+		$this->set(compact('price','sales_tax','total','payments'));
 
 	}
+
+	public function confirm()
+	{
+		// $session = $this->getRequest()->getSession();
+		// if (!$session->read('session.signup')) {
+		// 	throw new InternalErrorException;
+		// }
+
+		$this->viewBuilder()->setLayout('main');
+		// $session->consume('session.signup');
+	}
+
+
 }
