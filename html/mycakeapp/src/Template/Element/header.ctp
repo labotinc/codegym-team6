@@ -90,7 +90,7 @@
 	<!--中央 -->
 	<div class="topnav-centered">
 		<!-- トップ -->
-		<a href="#">トップ</a>
+		<a href="<?= $this->Url->build(['controller' => 'Main', 'action' => 'top']) ?>">トップ</a>
 		<!-- 上映スケジュール -->
 		<a href="#">上映スケジュール </a>
 		<!-- 料金•割引 -->
