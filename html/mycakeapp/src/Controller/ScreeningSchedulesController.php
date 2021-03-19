@@ -126,11 +126,12 @@ class ScreeningSchedulesController extends AppController
     // スケジュールのアクション追加
     public function schedule($date = 0)
     {
-        if ($this->request->is('post')) { //予約購入
-            var_dump($_POST);
-            exit;
-            // return $this->redirect(['controller' => 'Main', 'action' => 'index']);
+        $session = $this->getRequest()->getSession(); //sessionを変数に入れる
+        if ($this->request->is('post')) { //sessionで座席予約画面に渡す
+            $schedule_id = $this->request->getData('schedule_id');
+            $session->write('session.screening_schedule_id', $schedule_id);
 
+            return $this->redirect(['controller' => 'Main', 'action' => 'index']); //飛ばすアクションは後から修正
         }
         //曜日を定義(ctpに渡す)
         $weekconfig = ["日", "月", "火", "水", "木", "金", "土"];
@@ -145,8 +146,6 @@ class ScreeningSchedulesController extends AppController
             throw new InternalErrorException;
         }
         // 今日の日付
-        // 現在日時時刻をサーバーから取得
-        // UNIX TIMESTAMPを取得
         $timestamp = time();
         $now = new DateTime();
         $today = $now->format('Y-m-d');
@@ -158,7 +157,7 @@ class ScreeningSchedulesController extends AppController
                     'screening_date LIKE' => $get_date . '%'
                 ])
                 ->andwhere(['ScreeningSchedules.is_deleted' => 0])
-                ->andwhere(['ScreeningSchedules.start_time >' => $now])
+                //->andwhere(['ScreeningSchedules.start_time >' => $now])
                 ->contain('Movies')
                 ->order('start_time', 'movie_id')
                 ->toArray();
@@ -212,6 +211,7 @@ class ScreeningSchedulesController extends AppController
 
         // DBの全てのデータを結果を代入、結果として取得
         $this->set(compact('schedule_arr', 'movie_data',  'header_date', 'weekconfig', 'date', 'count_sk_col'));
+        //sessionの値を削除処理
+        $session->consume('session.screening_schedule_id');
     }
 }
-// $result = /$movie_data

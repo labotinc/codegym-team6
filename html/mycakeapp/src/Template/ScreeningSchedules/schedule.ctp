@@ -85,6 +85,7 @@
                                         <?php echo $this->Form->button('予約購入', [
                                             'label' => false,
                                             'type' => 'submit',
+                                            'name' => 'schedule_id',
                                             'value' => $schedule_movie[$j]['schedule_id']
                                         ]); ?>
                                     </div>
