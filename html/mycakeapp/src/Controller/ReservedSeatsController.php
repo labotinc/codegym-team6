@@ -130,6 +130,8 @@ class ReservedSeatsController extends BaseController
 		$reserved_seats = $this->Reserved_seats->newEntity(); //座席予約
 		$session = $this->getRequest()->getSession();
 		$seatNum = $this->request->getData('seatNum');
+		//選択済み座席のレコード全て取り出し
+		$already_reserved = $this->Reserved_seats->find('all')->where(['is_deleted' => 0])->enableHydration(false)->toArray();
 
 		if ($this->request->is('post')) {
 			if (isset($seatNum)) {
@@ -163,7 +165,7 @@ class ReservedSeatsController extends BaseController
 				$this->set(compact('error'));
 			}
 		}
-		$this->set(compact('reservations', 'reserved_seats'));
+		$this->set(compact('reservations', 'reserved_seats', 'already_reserved'));
 		$session->consume('session.reservations_id');
 		$session->consume('session.reserved_seats_id');
 	}

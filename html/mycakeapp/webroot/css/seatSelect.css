@@ -57,7 +57,7 @@ table {
 }
 
 .checkbox:checked+label {
-	background-color: gray;
+	background-color: #FBC119;
 }
 
 .error {
