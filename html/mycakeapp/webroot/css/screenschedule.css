@@ -17,6 +17,7 @@ body{
 	justify-content: center;
 	margin-bottom: 30px;
 }
+
 /* 上映スケジュールの見出し */
 main .banner-title{
 text-align: left;
@@ -30,18 +31,6 @@ margin-left: 20%;
 z-index: 1;
 }
 
-/* バーナーの帯の左右操作部分 */
-.nav-button{
-	width: 24px;
-	height: 80px;
-	background: #B1B1B1 0% 0% no-repeat padding-box;
-	opacity: 0.7;
-	text-align: center;
-	font: normal normal bold Noto Sans 80px;
-	color: #FFFFFF;
-	line-height: 80px;
-}
-
 /* 上映スケジュールのバーナーのボックス */
 main .banner-box{
 	position: relative;
@@ -52,6 +41,7 @@ main .banner-box{
 	margin: 0 1px;
 	z-index: 1;
 }
+
 /* バーナー1週間分の日にち */
 .banner-box a {
 	top: 30%;
@@ -99,10 +89,12 @@ div .box {
 	margin: 50px auto;
 	z-index: 1;
 }
+
 /* スケジュールを映画作品文div表示。最後に表示されるものの余白を追加 */
 .box:last-child{
 	margin-bottom: 200px;
 }
+
 /* 映画のタイトル表示部分 */
 .box .box-title {
     font-size: 1.2em;
@@ -123,6 +115,7 @@ div.box .box-title p{
 	line-height: 1%;
 	font-size: 1rem;
 }
+
 div.box .box-title p span{
 	text-align: left;
 	white-space: nowrap;
@@ -130,6 +123,7 @@ div.box .box-title p span{
 	color: #B1B1B1;
 	font-size: small;
 }
+
 /* 映画の詳細表示部分 */
 .box .movie-schedule-box{
 	position: relative;
@@ -164,16 +158,19 @@ div.box .box-title p span{
 	margin: 0 auto;
 	padding-top:30px ;
 }
+
 /* 上映開始 */
  div .movie-time-box  p span.start-time{
 	color: #7B7B7B;
 	display: inline;
 	font-size: large;
 }
+
 /* 上映終了 */
 .movie-time-box  .end-time{
 	color: #7B7B7B;
 }
+
 /* 予約購入ボタン */
 button{
 	text-align: center;
@@ -187,6 +184,7 @@ button{
 	margin: 40px auto;
 	display: block;
 }
+
 /* 予約購入ボタン時hover時 */
 button:hover{
 	opacity: 0.5;
