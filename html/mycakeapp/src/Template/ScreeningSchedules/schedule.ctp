@@ -24,6 +24,8 @@
 <?= $this->layout = false; ?>
 <!-- ヘッダーエレメント読み込み -->
 <?= $this->element('header') ?>
+<body>
+
 <!-- 上映スケジュールバーナー -->
 <main>
     <!-- バーナータイトル -->
@@ -64,6 +66,7 @@
 
             <div>
                 <?= $this->Form->create(null, array('novalidate' => true)); ?>
+                <!-- 縦に映画作品を繰り返し -->
                 <?php foreach ($schedule_arr as $schedule_movie) : ?>
                     <!-- echo Movie Box -->
                     <div class="box">
@@ -74,24 +77,22 @@
                             <!-- 映画の画像top_image_nameを表示 -->
                             <!-- DBのトップ画像を表示 -->
                             <?php echo $this->Html->image('/img/movie/' . ($schedule_movie['top_image_name'])); ?>
-
-                            <?php foreach ($schedule_movie['schedule'] as $schedule_time) : ?>
-                                <?php foreach ($schedule_movie['button_id'] as $schedule_id) : ?>
+                    <!-- 横に映画の持ってるスケジュール情報を繰り返し -->
+                            <?php foreach ($schedule_movie['schedule']as $schedule_time) : ?>
                                 <!-- echo Schedule Box -->
                                 <div class="movie-time-box">
                                     <!-- 上映時間start_time ~ end_timeをDB(上映スケジュールテーブル)から取得して表示 -->
-                                    <p class="running-time"><span class="start-time"><?= h($schedule_time); ?></span></p>
+                                    <p class="running-time"><span class="start-time"><?= h($schedule_movie['display_time']); ?></span></p>
 
                                     <!-- リンクで座席予約ページに推移させる -->
-                                        <?php echo $this->Form->button('予約購入', [
-                                            'label' => false,
-                                            'type' => 'submit',
-                                            'value' => $id
-                                        ]); ?>
+                                    <?php echo $this->Form->button('予約購入', [
+                                        'label' => false,
+                                        'type' => 'submit',
+                                        'value' => $schedule_movie['schedule_id']
+                                    ]); ?>
 
                                 </div>
 
-                                    <?php endforeach; ?>
                             <?php endforeach; ?>
                             <!-- スライドの隠して上げる部分 -->
                             <div class="box-trim"></div>
@@ -105,6 +106,8 @@
                 <!-- 現在はヒットした映画作品数字を入れている -->
             </div>
 </main>
-
+</body>
 <!-- フッターエレメント読み込み -->
 <?= $this->element('footer') ?>
+<?echo $this->fetch('content');?>
+</html>
