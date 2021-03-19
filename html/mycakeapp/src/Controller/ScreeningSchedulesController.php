@@ -147,9 +147,6 @@ class ScreeningSchedulesController extends AppController
         // 今日の日付
         $timestamp = time();
         $now = new DateTime();
-        // $now_time = $now->format('h:i');
-        $today = $now->format('Y-m-d');
-        // dd($timestamp,$now_time, $today);
         // 映画のスケジュールテーブルから今日の日付と放映日が一致する作品レコードを検索
         if ($this->request->is('get')) {
             $schedule_datas = $this->ScreeningSchedules->find()
