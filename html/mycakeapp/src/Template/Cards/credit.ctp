@@ -25,7 +25,7 @@
 			<?php echo $this->Form->error('expiration_date'); ?>
 		</div>
 		<div class="Gemini-form">
-			<?php echo $this->Form->control('securitycode', ['label' => false, 'placeholder' => 'セキュリティコード']); ?>
+			<?php echo $this->Form->control('securitycode', ['type' => 'password', 'label' => false, 'placeholder' => 'セキュリティコード']); ?>
 		</div>
 	</div>
 	<div class="checkbox">
