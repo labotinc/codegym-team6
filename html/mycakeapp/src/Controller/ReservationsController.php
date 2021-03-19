@@ -144,9 +144,9 @@ class ReservationsController extends BaseController
 		//次へのボタンを押した時の処理
 		if ($this->request->is('put')) {
 			//ラジオボタンで選択したチケットIDを取得
-			$selected_ticket = $this->request->getData('ticket');
+			$selected_ticket = $this->request->getData('ticket_id');
 			if (isset($selected_ticket)) {
-				$session->write('session.ticket', $selected_ticket);
+				$session->write('session.ticket_id', $selected_ticket);
 				return $this->redirect(['action' => 'reservation']);
 			} else {
 				$error = 'チケットを選択してください';
@@ -154,13 +154,13 @@ class ReservationsController extends BaseController
 			}
 		}
 		$this->set(compact('tickets', 'screening_schedules', 'movie', 'reserved_seats'));
-		$session->consume('session.ticket');
+		$session->consume('session.ticket_id');
 	}
 
 	public function reservation()
 	{
 		$this->viewBuilder()->setLayout('main');
-		$ticket_id = $this->getRequest()->getSession()->read('session.ticket');
+		$ticket_id = $this->getRequest()->getSession()->read('session.ticket_id');
 		$tickets = $this->Tickets->find()->where(['id' => $ticket_id]);
 		$authuser = $this->Auth->user('id');
 		//カードの枚数を数えて、ビューでの分岐に使う

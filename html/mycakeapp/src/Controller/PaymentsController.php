@@ -163,10 +163,7 @@ class PaymentsController extends BaseController
 		$session = $this->getRequest()->getSession();
 		$payments = $this->Payments->newEntity();
 		$this->viewBuilder()->setLayout('main');
-		// $authuser = $this->Auth->user('id');
-		$session_ticket_id = $this->getRequest()->getSession()->read('session.ticket');
-		// var_dump($ticket_id);
-		// exit;
+		$session_ticket_id = $this->getRequest()->getSession()->read('session.ticket_id');
 		$tickets = $this->Tickets->find()->where(['id' => $session_ticket_id]);
 		$price = $tickets->toArray()[0]->price;
 		//消費税を検索し、100で割る

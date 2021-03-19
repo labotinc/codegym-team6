@@ -25,7 +25,7 @@ $week_name = ['日', '月', '火', '水', '木', '金', '土'];
 	<div class="ticket">
 		<?php foreach ($tickets as $ticket) : ?>
 			<div class="ticket-area">
-				<?php echo $this->Form->control('ticket', array(
+				<?php echo $this->Form->control('ticket_id', array(
 					'hiddenField' => false,
 					'label' => false,
 					"type" => "radio",
