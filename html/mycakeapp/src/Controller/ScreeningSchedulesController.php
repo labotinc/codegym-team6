@@ -130,8 +130,7 @@ class ScreeningSchedulesController extends AppController
         if ($this->request->is('post')) { //sessionで座席予約画面に渡す
             $schedule_id = $this->request->getData('schedule_id');
             $session->write('session.screening_schedule_id', $schedule_id);
-
-            return $this->redirect(['controller' => 'Main', 'action' => 'index']); //飛ばすアクションは後から修正
+            return $this->redirect(['controller' => 'ReservedSeats', 'action' => 'seatSelect']); //現在ブランチにないアクションですのでエラー画面が出ますがsessionの値は保持できています
         }
         //曜日を定義(ctpに渡す)
         $weekconfig = ["日", "月", "火", "水", "木", "金", "土"];
@@ -157,7 +156,7 @@ class ScreeningSchedulesController extends AppController
                     'screening_date LIKE' => $get_date . '%'
                 ])
                 ->andwhere(['ScreeningSchedules.is_deleted' => 0])
-                //->andwhere(['ScreeningSchedules.start_time >' => $now])
+                ->andwhere(['ScreeningSchedules.start_time >' => $now])
                 ->contain('Movies')
                 ->order('start_time', 'movie_id')
                 ->toArray();
