@@ -189,14 +189,13 @@ class ScreeningSchedulesController extends AppController
             } else { //同じmovie_idを生成した場合≒2つ目があった場合→配列を結合する
                 $schedule =  array(
                     'schedule_id' => $schedule_data->id,
-                    'disoplay_time' => $display_time
+                    'display_time' => $display_time
                 );
                 array_push($schedule_arr[$schedule_data->movie_id], $schedule);
             }
         }
-
-        $hit  = count($schedule_datas);
-        $arr[] = array();
+        //作品ごとの配列の保有キー数(ctp側でスケジュール数繰り返す時に使う)
+        $count_sk_col = count($schedule_arr[$schedule_data->movie_id]);
 
         // ヒットした映画の件数(その日の作品数)
         if ($this->request->is('get')) {
@@ -212,6 +211,7 @@ class ScreeningSchedulesController extends AppController
         $movie_data = $movie_find->toArray();
 
         // DBの全てのデータを結果を代入、結果として取得
-        $this->set(compact('schedule_arr', 'movie_data',  'header_date', 'weekconfig', 'date'));
+        $this->set(compact('schedule_arr', 'movie_data',  'header_date', 'weekconfig', 'date', 'count_sk_col'));
     }
 }
+// $result = /$movie_data
