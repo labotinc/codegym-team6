@@ -31,10 +31,10 @@
 			<section class="bottom">
 				<h2>お得な割引</h2>
 				<ul class="bottom-flex-box">
-					<li class="bottom-image"><?php echo $this->Html->image('/img/main/' . h($movie[4]["top_image_name"])); ?></li>
-					<li class="bottom-image"><?php echo $this->Html->image('/img/main/' . h($movie[5]["top_image_name"])); ?></li>
-					<li class="bottom-image"><?php echo $this->Html->image('/img/main/' . h($movie[6]["top_image_name"])); ?></li>
-					<li class="bottom-image"><?php echo $this->Html->image('/img/main/' . h($movie[7]["top_image_name"])); ?></li>
+					<li class="bottom-image"><img src="/img/main/discount1.png"></li>
+					<li class="bottom-image"><img src="/img/main/discount2.png"></li>
+					<li class="bottom-image"><img src="/img/main/discount3.png"></li>
+					<li class="bottom-image"><img src="/img/main/discount4.png"></li>
 				</ul>
 				<a class="button" href="#">詳しく見る</a>
 			</section>
