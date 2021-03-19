@@ -147,8 +147,9 @@ class ScreeningSchedulesController extends AppController
         // 今日の日付
         $timestamp = time();
         $now = new DateTime();
+        // $now_time = $now->format('h:i');
         $today = $now->format('Y-m-d');
-
+        // dd($timestamp,$now_time, $today);
         // 映画のスケジュールテーブルから今日の日付と放映日が一致する作品レコードを検索
         if ($this->request->is('get')) {
             $schedule_datas = $this->ScreeningSchedules->find()
@@ -156,11 +157,11 @@ class ScreeningSchedulesController extends AppController
                     'screening_date LIKE' => $get_date . '%'
                 ])
                 ->andwhere(['ScreeningSchedules.is_deleted' => 0])
-                ->andwhere(['ScreeningSchedules.start_time >' => $now])
                 ->contain('Movies')
                 ->order('start_time', 'movie_id')
                 ->toArray();
         }
+
         // 空の配列の用意
         $schedule_arr = [];
         foreach ($schedule_datas as $schedule_data) { //該当日の上映スケジュール分回る
@@ -195,21 +196,8 @@ class ScreeningSchedulesController extends AppController
         //作品ごとの配列の保有キー数(ctp側でスケジュール数繰り返す時に使う)
         $count_sk_col = count($schedule_arr[$schedule_data->movie_id]);
 
-        // ヒットした映画の件数(その日の作品数)
-        if ($this->request->is('get')) {
-            $movie_find = $this->Movies->find()
-                // まだ上映期間中の映画
-                ->where(['end_date >=' => $today])
-                // かつ削除されていない映画
-                ->andwhere(['is_deleted' => 0])
-                ->contain('ScreeningSchedules');
-            // 今日上映の映画作品数
-            $count_movie = $movie_find->count();
-        }
-        $movie_data = $movie_find->toArray();
-
         // DBの全てのデータを結果を代入、結果として取得
-        $this->set(compact('schedule_arr', 'movie_data',  'header_date', 'weekconfig', 'date', 'count_sk_col'));
+        $this->set(compact('schedule_arr','header_date', 'weekconfig', 'date', 'count_sk_col'));
         //sessionの値を削除処理
         $session->consume('session.screening_schedule_id');
     }
