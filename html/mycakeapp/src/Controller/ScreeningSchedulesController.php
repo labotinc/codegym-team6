@@ -130,7 +130,7 @@ class ScreeningSchedulesController extends AppController
         if ($this->request->is('post')) { //sessionで座席予約画面に渡す
             $schedule_id = $this->request->getData('schedule_id');
             $session->write('session.screening_schedule_id', $schedule_id);
-            return $this->redirect(['controller' => 'ReservedSeats', 'action' => 'seatSelect']); //現在ブランチにないアクションですのでエラー画面が出ますがsessionの値は保持できています
+            return $this->redirect(['controller' => 'Reservedseats', 'action' => 'seatselect']); //現在ブランチにないアクションですのでエラー画面が出ますがsessionの値は保持できています
         }
         //曜日を定義(ctpに渡す)
         $weekconfig = ["日", "月", "火", "水", "木", "金", "土"];
