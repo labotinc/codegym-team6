@@ -54,6 +54,12 @@
     margin-top: 50px;
 }
 
+.under-area-summary {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
 .back {
     background-color: #e4dede;
     text-align: center;
@@ -83,6 +89,17 @@
     height: 48px;
     cursor: pointer;
 }
+.under-area-summary button:last-child {
+    color: #ffffff;
+    font-size: 16px;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #f5ae0b;
+    border: 3px solid #f5ae0b;
+    width: 220px;
+    height: 48px;
+    cursor: pointer;
+}
 
 label {
     color: #707070;
@@ -102,4 +119,31 @@ label input {
     text-align: center;
     color: red;
     font-size: 0.9rem;
+}
+
+.payments {
+    padding-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.list {
+    width: 420px;
+    color: #707070;
+    font-size: 1.3rem;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.point {
+    color: #f5ae0b;
+}
+
+.underline{
+    border-bottom: 3px solid #e0dede;
 }
