@@ -83,6 +83,18 @@
     cursor: pointer;
 }
 
+.under-area button:last-child {
+    color: #ffffff;
+    font-size: 16px;
+    text-align: center;
+    padding: 10px 0;
+    background-color: #f5ae0b;
+    border: 3px solid #f5ae0b;
+    width: 180px;
+    height: 48px;
+    cursor: pointer;
+}
+
 .error {
     margin-top: 15px;
     text-align: center;
