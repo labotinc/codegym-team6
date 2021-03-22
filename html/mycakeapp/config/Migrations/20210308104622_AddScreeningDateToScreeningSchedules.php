@@ -16,7 +16,8 @@ class AddScreeningDateToScreeningSchedules extends AbstractMigration
         $table = $this->table('screening_schedules');
         $table->addColumn('screening_date', 'date', [
             'default' => null,
-            'null' => true,
+            'null' => false,
+            'after' => 'movie_id'
         ]);
         $table->update();
     }
