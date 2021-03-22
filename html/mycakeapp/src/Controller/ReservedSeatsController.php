@@ -125,12 +125,16 @@ class ReservedSeatsController extends BaseController
 	// 後ほど修正：seatselectへの画面遷移時にセッションがなければ弾く。その処理を書く。
 	public function seatSelect()
 	{
+		$session = $this->getRequest()->getSession();
+		if (!$session->read('session.screening_schedules_id')) {
+			$session->consume('session');
+			throw new InternalErrorException;
+		}
 		$this->viewBuilder()->setLayout('main');
 		$authuser = $this->Auth->user('id');
 
 		$reservations = $this->Reservations->newEntity(); //予約
 		$reserved_seats = $this->Reserved_seats->newEntity(); //座席予約
-		$session = $this->getRequest()->getSession();
 		$seatNum = $this->request->getData('seatNum');
 		//セッションの中の上映スケジュールidを読み込む
 		$session_screening_schedule_id = $session->read('session.screening_schedules_id');
@@ -173,5 +177,4 @@ class ReservedSeatsController extends BaseController
 		$session->consume('session.reservations_id');
 		$session->consume('session.reserved_seats_id');
 	}
-
 }

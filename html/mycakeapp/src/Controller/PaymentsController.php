@@ -137,8 +137,21 @@ class PaymentsController extends BaseController
 
 	public function payment()
 	{
-		$this->viewBuilder()->setLayout('main');
 		$session = $this->getRequest()->getSession();
+		if (!$session->read('session.screening_schedules_id')) {
+			$session->consume('session');
+			throw new InternalErrorException;
+		} elseif (!$session->read('session.reservations_id')) {
+			$session->consume('session');
+			throw new InternalErrorException;
+		} elseif (!$session->read('session.reserved_seats_id')) {
+			$session->consume('session');
+			throw new InternalErrorException;
+		} elseif (!$session->read('session.ticket_id')) {
+			$session->consume('session');
+			throw new InternalErrorException;
+		}
+		$this->viewBuilder()->setLayout('main');
 		$authuser = $this->Auth->user('id');
 		//ログインユーザーのカードを登録した順番で取得
 		$cards = $this->Cards->find('all', array('order' => array('Cards.created ASC')))->where(['user_id' => $authuser, 'is_deleted' => 0]);
@@ -161,6 +174,22 @@ class PaymentsController extends BaseController
 	public function paymentSummary()
 	{
 		$session = $this->getRequest()->getSession();
+		if (!$session->read('session.screening_schedules_id')) {
+			$session->consume('session');
+			throw new InternalErrorException;
+		} elseif (!$session->read('session.reservations_id')) {
+			$session->consume('session');
+			throw new InternalErrorException;
+		} elseif (!$session->read('session.reserved_seats_id')) {
+			$session->consume('session');
+			throw new InternalErrorException;
+		} elseif (!$session->read('session.ticket_id')) {
+			$session->consume('session');
+			throw new InternalErrorException;
+		} elseif (!$session->read('session.card_id')) {
+			$session->consume('session');
+			throw new InternalErrorException;
+		}
 		$payments = $this->Payments->newEntity();
 		$this->viewBuilder()->setLayout('main');
 		$session_ticket_id = $this->getRequest()->getSession()->read('session.ticket_id');
@@ -200,15 +229,11 @@ class PaymentsController extends BaseController
 	{
 		$session = $this->getRequest()->getSession();
 		if (!$session->read('session.peyments')) {
+			$session->consume('session');
 			throw new InternalErrorException;
 		}
 
 		$this->viewBuilder()->setLayout('main');
-		$session->consume('session.peyments');
-		$session->consume('session.reservations_id');
-		$session->consume('session.reserved_seats_id');
-		$session->consume('session.screening_schedules_id');
-		$session->consume('session.ticket_id');
-		$session->consume('session.card_id');
+		$session->consume('session');
 	}
 }
