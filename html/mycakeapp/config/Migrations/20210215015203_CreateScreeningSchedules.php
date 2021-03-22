@@ -22,11 +22,11 @@ class CreateScreeningSchedules extends AbstractMigration
             'default' => null,
             'null' => false,
         ]);
-        $table->addColumn('start_time', 'time', [
+        $table->addColumn('start_time', 'datetime', [
             'default' => null,
             'null' => false,
         ]);
-        $table->addColumn('end_time', 'time', [
+        $table->addColumn('end_time', 'datetime', [
             'default' => null,
             'null' => false,
         ]);
