@@ -157,44 +157,53 @@ class ScreeningSchedulesController extends AppController
                 ->contain('Movies')
                 ->order('start_time', 'movie_id')
                 ->toArray();
+            $schedule_datas_count = $this->ScreeningSchedules->find()
+                ->where([
+                    'screening_date LIKE' => $get_date . '%'
+                ])
+                ->andwhere(['ScreeningSchedules.is_deleted' => 0])
+                ->count();
         }
 
-        // 空の配列の用意
-        $schedule_arr = [];
-        foreach ($schedule_datas as $schedule_data) { //該当日の上映スケジュール分回る
-            // 文字列で開始時間と終了時間を入れた変数を用意
-            //※ここでmerge後影響出るかも(start_time,end_timeのカラム型変更)
-            $display_time = $schedule_data->start_time->i18nFormat('H:mm') . '~' . $schedule_data->end_time->i18nFormat('H:mm'); //開始時間と終了時間
-            if (!isset($schedule_arr[$schedule_data->movie_id])) { //同じmovie_idが無い場合
-                $schedule =  array(
-                    'schedule_id' => $schedule_data->id,
-                    'display_time' => $display_time
-                );
-                $schedule_arr[$schedule_data->movie_id] = array(
-                    'movie_id' => $schedule_data->movie_id,
-                    'title' => $schedule_data->movie->title,
-                    'running_time' => $schedule_data->movie->running_time,
-                    'end_date' => $schedule_data->movie->end_date,
-                    'top_image_name' => $schedule_data->movie->top_image_name,
-                    'is_deleted' => $schedule_data->movie->is_deleted,
-                    array(
+        if ($schedule_datas_count >= 1) {
+            // 空の配列の用意
+            $schedule_arr = [];
+            foreach ($schedule_datas as $schedule_data) { //該当日の上映スケジュール分回る
+                // 文字列で開始時間と終了時間を入れた変数を用意
+                //※ここでmerge後影響出るかも(start_time,end_timeのカラム型変更)
+                $display_time = $schedule_data->start_time->i18nFormat('H:mm') . '~' . $schedule_data->end_time->i18nFormat('H:mm'); //開始時間と終了時間
+                if (!isset($schedule_arr[$schedule_data->movie_id])) { //同じmovie_idが無い場合
+                    $schedule =  array(
                         'schedule_id' => $schedule_data->id,
                         'display_time' => $display_time
-                    )
-                );
-            } else { //同じmovie_idを生成した場合≒2つ目があった場合→配列を結合する
-                $schedule =  array(
-                    'schedule_id' => $schedule_data->id,
-                    'display_time' => $display_time
-                );
-                array_push($schedule_arr[$schedule_data->movie_id], $schedule);
+                    );
+                    $schedule_arr[$schedule_data->movie_id] = array(
+                        'movie_id' => $schedule_data->movie_id,
+                        'title' => $schedule_data->movie->title,
+                        'running_time' => $schedule_data->movie->running_time,
+                        'end_date' => $schedule_data->movie->end_date,
+                        'top_image_name' => $schedule_data->movie->top_image_name,
+                        'is_deleted' => $schedule_data->movie->is_deleted,
+                        array(
+                            'schedule_id' => $schedule_data->id,
+                            'display_time' => $display_time
+                        )
+                    );
+                } else { //同じmovie_idを生成した場合≒2つ目があった場合→配列を結合する
+                    $schedule =  array(
+                        'schedule_id' => $schedule_data->id,
+                        'display_time' => $display_time
+                    );
+                    array_push($schedule_arr[$schedule_data->movie_id], $schedule);
+                }
             }
+            //作品ごとの配列の保有キー数(ctp側でスケジュール数繰り返す時に使う)
+            $count_sk_col = count($schedule_arr[$schedule_data->movie_id]);
+            $this->set(compact('schedule_arr',  'count_sk_col'));
         }
-        //作品ごとの配列の保有キー数(ctp側でスケジュール数繰り返す時に使う)
-        $count_sk_col = count($schedule_arr[$schedule_data->movie_id]);
 
         // DBの全てのデータを結果を代入、結果として取得
-        $this->set(compact('schedule_arr','header_date', 'weekconfig', 'date', 'count_sk_col'));
+        $this->set(compact('header_date', 'weekconfig', 'date', 'schedule_datas_count'));
         //sessionの値を削除処理
         $session->consume('session.screening_schedule_id');
     }
