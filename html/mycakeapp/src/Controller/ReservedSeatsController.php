@@ -130,8 +130,10 @@ class ReservedSeatsController extends BaseController
 		$reserved_seats = $this->Reserved_seats->newEntity(); //座席予約
 		$session = $this->getRequest()->getSession();
 		$seatNum = $this->request->getData('seatNum');
+		//セッションの中の上映スケジュールidを読み込む
+		$session_screening_schedule_id = $session->read('session.screening_schedule_id');
 		//選択済み座席のレコード全て取り出し
-		$already_reserved = $this->Reserved_seats->find('all')->where(['is_deleted' => 0])->enableHydration(false)->toArray();
+		$already_reserved = $this->Reserved_seats->find('all')->where(['is_deleted' => 0, 'screening_schedule_id' => $session_screening_schedule_id])->enableHydration(false)->toArray();
 
 		if ($this->request->is('post')) {
 			if (isset($seatNum)) {
@@ -143,8 +145,6 @@ class ReservedSeatsController extends BaseController
 					// セッションに書き込み
 					$session->write('session.reservations_id', $reservations_id[0]['id']);
 				}
-				//セッションの中の上映スケジュールidを読み込む
-				$session_screening_schedule_id = $session->read('session.screening_schedule');
 				//Reserved_seatsテーブルに保存
 				$data = array(
 					'reservation_id' => $reservations_id[0]['id'],
@@ -178,10 +178,10 @@ class ReservedSeatsController extends BaseController
 		$session = $this->getRequest()->getSession();
 		//次へボタンを押した時にセッションに保存をしてリダイレクト
 		if ($this->request->is('post')) {
-			$session->write('session.screening_schedule', $screening_schedule['id']);
+			$session->write('session.screening_schedule_id', $screening_schedule['id']);
 			return $this->redirect(['action' => 'seatselect']);
 		}
 		//画面遷移してきたタイミングで保存していたセッションは破棄する
-		$session->consume('session.screening_schedule');
+		$session->consume('session.screening_schedule_id');
 	}
 }
