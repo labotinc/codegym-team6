@@ -180,25 +180,4 @@ class ReservationsController extends BaseController
 		$this->set(compact('tickets', 'screening_schedules', 'movie', 'reserved_seats', 'cardcount'));
 	}
 
-	public function dummy()
-	{
-		$authuser = $this->Auth->user('id');
-		$reservations = $this->Reservations->find()->where(['user_id' => $authuser])->first();
-		$reserved_seats = $this->Reserved_seats->find()->where(['reservation_id' => $reservations['id']])->first();
-		//座席予約テーブルのスケジュールIDでスケジュールテーブルを検索
-		$screening_schedules = $this->Screening_schedules->find()->where(['id' => $reserved_seats['screening_schedule_id']])->first();
-		$session = $this->getRequest()->getSession();
-		$this->viewBuilder()->setLayout('main');
-		//次へボタンを押した時にセッションに保存をしてリダイレクト
-		if ($this->request->is('post')) {
-			$session->write('session.reservations_id', $reservations['id']);
-			$session->write('session.reserved_seats_id', $reserved_seats['id']);
-			$session->write('session.screening_schedules_id', $screening_schedules['id']);
-			return $this->redirect(['action' => 'selectticket']);
-		}
-		//画面遷移してきたタイミングで保存していたセッションは破棄する
-		$session->consume('session.reservations_id');
-		$session->consume('session.reserved_seats_id');
-		$session->consume('session.screening_schedules_id');
-	}
 }

@@ -174,18 +174,4 @@ class ReservedSeatsController extends BaseController
 		$session->consume('session.reserved_seats_id');
 	}
 
-	public function dummySeat()
-	{
-		$this->viewBuilder()->setLayout('main');
-		//座席予約テーブルのでスケジュールテーブルを検索
-		$screening_schedule = $this->Screening_schedules->find()->first();
-		$session = $this->getRequest()->getSession();
-		//次へボタンを押した時にセッションに保存をしてリダイレクト
-		if ($this->request->is('post')) {
-			$session->write('session.screening_schedules_id', $screening_schedule['id']);
-			return $this->redirect(['action' => 'seatselect']);
-		}
-		//画面遷移してきたタイミングで保存していたセッションは破棄する
-		$session->consume('session.screening_schedules_id');
-	}
 }
