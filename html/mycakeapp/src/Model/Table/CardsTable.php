@@ -75,13 +75,12 @@ class CardsTable extends Table
 			->maxLength('name', 100)
 			->requirePresence('name', 'create')
 			->notEmptyString('name', '空白になっています')
-			->add('name', 'alphaNumeric_japanese_Check', [
-				'rule' => ['alphaNumericWithJapaneseCheck'],
+			->add('name', 'cardNameCheck', [
+				'rule' => ['cardNameCheck'],
 				'provider' => 'Custom',
-				'message' => '使えない文字が入力されています',
+				'message' => '半角英字以外の文字が使われています',
 				'last' => true,
-			])
-			->regex('name', "/^[a-zA-Z]+$/", '半角英字以外の文字が使われています');
+			]);
 
 		$validator
 			->boolean('is_deleted')

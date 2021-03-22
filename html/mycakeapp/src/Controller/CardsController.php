@@ -115,11 +115,17 @@ class CardsController extends BaseController
 		$this->loadComponent('Flash');
 		$this->viewBuilder()->setLayout('main');
 
+		$authuser = $this->Auth->user('id');
+		$cardcount = $this->Cards->find()->where(['user_id' => $authuser])->count();
+
+		//カードがすでに2枚登録されていたら、直接遷移されたときにエラー画面を表示し、クレジットカード登録画面の新規登録ボタンも無効にする
+		if($cardcount >= 2) {
+			throw new InternalErrorException;
+		}
+
 		$card = $this->Cards->newEntity();
 
 		if ($this->request->is('post')) {
-			$authuser = $this->Auth->user('id');
-			$cardcount = $this->Cards->find()->where(['user_id' => $authuser])->count();
 
 			$card_number = $this->request->getData('card_number');
 			//正規表現でカード番号の整合性がとれているかチェックする
@@ -187,7 +193,6 @@ class CardsController extends BaseController
 					$session->write('session.credit', $card);
 					return $this->redirect(['action' => 'confirm']);
 				}
-				throw new InternalErrorException;
 			}
 
 			$this->Flash->error(__('保存に失敗しました。もう一度入力下さい。'));

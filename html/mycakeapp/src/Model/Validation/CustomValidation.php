@@ -8,4 +8,7 @@ class CustomValidation extends Validation {
         return (bool) preg_match('/^[a-zA-Z0-9]+$/', $value);
     }
 
+    public static function cardNameCheck($value) {
+        return (bool) preg_match('/^[a-zA-Z0-9\s]+$]*$/', $value);
+    }
 }
