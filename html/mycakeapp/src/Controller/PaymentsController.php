@@ -208,7 +208,7 @@ class PaymentsController extends BaseController
 		$session->consume('session.reservations_id');
 		$session->consume('session.reserved_seats_id');
 		$session->consume('session.screening_schedules_id');
-		$session->consume('session.ticket');
+		$session->consume('session.ticket_id');
 		$session->consume('session.card_id');
 	}
 }
