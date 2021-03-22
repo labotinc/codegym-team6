@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\ScreeningSchedule $screeningSchedule
@@ -29,8 +30,8 @@
             <td><?= $this->Number->format($screeningSchedule->id) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Date') ?></th>
-            <td><?= h($screeningSchedule->date) ?></td>
+            <th scope="row"><?= __('Screening Date') ?></th>
+            <td><?= h($screeningSchedule->screening_date) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Start Time') ?></th>
@@ -55,35 +56,35 @@
     </table>
     <div class="related">
         <h4><?= __('Related Reserved Seats') ?></h4>
-        <?php if (!empty($screeningSchedule->reserved_seats)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th scope="col"><?= __('Id') ?></th>
-                <th scope="col"><?= __('Reservation Id') ?></th>
-                <th scope="col"><?= __('Screening Schedule Id') ?></th>
-                <th scope="col"><?= __('Seat') ?></th>
-                <th scope="col"><?= __('Is Deleted') ?></th>
-                <th scope="col"><?= __('Created') ?></th>
-                <th scope="col"><?= __('Modified') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($screeningSchedule->reserved_seats as $reservedSeats): ?>
-            <tr>
-                <td><?= h($reservedSeats->id) ?></td>
-                <td><?= h($reservedSeats->reservation_id) ?></td>
-                <td><?= h($reservedSeats->screening_schedule_id) ?></td>
-                <td><?= h($reservedSeats->seat) ?></td>
-                <td><?= h($reservedSeats->is_deleted) ?></td>
-                <td><?= h($reservedSeats->created) ?></td>
-                <td><?= h($reservedSeats->modified) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'ReservedSeats', 'action' => 'view', $reservedSeats->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'ReservedSeats', 'action' => 'edit', $reservedSeats->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'ReservedSeats', 'action' => 'delete', $reservedSeats->id], ['confirm' => __('Are you sure you want to delete # {0}?', $reservedSeats->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
+        <?php if (!empty($screeningSchedule->reserved_seats)) : ?>
+            <table cellpadding="0" cellspacing="0">
+                <tr>
+                    <th scope="col"><?= __('Id') ?></th>
+                    <th scope="col"><?= __('Reservation Id') ?></th>
+                    <th scope="col"><?= __('Screening Schedule Id') ?></th>
+                    <th scope="col"><?= __('Seat') ?></th>
+                    <th scope="col"><?= __('Is Deleted') ?></th>
+                    <th scope="col"><?= __('Created') ?></th>
+                    <th scope="col"><?= __('Modified') ?></th>
+                    <th scope="col" class="actions"><?= __('Actions') ?></th>
+                </tr>
+                <?php foreach ($screeningSchedule->reserved_seats as $reservedSeats) : ?>
+                    <tr>
+                        <td><?= h($reservedSeats->id) ?></td>
+                        <td><?= h($reservedSeats->reservation_id) ?></td>
+                        <td><?= h($reservedSeats->screening_schedule_id) ?></td>
+                        <td><?= h($reservedSeats->seat) ?></td>
+                        <td><?= h($reservedSeats->is_deleted) ?></td>
+                        <td><?= h($reservedSeats->created) ?></td>
+                        <td><?= h($reservedSeats->modified) ?></td>
+                        <td class="actions">
+                            <?= $this->Html->link(__('View'), ['controller' => 'ReservedSeats', 'action' => 'view', $reservedSeats->id]) ?>
+                            <?= $this->Html->link(__('Edit'), ['controller' => 'ReservedSeats', 'action' => 'edit', $reservedSeats->id]) ?>
+                            <?= $this->Form->postLink(__('Delete'), ['controller' => 'ReservedSeats', 'action' => 'delete', $reservedSeats->id], ['confirm' => __('Are you sure you want to delete # {0}?', $reservedSeats->id)]) ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
         <?php endif; ?>
     </div>
 </div>

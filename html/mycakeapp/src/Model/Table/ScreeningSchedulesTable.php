@@ -63,9 +63,9 @@ class ScreeningSchedulesTable extends Table
             ->allowEmptyString('id', null, 'create');
 
         $validator
-            ->date('date')
-            ->requirePresence('date', 'create')
-            ->notEmptyDate('date');
+            ->date('screening_date')
+            ->requirePresence('screening_date', 'create')
+            ->notEmptyDate('screening_date');
 
         $validator
             ->time('start_time')
