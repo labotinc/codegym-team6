@@ -62,7 +62,7 @@ main .banner-box{
 	 text-decoration: none;
  }
 
-/* 映画の詳細 */
+/* 映画の詳細情報表示部分 */
 .movie-schedule-wrapper{
 	display: flex;
 	flex-direction: column;
@@ -71,7 +71,8 @@ main .banner-box{
 
 /* 選んだ日付 */
 main .selected-date{
-	display: block;
+	display: block ;
+	flex-direction: column;
 	margin-left: 20%;
 	text-align: left;
 	font: normal normal bold 23px/32px Noto Sans;
@@ -83,10 +84,9 @@ main .selected-date{
 /* 映画詳細ボックス */
 div .box {
 	position: relative;
-    margin: 2em 0;
-	width: 67%;
+	width: 78%;
 	height: 216px;
-	margin: 50px auto;
+	margin: 50px 0;
 	z-index: 1;
 }
 
@@ -144,9 +144,9 @@ div.box .box-title p span{
 /* スケジュールタイムの表示ボックス */
  .movie-time-box{
 	background-color: #FFFFFF;
-	width:40%;
+	width:200%;
 	height: 144px;
-	margin: 3% 9px;
+	margin: 27px 9px;
 }
 
 /* 上映時間 */
