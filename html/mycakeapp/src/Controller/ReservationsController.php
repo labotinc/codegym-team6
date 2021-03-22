@@ -127,7 +127,7 @@ class ReservationsController extends BaseController
 
 		$this->viewBuilder()->setLayout('main');
 		//チケット情報をrowの昇順で取得
-		$tickets = $this->Tickets->find('all', array('order' => array('Tickets.row ASC')));
+		$tickets = $this->Tickets->find('all', array('order' => array('Tickets.row ASC')))->where(['is_deleted' => 0]);
 		$session = $this->getRequest()->getSession();
 		//セッションに保存された上映スケジュールidを取得
 		$session_screening_schedule_id = $session->read('session.screening_schedules_id');
@@ -164,7 +164,7 @@ class ReservationsController extends BaseController
 		$tickets = $this->Tickets->find()->where(['id' => $ticket_id]);
 		$authuser = $this->Auth->user('id');
 		//カードの枚数を数えて、ビューでの分岐に使う
-		$cardcount = $this->Cards->find()->where(['user_id' => $authuser])->count();
+		$cardcount = $this->Cards->find()->where(['user_id' => $authuser, 'is_deleted' => 0])->count();
 		$session = $this->getRequest()->getSession();
 		//セッションに保存された上映スケジュールidを取得
 		$session_screening_schedule_id = $session->read('session.screening_schedules_id');
