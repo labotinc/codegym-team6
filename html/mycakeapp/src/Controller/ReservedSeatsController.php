@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Controller\AppController;
 
+use Exception;
+
 /**
  * ReservedSeats Controller
  *
@@ -134,35 +136,38 @@ class ReservedSeatsController extends BaseController
 		$session_screening_schedule_id = $session->read('session.screening_schedules_id');
 		//選択済み座席のレコード全て取り出し
 		$already_reserved = $this->Reserved_seats->find('all')->where(['is_deleted' => 0, 'screening_schedule_id' => $session_screening_schedule_id])->enableHydration(false)->toArray();
-
-		if ($this->request->is('post')) {
-			if (isset($seatNum)) {
-				//Reservationsテーブルに保存
-				$data = array('user_id' => $authuser);
-				$reservations = $this->Reservations->patchEntity($reservations, $data);
-				if ($this->Reservations->save($reservations)) {
-					$reservations_id = $this->Reservations->find('all', array('order' => array('Reservations.created DESC')))->where(['user_id' => $authuser])->enableHydration(false)->toArray();
-					// セッションに書き込み
-					$session->write('session.reservations_id', $reservations_id[0]['id']);
+		try {
+			if ($this->request->is('post')) {
+				if (isset($seatNum)) {
+					//Reservationsテーブルに保存
+					$data = array('user_id' => $authuser);
+					$reservations = $this->Reservations->patchEntity($reservations, $data);
+					if ($this->Reservations->save($reservations)) {
+						$reservations_id = $this->Reservations->find('all', array('order' => array('Reservations.created DESC')))->where(['user_id' => $authuser])->enableHydration(false)->toArray();
+						// セッションに書き込み
+						$session->write('session.reservations_id', $reservations_id[0]['id']);
+					}
+					//Reserved_seatsテーブルに保存
+					$data = array(
+						'reservation_id' => $reservations_id[0]['id'],
+						'screening_schedule_id' => $session_screening_schedule_id,
+						'seat' => $seatNum[0],
+					);
+					$reserved_seats = $this->Reserved_seats->patchEntity($reserved_seats, $data);
+					if ($this->Reserved_seats->save($reserved_seats)) {
+						// 直前に保存した予約idを使って予約座席idを検索
+						$reserved_seats_id = $this->Reserved_seats->find('all', array('order' => array('Reserved_seats.created DESC')))->where(['reservation_id' => $reservations_id[0]['id']])->enableHydration(false)->toArray();
+						// セッションに書き込み
+						$session->write('session.reserved_seats_id', $reserved_seats_id[0]['id']);
+					}
+					return $this->redirect(['controller' => 'Reservations', 'action' => 'selectticket']);
+				} else {
+					$error = '座席を選択してください';
+					$this->set(compact('error'));
 				}
-				//Reserved_seatsテーブルに保存
-				$data = array(
-					'reservation_id' => $reservations_id[0]['id'],
-					'screening_schedule_id' => $session_screening_schedule_id,
-					'seat' => $seatNum[0],
-				);
-				$reserved_seats = $this->Reserved_seats->patchEntity($reserved_seats, $data);
-				if ($this->Reserved_seats->save($reserved_seats)) {
-					// 直前に保存した予約idを使って予約座席idを検索
-					$reserved_seats_id = $this->Reserved_seats->find('all', array('order' => array('Reserved_seats.created DESC')))->where(['reservation_id' => $reservations_id[0]['id']])->enableHydration(false)->toArray();
-					// セッションに書き込み
-					$session->write('session.reserved_seats_id', $reserved_seats_id[0]['id']);
-				}
-				return $this->redirect(['controller' => 'Reservations', 'action' => 'selectticket']);
-			} else {
-				$error = '座席を選択してください';
-				$this->set(compact('error'));
 			}
+		} catch (Exception $e) {
+			throw new InternalErrorException;
 		}
 		$this->set(compact('reservations', 'reserved_seats', 'already_reserved'));
 		$session->consume('session.reservations_id');
