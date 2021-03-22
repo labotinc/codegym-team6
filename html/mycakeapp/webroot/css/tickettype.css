@@ -57,11 +57,29 @@
 
 .back a {
     color: #707070;
+    font-size: 16px;
     text-decoration: none;
     display: block;
     height: 48px;
     line-height: 48px;
+    cursor: pointer;
+}
+
+.next {
+    background-color: #f5ae0b;
+    text-align: center;
+    width: 180px;
+    height: 48px;
+    margin-right: 25px;
+}
+
+.next a {
+    color: #ffffff;
     font-size: 16px;
+    text-decoration: none;
+    display: block;
+    height: 48px;
+    line-height: 48px;
     cursor: pointer;
 }
 
@@ -84,10 +102,10 @@
     font-size: 0.9rem;
 }
 
-.schedules span{
+.schedules span {
     color: #707070;
 }
 
-.seat span{
+.seat span {
     color: #707070;
 }

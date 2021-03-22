@@ -3,9 +3,9 @@
 <?php
 //データの読み込み
 $title = $movie->toArray()[0]->title;
-$date = $screening_schedule->toArray()[0]->screening_date;
-$start_time = $screening_schedule->toArray()[0]->start_time;
-$end_time = $screening_schedule->toArray()[0]->end_time;
+$date = $screening_schedules->toArray()[0]->screening_date;
+$start_time = $screening_schedules->toArray()[0]->start_time;
+$end_time = $screening_schedules->toArray()[0]->end_time;
 $seat = $reserved_seats->toArray()[0]->seat;
 //曜日に変換するための配列
 $week_name = ['日', '月', '火', '水', '木', '金', '土'];
@@ -25,7 +25,7 @@ $week_name = ['日', '月', '火', '水', '木', '金', '土'];
 	<div class="ticket">
 		<?php foreach ($tickets as $ticket) : ?>
 			<div class="ticket-area">
-				<?php echo $this->Form->control('ticket', array(
+				<?php echo $this->Form->control('ticket_id', array(
 					'hiddenField' => false,
 					'label' => false,
 					"type" => "radio",
