@@ -129,7 +129,7 @@ class ScreeningSchedulesController extends AppController
         $session = $this->getRequest()->getSession(); //sessionを変数に入れる
         if ($this->request->is('post')) { //sessionで座席予約画面に渡す
             $schedule_id = $this->request->getData('schedule_id');
-            $session->write('session.screening_schedule_id', $schedule_id);
+            $session->write('session.screening_schedules_id', $schedule_id);
             return $this->redirect(['controller' => 'Reservedseats', 'action' => 'seatselect']); //現在ブランチにないアクションですのでエラー画面が出ますがsessionの値は保持できています
         }
         //曜日を定義(ctpに渡す)
@@ -205,6 +205,6 @@ class ScreeningSchedulesController extends AppController
         // DBの全てのデータを結果を代入、結果として取得
         $this->set(compact('header_date', 'weekconfig', 'date', 'schedule_datas_count'));
         //sessionの値を削除処理
-        $session->consume('session.screening_schedule_id');
+        $session->consume('session.screening_schedules_id');
     }
 }

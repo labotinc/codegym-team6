@@ -131,7 +131,7 @@ class ReservedSeatsController extends BaseController
 		$session = $this->getRequest()->getSession();
 		$seatNum = $this->request->getData('seatNum');
 		//セッションの中の上映スケジュールidを読み込む
-		$session_screening_schedule_id = $session->read('session.screening_schedule_id');
+		$session_screening_schedule_id = $session->read('session.screening_schedules_id');
 		//選択済み座席のレコード全て取り出し
 		$already_reserved = $this->Reserved_seats->find('all')->where(['is_deleted' => 0, 'screening_schedule_id' => $session_screening_schedule_id])->enableHydration(false)->toArray();
 
@@ -158,8 +158,7 @@ class ReservedSeatsController extends BaseController
 					// セッションに書き込み
 					$session->write('session.reserved_seats_id', $reserved_seats_id[0]['id']);
 				}
-				//リダイレクト先は仮にマイページとする
-				return $this->redirect(['controller' => 'Main', 'action' => 'mypage']);
+				return $this->redirect(['controller' => 'Reservations', 'action' => 'selectticket']);
 			} else {
 				$error = '座席を選択してください';
 				$this->set(compact('error'));
@@ -178,10 +177,10 @@ class ReservedSeatsController extends BaseController
 		$session = $this->getRequest()->getSession();
 		//次へボタンを押した時にセッションに保存をしてリダイレクト
 		if ($this->request->is('post')) {
-			$session->write('session.screening_schedule_id', $screening_schedule['id']);
+			$session->write('session.screening_schedules_id', $screening_schedule['id']);
 			return $this->redirect(['action' => 'seatselect']);
 		}
 		//画面遷移してきたタイミングで保存していたセッションは破棄する
-		$session->consume('session.screening_schedule_id');
+		$session->consume('session.screening_schedules_id');
 	}
 }
