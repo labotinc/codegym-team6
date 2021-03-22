@@ -7,7 +7,7 @@
 			<?php foreach ($my_reservation->reserved_seats as $reserved_seat): ?>
 				<?php if($now_time < $reserved_seat->screening_schedule->start_time):?>
 					<section class="my-reservation">
-						<?php echo $this->Html->image('/img/main/' . h($reserved_seat->screening_schedule->movie->slide_image_name)); ?>
+						<?php echo $this->Html->image('/img/movie/' . h($reserved_seat->screening_schedule->movie->top_image_name)); ?>
 						<div class="reservation-detail">
 							<h3><?= h($reserved_seat->screening_schedule->movie->title); ?></h3>
 							<ul class="schedule-seat">
