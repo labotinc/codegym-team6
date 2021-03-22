@@ -119,7 +119,7 @@ class CardsController extends BaseController
 		$cardcount = $this->Cards->find()->where(['user_id' => $authuser])->count();
 
 		//カードがすでに2枚登録されていたら、直接遷移されたときにエラー画面を表示し、クレジットカード登録画面の新規登録ボタンも無効にする
-		if($cardcount >= 2) {
+		if ($cardcount >= 2) {
 			throw new InternalErrorException;
 		}
 
@@ -219,7 +219,7 @@ class CardsController extends BaseController
 		$this->viewBuilder()->setLayout('main');
 		$authuser = $this->Auth->user('id');
 		//ログインユーザーのカードを登録した順番で取得
-		$cards = $this->Cards->find('all', array('order' => array('Cards.created ASC')))->where(['user_id' => $authuser]);
+		$cards = $this->Cards->find('all', array('order' => array('Cards.created ASC')))->where(['user_id' => $authuser, 'is_deleted' => 0]);
 		//ユーザーが登録しているカードの枚数をカウントし、viewで表示の切り替えに使用する
 		$cardcount = $this->Cards->find()->where(['user_id' => $authuser])->count();
 		$this->set(compact('cards', 'cardcount'));
