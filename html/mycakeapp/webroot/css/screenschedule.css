@@ -1,228 +1,234 @@
-html{
-	margin: 0;
-	padding: 0;
-	height: 100%;
+html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
 }
 /* コンテンツ表示部分背景 */
-body{
-	min-height: 100vh; /*←コンテンツの高さの最小値＝ブラウザの高さに指定*/
-	position: relative;/* ←相対位置 */
-	padding-bottom: 60px; /* ←フッターの高さを指定 */
-	background-color: #EBEBEB;
+body {
+    min-height: 100vh; /*←コンテンツの高さの最小値＝ブラウザの高さに指定*/
+    position: relative; /* ←相対位置 */
+    padding-bottom: 60px; /* ←フッターの高さを指定 */
+    background-color: #ebebeb;
 }
 
 /* 上映スケジュール日付バーナー表示部分 */
-.week-banner{
-	display:flex;
-	justify-content: center;
-	margin-bottom: 30px;
+.week-banner {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
 }
 
 /* 上映スケジュールの見出し */
-main .banner-title{
-text-align: left;
-font: normal normal bold 16px/22px Noto Sans;
-letter-spacing: 1.28px;
-color: #242424;
-opacity: 1;
-position: relative;
-padding-top: 80px;
-margin-left: 20%;
-z-index: 1;
+main .banner-title {
+    text-align: left;
+    font: normal normal bold 16px/22px Noto Sans;
+    letter-spacing: 1.28px;
+    color: #242424;
+    opacity: 1;
+    position: relative;
+    padding-top: 80px;
+    margin-left: 20%;
+    z-index: 1;
 }
 
 /* 上映スケジュールのバーナーのボックス */
-main .banner-box{
-	position: relative;
-	width:9%;
-	height:80px;
-	background: #7B7B7B 0% 0% no-repeat padding-box;
-	opacity: 1;
-	margin: 0 1px;
-	z-index: 1;
+main .banner-box {
+    position: relative;
+    width: 9%;
+    height: 80px;
+    background: #7b7b7b 0% 0% no-repeat padding-box;
+    opacity: 1;
+    margin: 0 1px;
+    z-index: 1;
 }
 
 /* バーナー1週間分の日にち */
 .banner-box a {
-	top: 30%;
-	left: 8%;
-	text-align: left;
-	 position: absolute;
-	 display: block;
-	 width: 100%;
-	 height: 100%;
-	 color: #FFFFFF;
-	 font: normal normal bold 0.9rem/1rem Noto Sans;
-	 letter-spacing: 1.2px;
-	 opacity: 1;
-	 margin: 10px auto;
-	 line-height: 30%;
-	 white-space: nowrap;
-	 z-index: 1;
-	 text-decoration: none;
- }
+    top: 30%;
+    left: 8%;
+    text-align: left;
+    position: absolute;
+    display: block;
+    width: 100%;
+    height: 100%;
+    color: #ffffff;
+    font: normal normal bold 0.9rem/1rem Noto Sans;
+    letter-spacing: 1.2px;
+    opacity: 1;
+    margin: 10px auto;
+    line-height: 30%;
+    white-space: nowrap;
+    z-index: 1;
+    text-decoration: none;
+}
 
 /* 映画の詳細情報表示部分 */
-.movie-schedule-wrapper{
-	display: flex;
-	flex-direction: column;
-	flex-wrap: nowrap;
+.movie-schedule-wrapper {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
 }
 
 /* 選んだ日付 */
-main .selected-date{
-	display: block ;
-	flex-direction: column;
-	margin-left: 20%;
-	text-align: left;
-	font: normal normal bold 23px/32px Noto Sans;
-	letter-spacing: 1.84px;
-	color: #242424;
-	opacity: 1;
+main .selected-date {
+    display: block;
+    flex-direction: column;
+    margin-left: 20%;
+    text-align: left;
+    font: normal normal bold 23px/32px Noto Sans;
+    letter-spacing: 1.84px;
+    color: #242424;
+    opacity: 1;
 }
 
 /* 映画詳細ボックス */
 div .box {
-	position: relative;
-	width: 78%;
-	height: 216px;
-	margin: 50px 0;
-	z-index: 1;
+    position: relative;
+    width: 78%;
+    height: 216px;
+    margin: 50px 0;
+    z-index: 1;
 }
 
 /* スケジュールを映画作品文div表示。最後に表示されるものの余白を追加 */
-.box:last-child{
-	margin-bottom: 200px;
+.box:last-child {
+    margin-bottom: 200px;
 }
 
 /* 映画のタイトル表示部分 */
 .box .box-title {
     font-size: 1.2em;
-    background:#7B7B7B;
+    background: #7b7b7b;
     padding: 4px;
     text-align: center;
-    color: #FFFFFF;
+    color: #ffffff;
     font-weight: bold;
     letter-spacing: 0.05em;
-	height: 48px;
-	overflow: hidden;
+    height: 48px;
+    overflow: hidden;
 }
 
-div.box .box-title p{
-	text-align: left;
-	white-space: nowrap;
-	opacity: 1;
-	line-height: 1%;
-	font-size: 1rem;
+.box .box-title:not(:first-child) {
+   margin-top: 100px;
 }
 
-div.box .box-title p span{
-	text-align: left;
-	white-space: nowrap;
-	opacity: 1;
-	color: #B1B1B1;
-	font-size: small;
+div.box .box-title p {
+    text-align: left;
+    white-space: nowrap;
+    opacity: 1;
+    line-height: 1%;
+    font-size: 1rem;
+}
+
+div.box .box-title p span {
+    text-align: left;
+    white-space: nowrap;
+    opacity: 1;
+    color: #b1b1b1;
+    font-size: small;
 }
 
 /* 映画の詳細表示部分 */
-.box .movie-schedule-box{
-	position: relative;
-	display: flex;
-	flex-direction: row;
-    background: #D5D5D5;
-	height: 216px;
-	overflow: hidden;
+.box .movie-schedule-box {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    background: #d5d5d5;
+    height: 216px;
+    overflow: hidden;
+	margin-bottom: 50px;
 }
+
 /* 映画の画像 */
 .box img {
-    margin: 3% 9px 3% 26px;
-	max-width: 20%;
+    margin: 26px 9px 9px 26px;
+    max-width: 20%;
     max-height: 144px;
-	z-index: 1;
+    z-index: 1;
 }
 
 /* スケジュールタイムの表示ボックス */
- .movie-time-box{
-	background-color: #FFFFFF;
-	width:200%;
-	height: 144px;
-	margin: 27px 9px;
+.movie-time-box {
+    background-color: #ffffff;
+    width: 180px;
+    height: 144px;
+    margin: 27px 9px;
 }
 
 /* 上映時間 */
-.running-time{
-	text-align: center;
-	font: normal normal bold 15px/17px Noto Sans;
-	letter-spacing: 1.2px;
-	color: #7B7B7B;
-	margin: 0 auto;
-	padding-top:30px ;
+.running-time {
+    text-align: center;
+    font: normal normal bold 15px/17px Noto Sans;
+    letter-spacing: 1.2px;
+    color: #7b7b7b;
+    margin: 0 auto;
+    padding-top: 30px;
 }
 
 /* 上映開始 */
- div .movie-time-box  p span.start-time{
-	color: #7B7B7B;
-	display: inline;
-	font-size: large;
+div .movie-time-box p span.start-time {
+    color: #7b7b7b;
+    display: inline;
+    font-size: large;
 }
 
 /* 上映終了 */
-.movie-time-box  .end-time{
-	color: #7B7B7B;
+.movie-time-box .end-time {
+    color: #7b7b7b;
 }
 
 /* 予約購入ボタン */
-button{
-	text-align: center;
-	font: normal normal bold 15px/15px Noto Sans;
-	letter-spacing: 1.84px;
-	background-color:  #B1B1B1;
-	color: #7B7B7B;
-	padding: 6% 13% ;
-	border: none;
-	opacity: 1;
-	margin: 40px auto;
-	display: block;
+button {
+    text-align: center;
+    font: normal normal bold 15px/15px Noto Sans;
+    letter-spacing: 1.84px;
+    background-color: #b1b1b1;
+    color: #7b7b7b;
+    padding: 6% 13%;
+    border: none;
+    opacity: 1;
+    margin: 40px auto;
+    display: block;
 }
 
 /* 予約購入ボタン時hover時 */
-button:hover{
-	opacity: 0.5;
+button:hover {
+    opacity: 0.5;
 }
 
-.schedule-nav-button{
-	position: absolute; /*絶対位置で指定 */
-	top: auto;
-	left: 93.7%;
-	height: 147px;
-	width: 46px;
-	background: #7B7B7B 0% 0% no-repeat padding-box;
-	opacity: 0.5;
-	margin: 3% 9px;
-    color: #FFFFFF;
-	display: inline-block;
-	z-index: 1;
-	overflow: visible;
+.schedule-nav-button {
+    position: absolute; /*絶対位置で指定 */
+    top: auto;
+    left: 93.7%;
+    height: 147px;
+    width: 46px;
+    background: #7b7b7b 0% 0% no-repeat padding-box;
+    opacity: 0.5;
+    margin: 3% 9px;
+    color: #ffffff;
+    display: inline-block;
+    z-index: 1;
+    overflow: visible;
 }
 
-div .schedule-nav-button p{
-	position: absolute; /*絶対位置で指定 */
-	top: auto;
-	height: 147px;
-	width: 46px;
-	text-align: center;
-	font-size: 55px;
-	line-height: 132px;
-	margin: 0 auto;
-	opacity: 1;
-	z-index: 1;
+div .schedule-nav-button p {
+    position: absolute; /*絶対位置で指定 */
+    top: auto;
+    height: 147px;
+    width: 46px;
+    text-align: center;
+    font-size: 55px;
+    line-height: 132px;
+    margin: 0 auto;
+    opacity: 1;
+    z-index: 1;
 }
 
-.box-trim{
-	position: absolute; /*絶対位置で指定 */
-	width: 26px;
-	height: 216px;
-    background: #D5D5D5;
-	z-index: 10;
-	right: 0;
+.box-trim {
+    position: absolute; /*絶対位置で指定 */
+    width: 26px;
+    height: 216px;
+    background: #d5d5d5;
+    z-index: 10;
+    right: 0;
 }
