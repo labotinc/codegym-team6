@@ -17,14 +17,14 @@
 	<main class="container">
 		<article>
 			<section class="top">
-				<div class="top-image"><?php echo $this->Html->image('/img/main/' . h($movie[0]["top_image_name"])); ?></div>
+				<div class="top-image"><?php echo $this->Html->image('/img/main/' . h($movie[0]["slide_image_name"])); ?></div>
 			</section>
 			<section class="middle">
 				<h2>上映映画一覧</h2>
 				<ul class="middle-flex-box">
-					<li class="middle-image"><?php echo $this->Html->image('/img/main/' . h($movie[1]["top_image_name"])); ?></li>
-					<li class="middle-image"><?php echo $this->Html->image('/img/main/' . h($movie[2]["top_image_name"])); ?></li>
-					<li class="middle-image"><?php echo $this->Html->image('/img/main/' . h($movie[3]["top_image_name"])); ?></li>
+					<li class="middle-image"><?php echo $this->Html->image('/img/main/' . h($movie[1]["slide_image_name"])); ?></li>
+					<li class="middle-image"><?php echo $this->Html->image('/img/main/' . h($movie[2]["slide_image_name"])); ?></li>
+					<li class="middle-image"><?php echo $this->Html->image('/img/main/' . h($movie[3]["slide_image_name"])); ?></li>
 				</ul>
 				<a class="button" href="#">詳しく見る</a>
 			</section>
