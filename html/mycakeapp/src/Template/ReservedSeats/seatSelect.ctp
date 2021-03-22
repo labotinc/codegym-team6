@@ -73,7 +73,6 @@
 			let seatNumber = value['seat'];
 			$(`label[for="${seatNumber}"]`).css('background-color', 'black'); //予約済み座席は色を黒に変更する
 			$(`input[id="${seatNumber}"]`).prop('disabled', true); //予約済み座席は選択不可にする
-			console.log(seatNumber);
 		});
 	});
 </script>
