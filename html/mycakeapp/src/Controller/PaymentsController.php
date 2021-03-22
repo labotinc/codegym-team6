@@ -141,7 +141,7 @@ class PaymentsController extends BaseController
 		$session = $this->getRequest()->getSession();
 		$authuser = $this->Auth->user('id');
 		//ログインユーザーのカードを登録した順番で取得
-		$cards = $this->Cards->find('all', array('order' => array('Cards.created ASC')))->where(['user_id' => $authuser]);
+		$cards = $this->Cards->find('all', array('order' => array('Cards.created ASC')))->where(['user_id' => $authuser, 'is_deleted' => 0]);
 
 		if ($this->request->is('post')) {
 			//ラジオボタンで選択したクレジットカードIDを取得
