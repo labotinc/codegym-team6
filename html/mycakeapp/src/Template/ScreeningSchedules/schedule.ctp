@@ -61,41 +61,47 @@
                 <?php
                 echo $header_date;
                 ?>
+                <?php if ($schedule_datas_count === 0) : ?>
+                    <div>スケジュールがありません</div>
+                <?php endif; ?>
                 <div>
                     <?= $this->Form->create(null, array('novalidate' => true)); ?>
                     <!-- 映画のタイトル詳細ボックス-->
                     <!-- 縦に映画作品を繰り返し -->
-                    <?php foreach ($schedule_arr as $schedule_movie) : ?>
-                        <div class="box">
-                            <div class="box-title">
-                                <p><?= h($schedule_movie['title']); ?> [ 上映時間 : <?= h($schedule_movie['running_time']); ?>分 ] 　<span class="box-title"><?= h($schedule_movie['end_date']->i18nFormat('yyyy年MM月dd日')); ?> 終了予定</span></p>
-                            </div>
-                            <div class="movie-schedule-box">
-                                <!-- 映画の画像top_image_nameを表示 -->
-                                <!-- DBのトップ画像を表示 -->
-                                <?php echo $this->Html->image('/img/movie/' . ($schedule_movie['top_image_name'])); ?>
-                                <!-- 横に映画の持ってるスケジュール情報を繰り返し -->
-                                <!-- = スケジュールの配列の数繰り返し=$schedule_arrの１作品ごとの保有キー($count_col)-6(movieの情報キー)  -->
-                                <?php for ($j = 0; $j < $count_sk_col - 6; $j++) : ?>
-                                    <div class="movie-time-box">
-                                        <!-- 上映時間start_time ~ end_timeをDB(上映スケジュールテーブル)から取得して表示 -->
-                                        <p class="running-time"><span class="start-time"><?= h($schedule_movie[$j]['display_time']); ?></span></p>
+                    <?php if ($schedule_datas_count >= 1) : ?>
+                        <?php foreach ($schedule_arr as $schedule_movie) : ?>
+                            <div class="box">
+                                <div class="box-title">
+                                    <p><?= h($schedule_movie['title']); ?> [ 上映時間 : <?= h($schedule_movie['running_time']); ?>分 ] 　<span class="box-title"><?= h($schedule_movie['end_date']->i18nFormat('yyyy年MM月dd日')); ?> 終了予定</span></p>
+                                </div>
+                                <div class="movie-schedule-box">
+                                    <!-- 映画の画像top_image_nameを表示 -->
+                                    <!-- DBのトップ画像を表示 -->
+                                    <?php echo $this->Html->image('/img/movie/' . ($schedule_movie['top_image_name'])); ?>
+                                    <!-- 横に映画の持ってるスケジュール情報を繰り返し -->
+                                    <!-- = スケジュールの配列の数繰り返し=$schedule_arrの１作品ごとの保有キー($count_col)-6(movieの情報キー)  -->
+                                    <?php for ($j = 0; $j < $count_sk_col - 6; $j++) : ?>
+                                        <div class="movie-time-box">
+                                            <!-- 上映時間start_time ~ end_timeをDB(上映スケジュールテーブル)から取得して表示 -->
+                                            <p class="running-time"><span class="start-time"><?= h($schedule_movie[$j]['display_time']); ?></span></p>
 
-                                        <!-- リンクで座席予約ページに推移させる -->
-                                        <?php echo $this->Form->button('予約購入', [
-                                            'label' => false,
-                                            'type' => 'submit',
-                                            'name' => 'schedule_id',
-                                            'value' => $schedule_movie[$j]['schedule_id']
-                                        ]); ?>
-                                    </div>
-                                <?php endfor; ?>
-                                <!-- スライドの隠して上げる部分 -->
-                                <div class="box-trim"></div>
+                                            <!-- リンクで座席予約ページに推移させる -->
+                                            <?php echo $this->Form->button('予約購入', [
+                                                'label' => false,
+                                                'type' => 'submit',
+                                                'name' => 'schedule_id',
+                                                'value' => $schedule_movie[$j]['schedule_id']
+                                            ]); ?>
+                                        </div>
+                                    <?php endfor; ?>
+                                    <!-- スライドの隠して上げる部分 -->
+                                    <div class="box-trim"></div>
 
+                                </div>
                             </div>
-                        </div>
-                    <?php endforeach; ?>
+                        <?php endforeach; ?>
+                    <?php endif; ?>
+
                     <?= $this->Form->end() ?>
                 </div>
     </main>
