@@ -80,20 +80,20 @@
                                     <?php echo $this->Html->image('/img/movie/' . ($schedule_movie['top_image_name'])); ?>
                                     <!-- 横に映画の持ってるスケジュール情報を繰り返し -->
                                     <!-- = スケジュールの配列の数繰り返し=$schedule_arrの１作品ごとの保有キー($count_col)-6(movieの情報キー)  -->
-                                    <?php for ($j = 0; $j < $count_sk_col - 6; $j++) : ?>
+                                    <?php foreach ($schedule_movie['schedule'] as $schedule_data) : ?>
                                         <div class="movie-time-box">
                                             <!-- 上映時間start_time ~ end_timeをDB(上映スケジュールテーブル)から取得して表示 -->
-                                            <p class="running-time"><span class="start-time"><?= h($schedule_movie[$j]['display_time']); ?></span></p>
+                                            <p class="running-time"><span class="start-time"><?= h($schedule_data['display_time']); ?></span></p>
 
                                             <!-- リンクで座席予約ページに推移させる -->
                                             <?php echo $this->Form->button('予約購入', [
                                                 'label' => false,
                                                 'type' => 'submit',
                                                 'name' => 'schedule_id',
-                                                'value' => $schedule_movie[$j]['schedule_id']
+                                                'value' => $schedule_data['schedule_id']
                                             ]); ?>
                                         </div>
-                                    <?php endfor; ?>
+                                    <?php endforeach; ?>
                                     <!-- スライドの隠して上げる部分 -->
                                     <div class="box-trim"></div>
 
