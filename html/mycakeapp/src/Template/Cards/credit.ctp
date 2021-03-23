@@ -19,10 +19,19 @@
 				'label' => '有効期限',
 				'monthNames' => false,
 				'day' => false,
+				'year' => false,
+			]); ?>
+			<?php echo $this->Form->error('expiration_date'); ?>
+		</div>
+		<div class="Gemini-form2">
+			<?php echo $this->Form->control('expiration_date', [
+				'label' => false,
+				'monthNames' => false,
+				'day' => false,
+				'month' => false,
 				'minYear' => date('Y'),
 				'maxYear' => date('Y') + 6,
 			]); ?>
-			<?php echo $this->Form->error('expiration_date'); ?>
 		</div>
 		<div class="Gemini-form">
 			<?php echo $this->Form->control('securitycode', ['type' => 'password', 'label' => false, 'placeholder' => 'セキュリティコード']); ?>
