@@ -92,17 +92,17 @@
 		<!-- トップ -->
 		<a href="<?= $this->Url->build(['controller' => 'Main', 'action' => 'top']) ?>">トップ</a>
 		<!-- 上映スケジュール -->
-		<a href="#">上映スケジュール </a>
+		<a href="<?= $this->Url->build(['controller' => 'Screening_schedules', 'action' => 'schedule']) ?>">上映スケジュール </a>
 		<!-- 料金•割引 -->
 		<a href="<?= $this->Url->build(['controller' => 'Main', 'action' => 'ticketDiscount']) ?>">料金•割引</a>
 	</div>
 
 	<!-- 右寄せ -->
 	<div class="topnav-right">
-		<?php if($this->request->getSession()->read('Auth.User.id')):?>
+		<?php if ($this->request->getSession()->read('Auth.User.id')) : ?>
 			<?= $this->Html->link("マイページ", ['controller' => 'Main', 'action' => 'mypage']) ?>
 			<?= $this->Html->link("ログアウト", ['controller' => 'Users', 'action' => 'logout']) ?>
-		<?php else: ?>
+		<?php else : ?>
 			<?= $this->Html->link("新規登録", ['controller' => 'Users', 'action' => 'signup']) ?>
 			<?= $this->Html->link("ログイン", ['controller' => 'Users', 'action' => 'login']) ?>
 		<?php endif; ?>

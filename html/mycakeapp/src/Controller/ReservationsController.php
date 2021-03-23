@@ -124,11 +124,20 @@ class ReservationsController extends BaseController
 
 	public function selectTicket()
 	{
-
+		$session = $this->getRequest()->getSession();
+		if (!$session->read('session.screening_schedules_id')) {
+			$session->consume('session');
+			throw new InternalErrorException;
+		} elseif (!$session->read('session.reservations_id')) {
+			$session->consume('session');
+			throw new InternalErrorException;
+		} elseif (!$session->read('session.reserved_seats_id')) {
+			$session->consume('session');
+			throw new InternalErrorException;
+		}
 		$this->viewBuilder()->setLayout('main');
 		//チケット情報をrowの昇順で取得
-		$tickets = $this->Tickets->find('all', array('order' => array('Tickets.row ASC')));
-		$session = $this->getRequest()->getSession();
+		$tickets = $this->Tickets->find('all', array('order' => array('Tickets.row ASC')))->where(['is_deleted' => 0]);
 		//セッションに保存された上映スケジュールidを取得
 		$session_screening_schedule_id = $session->read('session.screening_schedules_id');
 		//取得した上映スケジュールidで検索、レコードの情報を取得
@@ -159,13 +168,26 @@ class ReservationsController extends BaseController
 
 	public function reservation()
 	{
+		$session = $this->getRequest()->getSession();
+		if (!$session->read('session.screening_schedules_id')) {
+			$session->consume('session');
+			throw new InternalErrorException;
+		} elseif (!$session->read('session.reservations_id')) {
+			$session->consume('session');
+			throw new InternalErrorException;
+		} elseif (!$session->read('session.reserved_seats_id')) {
+			$session->consume('session');
+			throw new InternalErrorException;
+		} elseif (!$session->read('session.ticket_id')) {
+			$session->consume('session');
+			throw new InternalErrorException;
+		}
 		$this->viewBuilder()->setLayout('main');
 		$ticket_id = $this->getRequest()->getSession()->read('session.ticket_id');
 		$tickets = $this->Tickets->find()->where(['id' => $ticket_id]);
 		$authuser = $this->Auth->user('id');
 		//カードの枚数を数えて、ビューでの分岐に使う
-		$cardcount = $this->Cards->find()->where(['user_id' => $authuser])->count();
-		$session = $this->getRequest()->getSession();
+		$cardcount = $this->Cards->find()->where(['user_id' => $authuser, 'is_deleted' => 0])->count();
 		//セッションに保存された上映スケジュールidを取得
 		$session_screening_schedule_id = $session->read('session.screening_schedules_id');
 		//取得した上映スケジュールidで検索、レコードの情報を取得
@@ -178,27 +200,5 @@ class ReservationsController extends BaseController
 		//上の行で取得したidでreserved_seatsテーブルの情報を取得
 		$reserved_seats = $this->Reserved_seats->find()->where(['id' => $session_reserved_seats_id]);
 		$this->set(compact('tickets', 'screening_schedules', 'movie', 'reserved_seats', 'cardcount'));
-	}
-
-	public function dummy()
-	{
-		$authuser = $this->Auth->user('id');
-		$reservations = $this->Reservations->find()->where(['user_id' => $authuser])->first();
-		$reserved_seats = $this->Reserved_seats->find()->where(['reservation_id' => $reservations['id']])->first();
-		//座席予約テーブルのスケジュールIDでスケジュールテーブルを検索
-		$screening_schedules = $this->Screening_schedules->find()->where(['id' => $reserved_seats['screening_schedule_id']])->first();
-		$session = $this->getRequest()->getSession();
-		$this->viewBuilder()->setLayout('main');
-		//次へボタンを押した時にセッションに保存をしてリダイレクト
-		if ($this->request->is('post')) {
-			$session->write('session.reservations_id', $reservations['id']);
-			$session->write('session.reserved_seats_id', $reserved_seats['id']);
-			$session->write('session.screening_schedules_id', $screening_schedules['id']);
-			return $this->redirect(['action' => 'selectticket']);
-		}
-		//画面遷移してきたタイミングで保存していたセッションは破棄する
-		$session->consume('session.reservations_id');
-		$session->consume('session.reserved_seats_id');
-		$session->consume('session.screening_schedules_id');
 	}
 }

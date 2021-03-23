@@ -129,7 +129,7 @@ class ScreeningSchedulesController extends AppController
         $session = $this->getRequest()->getSession(); //sessionを変数に入れる
         if ($this->request->is('post')) { //sessionで座席予約画面に渡す
             $schedule_id = $this->request->getData('schedule_id');
-            $session->write('session.screening_schedule_id', $schedule_id);
+            $session->write('session.screening_schedules_id', $schedule_id);
             return $this->redirect(['controller' => 'Reservedseats', 'action' => 'seatselect']); //現在ブランチにないアクションですのでエラー画面が出ますがsessionの値は保持できています
         }
         //曜日を定義(ctpに渡す)
@@ -183,20 +183,20 @@ class ScreeningSchedulesController extends AppController
                         'running_time' => $schedule_data->movie->running_time,
                         'end_date' => $schedule_data->movie->end_date,
                         'top_image_name' => $schedule_data->movie->top_image_name,
-                        'is_deleted' => $schedule_data->movie->is_deleted,
-                        array(
-                            'schedule_id' => $schedule_data->id,
-                            'display_time' => $display_time
-                        )
+                        'is_deleted' => $schedule_data->movie->is_deleted
                     );
-                } else { //同じmovie_idを生成した場合≒2つ目があった場合→配列を結合する
-                    $schedule =  array(
+                    $schedule_arr[$schedule_data->movie_id]['schedule'][] = array(
                         'schedule_id' => $schedule_data->id,
                         'display_time' => $display_time
                     );
-                    array_push($schedule_arr[$schedule_data->movie_id], $schedule);
+                } else { //同じmovie_idを生成した場合≒2つ目があった場合→配列を結合する
+                    $schedule_arr[$schedule_data->movie_id]['schedule'][] = array(
+                        'schedule_id' => $schedule_data->id,
+                        'display_time' => $display_time
+                    );
                 }
             }
+
             //作品ごとの配列の保有キー数(ctp側でスケジュール数繰り返す時に使う)
             $count_sk_col = count($schedule_arr[$schedule_data->movie_id]);
             $this->set(compact('schedule_arr',  'count_sk_col'));
@@ -205,6 +205,6 @@ class ScreeningSchedulesController extends AppController
         // DBの全てのデータを結果を代入、結果として取得
         $this->set(compact('header_date', 'weekconfig', 'date', 'schedule_datas_count'));
         //sessionの値を削除処理
-        $session->consume('session.screening_schedule_id');
+        $session->consume('session.screening_schedules_id');
     }
 }
