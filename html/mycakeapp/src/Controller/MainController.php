@@ -36,8 +36,12 @@ class MainController extends BaseController
 		// レイアウトテンプレートの無効化
 		$this->layout = false;
 		// DBから情報を取得
-		$discounts = $this->Discounts->find('all');
-		$tickets = $this->Tickets->find('all');
+		$discounts = $this->Discounts->find()
+			->where(['is_deleted' => 0])
+			->all();
+		$tickets = $this->Tickets->find()
+			->where(['is_deleted' => 0])
+			->all();
 		$this->set(compact('discounts', 'tickets'));
 	}
 
